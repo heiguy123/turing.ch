@@ -12,7 +12,7 @@ import { Roboto_500Medium, Roboto_700Bold } from "@expo-google-fonts/roboto";
 import { useFonts } from "expo-font";
 import colors from "./config/colors";
 import fonts from "./config/fonts";
-//import GetStarted from "./screens/GetStarted";
+import GetStarted from "./screens/GetStarted";
 
 export default function App() {
   let [fontloaded, error] = useFonts({
@@ -22,21 +22,21 @@ export default function App() {
   if (!fontloaded) {
     return <AppLoading />;
   }
-  return (
-    <SafeAreaView style={styles.container}>
-      <View style={{ flex: 0.5, justifyContent: "flex-start" }}>
-        <Text style={fonts.title1}>Sunlight</Text>
-        <Text style={fonts.title2}>Detector App </Text>
-        <View style={{ width: "80%", height: "25%", top: 20 }}>
-          <Text style={fonts.desc1}>
-            ghasgb tbW TBW Tbwb twt wntyndygfdghe gra gae gedrageda g aegeryhe
-            ga hegeagerfds fgdg agad dfagfda hyad gfdag adgfdag adygad
-          </Text>
-        </View>
-      </View>
-      <StatusBar style="auto" />
-    </SafeAreaView>
-  );
+
+  return GetStarted();
+  // <SafeAreaView style={styles.container}>
+  //   <View style={{ flex: 0.5, justifyContent: "flex-start" }}>
+  //     <Text style={fonts.title1}>Sunlight</Text>
+  //     <Text style={fonts.title2}>Detector App </Text>
+  //     <View style={{ width: "80%", height: "25%", top: 20 }}>
+  //       <Text style={fonts.desc1}>
+  //         ghasgb tbW TBW Tbwb twt wntyndygfdghe gra gae gedrageda g aegeryhe
+  //         ga hegeagerfds fgdg agad dfagfda hyad gfdag adgfdag adygad
+  //       </Text>
+  //     </View>
+  //   </View>
+  //   <StatusBar style="auto" />
+  // </SafeAreaView>
 }
 
 const styles = StyleSheet.create({
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
   //   letterSpacing: 0.15,
   // },
   // title3: {
-  //   fontFamily: "Normal",
+  //   fontFamily: "Bold",
   //   fontSize: 48,
   //   color: colors.black,
   //   textAlign: "center",
