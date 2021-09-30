@@ -15,13 +15,13 @@ import fonts from "./config/fonts";
 //import GetStarted from "./screens/GetStarted";
 
 export default function App() {
-  // let [fontloaded, error] = useFonts({
-  //   Normal: Roboto_500Medium,
-  //   Bold: Roboto_700Bold,
-  // });
-  // if (!fontloaded) {
-  //   <AppLoading />;
-  // }
+  let [fontloaded, error] = useFonts({
+    Normal: Roboto_500Medium,
+    Bold: Roboto_700Bold,
+  });
+  if (!fontloaded) {
+    return <AppLoading />;
+  }
   return (
     <SafeAreaView style={styles.container}>
       <View style={{ flex: 0.5, justifyContent: "flex-start" }}>
@@ -48,4 +48,33 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "flex-end",
   },
+  // title1: {
+  //   fontFamily: "Bold",
+  //   fontSize: 48,
+  //   color: colors.yellow,
+  //   textAlign: "center",
+  //   letterSpacing: 0.15,
+  // },
+  // title2: {
+  //   fontFamily: "Bold",
+  //   fontSize: 48,
+  //   color: colors.white,
+  //   textAlign: "center",
+  //   letterSpacing: 0.15,
+  // },
+  // title3: {
+  //   fontFamily: "Normal",
+  //   fontSize: 48,
+  //   color: colors.black,
+  //   textAlign: "center",
+  //   letterSpacing: 0.15,
+  // },
+  // desc1: {
+  //   fontFamily: "Normal",
+  //   fontSize: 14,
+  //   color: colors.white,
+  //   textAlign: "center",
+  //   lineHeight: 24,
+  //   letterSpacing: 0.15,
+  // },
 });
