@@ -74,7 +74,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingVertical: 14,
-    paddingHorizontal: 32,
     borderRadius: 16,
     elevation: 3,
     backgroundColor: colors.secondaryColor,
