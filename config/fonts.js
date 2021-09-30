@@ -2,33 +2,64 @@ import { StyleSheet } from "react-native";
 import colors from "./colors";
 
 export default StyleSheet.create({
-  title1: {
-    fontFamily: "Bold",
-    fontSize: 48,
-    color: colors.yellow,
-    textAlign: "center",
-    letterSpacing: 0.15,
-  },
-  title2: {
-    fontFamily: "Bold",
-    fontSize: 48,
-    color: colors.white,
-    textAlign: "center",
-    letterSpacing: 0.15,
-  },
-  title3: {
+  h1: {
     fontFamily: "Bold",
     fontSize: 48,
     color: colors.black,
     textAlign: "center",
     letterSpacing: 0.15,
+    marginBottom: 24
   },
-  desc1: {
+  h2: {
+    fontFamily: "Bold",
+    fontSize: 32,
+    color: colors.black,
+    textAlign: "center",
+    letterSpacing: 0.15,
+    marginBottom: 24
+  },
+  h3: {
+    fontFamily: "Bold",
+    fontSize: 28,
+    color: colors.black,
+    textAlign: "center",
+    letterSpacing: 0.15,
+    marginBottom: 24
+  },
+  h4: {
+    fontFamily: "Bold",
+    fontSize: 24,
+    color: colors.black,
+    textAlign: "center",
+    letterSpacing: 0.15,
+    marginBottom: 24
+  },
+  h5: {
+    fontFamily: "Bold",
+    fontSize: 21,
+    color: colors.black,
+    textAlign: "center",
+    letterSpacing: 0.15,
+    marginBottom: 24
+  },
+  h6: {
+    fontFamily: "Bold",
+    fontSize: 18,
+    color: colors.black,
+    textAlign: "center",
+    letterSpacing: 0.15,
+    marginBottom: 24
+  },
+  p: {
     fontFamily: "Normal",
-    fontSize: 14,
-    color: colors.white,
+    fontSize: 16,
+    color: colors.black,
     textAlign: "center",
     lineHeight: 24,
     letterSpacing: 0.15,
+    marginBottom: 24
   },
+  dark: {
+
+  }
 });

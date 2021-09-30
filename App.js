@@ -3,9 +3,13 @@ import {
   Platform,
   SafeAreaView,
   StyleSheet,
+  Dimensions,
   Text,
+  Pressable,
+  Image,
   View,
   StatusBar,
+  Button,
 } from "react-native";
 import AppLoading from "expo-app-loading";
 import { Roboto_500Medium, Roboto_700Bold } from "@expo-google-fonts/roboto";
@@ -24,14 +28,28 @@ export default function App() {
   }
   return (
     <SafeAreaView style={styles.container}>
-      <View style={{ flex: 0.5, justifyContent: "flex-start" }}>
-        <Text style={fonts.title1}>Sunlight</Text>
-        <Text style={fonts.title2}>Detector App </Text>
-        <View style={{ width: "80%", height: "25%", top: 20 }}>
-          <Text style={fonts.desc1}>
-            ghasgb tbW TBW Tbwb twt wntyndygfdghe gra gae gedrageda g aegeryhe
-            ga hegeagerfds fgdg agad dfagfda hyad gfdag adgfdag adygad
+      <View style={[ fonts.dark ], { maxWidth: "90%" }}>
+        <View style={{flexBasis: "45%", alignItems: "center"}}>
+          <Image
+            style={styles.image}
+            source={require('./assets/slash1.png')}
+          />
+        </View>
+        
+        <Text style={ fonts.dark, fonts.h1 }>
+          <Text>Sunlight</Text>
+          <Text style={{color: colors.secondaryColor}}> Detector App</Text>
+        </Text>
+        <View>
+          <Text style={ fonts.p }>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed in tempus orci, 
+          vel luctus turpis. Praesent nisi odio, venenatis in volutpat quis, dignissim vel augue.
           </Text>
+        </View>
+        <View style={{alignItems: "center"}}>
+          <Pressable style={styles.button} onPress={() => Alert.alert('Next Page')}>
+            <Text style={[styles.buttonText]}>Get Started</Text>
+          </Pressable>
         </View>
       </View>
       <StatusBar style="auto" />
@@ -44,37 +62,39 @@ const styles = StyleSheet.create({
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
     fontSize: 100,
     flex: 1,
-    backgroundColor: colors.blue,
-    alignItems: "center",
-    justifyContent: "flex-end",
+    backgroundColor: colors.primaryColor,
+    alignItems: "center"
   },
-  // title1: {
-  //   fontFamily: "Bold",
-  //   fontSize: 48,
-  //   color: colors.yellow,
-  //   textAlign: "center",
-  //   letterSpacing: 0.15,
-  // },
-  // title2: {
-  //   fontFamily: "Bold",
-  //   fontSize: 48,
-  //   color: colors.white,
-  //   textAlign: "center",
-  //   letterSpacing: 0.15,
-  // },
-  // title3: {
-  //   fontFamily: "Normal",
-  //   fontSize: 48,
-  //   color: colors.black,
-  //   textAlign: "center",
-  //   letterSpacing: 0.15,
-  // },
-  // desc1: {
-  //   fontFamily: "Normal",
-  //   fontSize: 14,
-  //   color: colors.white,
-  //   textAlign: "center",
-  //   lineHeight: 24,
-  //   letterSpacing: 0.15,
-  // },
+  image: {
+    resizeMode: 'contain',
+    maxWidth: Math.round(calculateMaxWidth() * 0.75),
+    maxHeight: calculateMaxHeight('100%')
+  },
+  button: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 14,
+    paddingHorizontal: 32,
+    borderRadius: 16,
+    elevation: 3,
+    backgroundColor: colors.secondaryColor,
+    width: "80%"
+  },
+  buttonText: {
+    color: colors.white,
+    fontSize: 16,
+    fontFamily: "Normal"
+  }
 });
+
+function calculateMaxWidth() {
+  const dimensions = Dimensions.get('window');
+  return dimensions.width;
+}
+
+function calculateMaxHeight(ratio) {
+  const dimensions = Dimensions.get('window');
+  if (ratio == '100%') { return dimensions.width}
+  if (ratio == '75%') { return Math.round(dimensions.width * 3 / 4) }
+  if (ratio == '56.25%') { return Math.round(dimensions.width * 9 / 16) }
+}
