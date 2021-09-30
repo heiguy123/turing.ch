@@ -8,7 +8,11 @@ import {
   StatusBar,
 } from "react-native";
 import AppLoading from "expo-app-loading";
-import { Roboto_500Medium, Roboto_700Bold } from "@expo-google-fonts/roboto";
+import {
+  Roboto_400Regular,
+  Roboto_500Medium,
+  Roboto_700Bold,
+} from "@expo-google-fonts/roboto";
 import { useFonts } from "expo-font";
 import colors from "./config/colors";
 import fonts from "./config/fonts";
@@ -16,6 +20,7 @@ import GetStarted from "./screens/GetStarted";
 
 export default function App() {
   let [fontloaded, error] = useFonts({
+    Regular: Roboto_400Regular,
     Normal: Roboto_500Medium,
     Bold: Roboto_700Bold,
   });
@@ -32,7 +37,7 @@ export default function App() {
   //       <Text style={fonts.desc1}>
   //         ghasgb tbW TBW Tbwb twt wntyndygfdghe gra gae gedrageda g aegeryhe
   //         ga hegeagerfds fgdg agad dfagfda hyad gfdag adgfdag adygad
-  //       </Text>
+  //       </Text>s
   //     </View>
   //   </View>
   //   <StatusBar style="auto" />
