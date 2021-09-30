@@ -14,18 +14,14 @@ import colors from "./config/colors";
 import fonts from "./config/fonts";
 //import GetStarted from "./screens/GetStarted";
 
-// require("react-dom");
-// window.React2 = require("react");
-// console.log(window.React1 === window.React2);
-
 export default function App() {
-  let [fontloaded, error] = useFonts({
-    Normal: Roboto_500Medium,
-    Bold: Roboto_700Bold,
-  });
-  if (!fontloaded) {
-    <AppLoading />;
-  }
+  // let [fontloaded, error] = useFonts({
+  //   Normal: Roboto_500Medium,
+  //   Bold: Roboto_700Bold,
+  // });
+  // if (!fontloaded) {
+  //   <AppLoading />;
+  // }
   return (
     <SafeAreaView style={styles.container}>
       <View style={{ flex: 0.5, justifyContent: "flex-start" }}>

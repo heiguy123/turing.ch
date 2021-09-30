@@ -1,16 +1,16 @@
-// import AppLoading from "expo-app-loading";
-// import { Roboto_500Medium, Roboto_700Bold } from "@expo-google-fonts/roboto";
-// import { useFonts } from "expo-font";
+import AppLoading from "expo-app-loading";
+import { Roboto_500Medium, Roboto_700Bold } from "@expo-google-fonts/roboto";
+import { useFonts } from "expo-font";
 import { StyleSheet } from "react-native";
 import colors from "./colors";
 
-// let [fontloaded, error] = useFonts({
-//   Normal: Roboto_500Medium,
-//   Bold: Roboto_700Bold,
-// });
-// if (!fontloaded) {
-//   <AppLoading />;
-// }
+let [fontloaded, error] = useFonts({
+  Normal: Roboto_500Medium,
+  Bold: Roboto_700Bold,
+});
+if (!fontloaded) {
+  <AppLoading />;
+}
 
 export default StyleSheet.create({
   title1: {
