@@ -1,33 +1,26 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View, StatusBar, Platform, SafeAreaView, Image } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 function ChooseScreen({ navigation: { navigate } }) {
-
     return (
-
         <View style={styles.container}>
-            <Text style={styles.textBase}>Before we start{"\n"}
-                <Text style={styles.textBase2}>{"\n"}We show you all related records from the{"\n"}given timeframe.</Text>
-            </Text>
+            <Text style={styles.textBase}>Hi, let's walk through{"\n"}the solar panel specification</Text>
             <View style={styles.container2}>
-                <TouchableOpacity style={styles.smallContainer} onPress={() =>
-                        navigate('Default')
-                }    
-                />
-                <TouchableOpacity style={styles.smallContainer2} onPress={() =>
-                        navigate('Customise')
-                }
-                />
+                <TouchableOpacity style={styles.smallContainer} onPress={() =>navigate('Default')}>
+                    <Text style={styles.textBase2}>Default Specification</Text>
+                    <Text style={ styles.textBase4}>Start</Text>
+                    <Text style={ styles.textBase3} >I would use the default panel specification</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.smallContainer2} onPress={() =>navigate('Customise')}>
+                    <Text style={styles.textBase2}>Customise Specification</Text>
+                    <Text style={ styles.textBase4}>Start</Text>
+                    <Text style={styles.textBase3}>I have my specific panel specification</Text>
+                </TouchableOpacity>
             </View>
-           
-            <View style={styles.menubar}></View>  
-
-            
+            <Image resizeMode={"contain"} style={styles.picture1} source={require('./assets/background.png')} />
         </View>
-       
-        
     );
 }
 function DefCal(props) {
@@ -49,6 +42,7 @@ function CusCal(props) {
 
 function CalculatorPage() {
     return (
+    <SafeAreaView style={{paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0, flex: 1}}>
         <NavigationContainer >
           <Stack.Navigator initialRouteName="Choose" screenOptions={{ headerShown: false }}>
             <Stack.Screen name="Choose" component={ChooseScreen} />
@@ -56,6 +50,7 @@ function CalculatorPage() {
             <Stack.Screen name="Customise" component={CusCal} />
           </Stack.Navigator>
         </NavigationContainer>
+    </SafeAreaView>        
       );
 }
 
@@ -66,58 +61,76 @@ export default CalculatorPage;
 
 const styles = StyleSheet.create({
     container:{
-        backgroundColor: "#E3E3E3",
+        backgroundColor: "#fff",
+        flexDirection:"row",
         flex: 1,
-        justifyContent:"flex-end",
-        alignItems: "center",
+        justifyContent:"center",
+    },
+    picture1:{
+        position:"absolute",
+        justifyContent:"center",
+        height:"31%",
+        top:"5%",
     },
     container2:{
-        backgroundColor:"#E3E3E3",
-        alignItems: "center",
-        width: "85%",
-        height: "25%",
-        bottom: "13%",
+        flex:1,
+        backgroundColor:"#d3d8e8",
+        justifyContent: "center", 
+        alignSelf:"flex-end",
+        height:"50%",
+        flexDirection : "row",
     },
     smallContainer:{
-        backgroundColor: "#000",
-        width: "45%",
-        height: "100%",
+        backgroundColor: "#fff",
+        width: "90%",
+        height: "22%",
         position:"absolute",
         alignSelf: "flex-start",
+        top:"8%",
+        borderRadius: 20,
+        elevation: 5,
     },
     smallContainer2:{
-        backgroundColor: "#000",
-        width: "45%",
-        height: "100%",
+        backgroundColor: "#fff",
+        width: "90%",
+        height: "22%",
         position:"absolute",
-        alignSelf: "flex-end",
+        alignSelf: "flex-start",
+        top:"38%",
+        borderRadius: 20,
+        elevation: 5,
     },
     textBase:{
         fontWeight:"bold",
-        fontSize: 50 ,
+        fontSize: 24 ,
         position: "absolute",
-        top: 0,
+        bottom: "53%",
         textAlign:"center",
     },
     textBase2:{
-        fontWeight: "normal" ,
-        fontSize: 15,
+        top: "20%",
+        left: "5%",
+        fontWeight: "bold" ,
+        fontSize: 14,
         position: "absolute",
+        lineHeight:20,
     },
-    conBut:{
-        backgroundColor:"#233E8B",
-        width:"80%",
-        height: "7%",
-        bottom: "7%",
-        justifyContent: "center",
-        alignItems:"center",
-        borderRadius: 30,
+    textBase3:{
+        bottom: "25%",
+        left: "5%",
+        fontWeight: "normal" ,
+        fontSize: 14,
+        position: "absolute",
+        lineHeight:20,
     },
-    menubar: {
-        backgroundColor: "#fff",
-        width: "100%", 
-        height: "15%",
-        
-        
+    textBase4:{
+        top: "20%",
+        right: "5%",
+        fontWeight: "bold" ,
+        fontSize: 14,
+        position: "absolute",
+        lineHeight:20,
+        color:"#233E8B"
     },
+    
 })
