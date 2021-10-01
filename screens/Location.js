@@ -12,12 +12,13 @@ import {
 } from "react-native";
 import colors from "../config/colors";
 import fonts from "../config/fonts";
+import fixassets from "../config/fixassets";
 
 export default function Location({ navigation }) {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: colors.primary }}>
       <View style={styles.container}>
-        <Image style={styles.sun} source={require("../assets/sun.png")} />
+        <Image style={fixassets.sun} source={require("../assets/sun.png")} />
         <Image
           style={styles.smarthome}
           source={require("../assets/undraw_map.png")}
@@ -27,15 +28,12 @@ export default function Location({ navigation }) {
         style={{
           flex: 1,
           justifyContent: "flex-start",
+          backgroundColor: colors.black,
         }}
       >
         <Text style={[fonts.h1, { color: colors.white, lineHeight: 53.5 }]}>
           Where is {"\n"} your{" "}
-          <Text
-            style={[fonts.h1, { color: colors.secondary, lineHeight: 53.5 }]}
-          >
-            Location?
-          </Text>
+          <Text style={[fonts.h1, { color: colors.secondary }]}>Location?</Text>
         </Text>
         <View style={{ height: "25%", top: "4%" }}>
           <Text style={[fonts.p, styles.desc]}>
@@ -51,7 +49,7 @@ export default function Location({ navigation }) {
           }}
         >
           <TouchableHighlight
-            style={styles.button}
+            style={fixassets.button}
             //onPress={() => navigate("SetTime")}
             onPress={() => navigation.goBack()}
           >
@@ -80,7 +78,7 @@ const styles = StyleSheet.create({
   container: {
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
     flex: 1,
-    backgroundColor: colors.primary,
+    backgroundColor: colors.white,
   },
   desc: {
     marginHorizontal: "8%",
@@ -90,26 +88,11 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
     lineHeight: 24,
   },
-  button: {
-    width: 278,
-    height: 46,
-    borderWidth: 0,
-    borderRadius: 16,
-    backgroundColor: colors.secondary,
-    justifyContent: "center",
-  },
-  sun: {
-    width: 65,
-    height: 130,
-    position: "absolute",
-    right: "0%",
-    bottom: Dimensions.get("window").height * 0.3 - 2,
-  },
   smarthome: {
     width: 280,
     height: 225,
     position: "absolute",
     alignSelf: "center",
-    bottom: Dimensions.get("window").height * 0.015,
+    bottom: Dimensions.get("window").height * 0.04,
   },
 });

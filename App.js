@@ -18,6 +18,7 @@ import colors from "./config/colors";
 import fonts from "./config/fonts";
 import GetStarted from "./screens/GetStarted";
 import Location from "./screens/Location";
+import SetLocation from "./screens/SetLocation";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
@@ -32,15 +33,17 @@ function App() {
   if (!fontloaded) {
     return <AppLoading />;
   }
-  //return SetLocation();
+
+  // return SetLocation();
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="GetStarted"
+        initialRouteName="SetLocation"
         screenOptions={{ headerShown: false, animation: "none" }}
       >
         <Stack.Screen name="GetStarted" component={GetStarted} />
         <Stack.Screen name="Location" component={Location} />
+        <Stack.Screen name="SetLocation" component={SetLocation} />
       </Stack.Navigator>
     </NavigationContainer>
   );
