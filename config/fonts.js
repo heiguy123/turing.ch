@@ -19,43 +19,25 @@ export default StyleSheet.create({
     marginBottom: 24
   },
   h3: {
-    fontFamily: "Bold",
-    fontSize: 28,
-    color: colors.black,
-    textAlign: "center",
-    letterSpacing: 0.15,
-    marginBottom: 24
-  },
-  h4: {
-    fontFamily: "Bold",
+    fontFamily: "Normal",
     fontSize: 24,
     color: colors.black,
     textAlign: "center",
     letterSpacing: 0.15,
     marginBottom: 24
   },
-  h5: {
-    fontFamily: "Bold",
-    fontSize: 21,
-    color: colors.black,
-    textAlign: "center",
-    letterSpacing: 0.15,
-    marginBottom: 24
-  },
-  h6: {
-    fontFamily: "Bold",
+  h4: {
+    fontFamily: "Normal",
     fontSize: 18,
     color: colors.black,
     textAlign: "center",
     letterSpacing: 0.15,
-    marginBottom: 24
   },
   p: {
-    fontFamily: "Normal",
-    fontSize: 16,
+    fontFamily: "Regular",
+    fontSize: 14,
     color: colors.black,
     textAlign: "center",
-    lineHeight: 24,
     letterSpacing: 0.15,
     marginBottom: 24
   },
