@@ -1,9 +1,8 @@
-import { resetWarningCache } from 'prop-types';
-import React from 'react';
+import React, { Component } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View, Pressable } from 'react-native';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
 var Def = false, Cuz = false;
-function defaultorcus (input){
+class test extends React.Component{
+     defaultorcus = (input) => {
         if (input == 1){
             return { "Def":true, "Cuz" : false};
         }
@@ -11,9 +10,13 @@ function defaultorcus (input){
             return { "Cuz" : true, "Def" : false};
         }
 }
+};
 
-function CalculatorPage(props) {
 
+function CalculatorPage({ navigation }) {
+const pressHandler = () => {
+    navigation.navigate('Default')
+}
     return (
         <View style={styles.container}>
            <Text style={styles.textBase}>Choose your{"\n"}
@@ -21,10 +24,10 @@ function CalculatorPage(props) {
             <Text style={styles.textBase2}>{"\n"}We show you all related records from the{"\n"}given timeframe.</Text>
            </Text>
            <View style={styles.container2}>
-                <TouchableOpacity style={styles.smallContainer} onPress={defaultorcus(1)} />
-                <TouchableOpacity style={styles.smallContainer2} onPress={defaultorcus(2)} />
+                <TouchableOpacity style={styles.smallContainer} onPress={(1)=> this.defaultorcus(1)} />
+                <TouchableOpacity style={styles.smallContainer2} onPress{} />
            </View>
-           <TouchableOpacity style={styles.conBut} onPress={()=> console.log("Pressed")}>
+           <TouchableOpacity style={styles.conBut} onPress={pressHandler}>
                 <Text style={{color:"#fff", fontSize:20}}>Continue</Text>
            </TouchableOpacity>
            
