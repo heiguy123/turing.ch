@@ -1,18 +1,22 @@
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 import CalculatorPage from "./CalculatorPage";
 import DefCal from "./DefCal";
+import CusCal from "./CusCal";
+import { NavigationContainer } from "@react-navigation/native";
 
 
-const screen ={
+const screens ={
     calculator: {
-        screen : CalculatorPage 
+        screen : CalculatorPage
     },
     Default: {
         screen : DefCal 
     },
+    Customise: {
+        screen : CusCal
+    }
 }
-const screenstack = createStackNavigator(screen) 
+const screenstack = createStackNavigator(screens) 
 
 export default createAppContainer(screenstack)

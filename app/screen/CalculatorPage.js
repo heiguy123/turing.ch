@@ -1,44 +1,70 @@
-import React, { Component } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View, Pressable } from 'react-native';
-var Def = false, Cuz = false;
-class test extends React.Component{
-     defaultorcus = (input) => {
-        if (input == 1){
-            return { "Def":true, "Cuz" : false};
-        }
-        else{
-            return { "Cuz" : true, "Def" : false};
-        }
-}
-};
+import React from 'react';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
+function ChooseScreen({ navigation: { navigate } }) {
 
-function CalculatorPage({ navigation }) {
-const pressHandler = () => {
-    navigation.navigate('Default')
-}
     return (
+
         <View style={styles.container}>
-           <Text style={styles.textBase}>Choose your{"\n"}
-            <Text style={{color:"#FFB319",}}>Solar Panel{"\n"}</Text>
-            <Text style={styles.textBase2}>{"\n"}We show you all related records from the{"\n"}given timeframe.</Text>
-           </Text>
-           <View style={styles.container2}>
-                <TouchableOpacity style={styles.smallContainer} onPress={(1)=> this.defaultorcus(1)} />
-                <TouchableOpacity style={styles.smallContainer2} onPress{} />
-           </View>
-           <TouchableOpacity style={styles.conBut} onPress={pressHandler}>
-                <Text style={{color:"#fff", fontSize:20}}>Continue</Text>
-           </TouchableOpacity>
+            <Text style={styles.textBase}>Before we start{"\n"}
+                <Text style={styles.textBase2}>{"\n"}We show you all related records from the{"\n"}given timeframe.</Text>
+            </Text>
+            <View style={styles.container2}>
+                <TouchableOpacity style={styles.smallContainer} onPress={() =>
+                        navigate('Default')
+                }    
+                />
+                <TouchableOpacity style={styles.smallContainer2} onPress={() =>
+                        navigate('Customise')
+                }
+                />
+            </View>
            
-           <View style={styles.menubar}></View>  
+            <View style={styles.menubar}></View>  
 
             
         </View>
        
         
     );
-}const styles = StyleSheet.create({
+}
+function DefCal(props) {
+    return (
+        <View style={{ flex : 1, alignItems:"center", justifyContent: "center" }}>
+            <Text>Hello World</Text>
+        </View>
+    );
+}
+
+function CusCal(props) {
+    return (
+        <View style={{ flex : 1, alignItems:"center", justifyContent: "center" }}>
+            <Text>Hello World</Text>
+        </View>
+    );
+}
+    const Stack = createNativeStackNavigator();
+
+function CalculatorPage() {
+    return (
+        <NavigationContainer >
+          <Stack.Navigator initialRouteName="Choose" screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="Choose" component={ChooseScreen} />
+            <Stack.Screen name="Default" component={DefCal} />
+            <Stack.Screen name="Customise" component={CusCal} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      );
+}
+
+
+
+
+export default CalculatorPage;
+
+const styles = StyleSheet.create({
     container:{
         backgroundColor: "#E3E3E3",
         flex: 1,
@@ -53,14 +79,14 @@ const pressHandler = () => {
         bottom: "13%",
     },
     smallContainer:{
-        backgroundColor: Def ? "#fff":"#000",
+        backgroundColor: "#000",
         width: "45%",
         height: "100%",
         position:"absolute",
         alignSelf: "flex-start",
     },
     smallContainer2:{
-        backgroundColor: Cuz ? "#fff":"#000",
+        backgroundColor: "#000",
         width: "45%",
         height: "100%",
         position:"absolute",
@@ -70,14 +96,13 @@ const pressHandler = () => {
         fontWeight:"bold",
         fontSize: 50 ,
         position: "absolute",
-        top: "12%",
+        top: 0,
         textAlign:"center",
     },
     textBase2:{
         fontWeight: "normal" ,
         fontSize: 15,
         position: "absolute",
-        lineHeight:20,
     },
     conBut:{
         backgroundColor:"#233E8B",
@@ -96,4 +121,3 @@ const pressHandler = () => {
         
     },
 })
-export default CalculatorPage;

@@ -1,9 +1,11 @@
 import React from 'react';
-import Navigator from './app/screen/ScreenStack';
-
+import CalculatorPage from './app/screen/CalculatorPage';
 
 export default function App() {
-  return <Navigator /> ;
+
+  return(
+    <CalculatorPage />
+    );
 }
 
 

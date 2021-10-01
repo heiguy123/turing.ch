@@ -1,41 +1,37 @@
-import AppLoading from "expo-app-loading";
-import { Roboto_500Medium, Roboto_700Bold } from "@expo-google-fonts/roboto";
-import { useFonts } from "expo-font";
 import { StyleSheet } from "react-native";
 import colors from "./colors";
 
-let [fontloaded, error] = useFonts({
-  Normal: Roboto_500Medium,
-  Bold: Roboto_700Bold,
-});
-if (!fontloaded) {
-  <AppLoading />;
-}
-
 export default StyleSheet.create({
-  title1: {
+  h1: {
     fontFamily: "Bold",
     fontSize: 48,
-    color: colors.yellow,
+    //color: colors.yellow,
     textAlign: "center",
     letterSpacing: 0.15,
   },
-  title2: {
+  h2: {
     fontFamily: "Bold",
-    fontSize: 48,
+    fontSize: 32,
     color: colors.white,
     textAlign: "center",
     letterSpacing: 0.15,
   },
-  title3: {
-    fontFamily: "Bold",
-    fontSize: 48,
+  h3: {
+    fontFamily: "Normal",
+    fontSize: 24,
     color: colors.black,
     textAlign: "center",
     letterSpacing: 0.15,
   },
-  desc1: {
+  h4: {
     fontFamily: "Normal",
+    fontSize: 18,
+    color: colors.black,
+    textAlign: "center",
+    letterSpacing: 0.15,
+  },
+  p: {
+    fontFamily: "Regular",
     fontSize: 14,
     color: colors.white,
     textAlign: "center",
