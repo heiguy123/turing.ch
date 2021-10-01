@@ -29,19 +29,6 @@ export default function App() {
   }
 
   return GetStarted();
-  // <SafeAreaView style={styles.container}>
-  //   <View style={{ flex: 0.5, justifyContent: "flex-start" }}>
-  //     <Text style={fonts.title1}>Sunlight</Text>
-  //     <Text style={fonts.title2}>Detector App </Text>
-  //     <View style={{ width: "80%", height: "25%", top: 20 }}>
-  //       <Text style={fonts.desc1}>
-  //         ghasgb tbW TBW Tbwb twt wntyndygfdghe gra gae gedrageda g aegeryhe
-  //         ga hegeagerfds fgdg agad dfagfda hyad gfdag adgfdag adygad
-  //       </Text>s
-  //     </View>
-  //   </View>
-  //   <StatusBar style="auto" />
-  // </SafeAreaView>
 }
 
 const styles = StyleSheet.create({
@@ -53,33 +40,4 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "flex-end",
   },
-  // title1: {
-  //   fontFamily: "Bold",
-  //   fontSize: 48,
-  //   color: colors.yellow,
-  //   textAlign: "center",
-  //   letterSpacing: 0.15,
-  // },
-  // title2: {
-  //   fontFamily: "Bold",
-  //   fontSize: 48,
-  //   color: colors.white,
-  //   textAlign: "center",
-  //   letterSpacing: 0.15,
-  // },
-  // title3: {
-  //   fontFamily: "Bold",
-  //   fontSize: 48,
-  //   color: colors.black,
-  //   textAlign: "center",
-  //   letterSpacing: 0.15,
-  // },
-  // desc1: {
-  //   fontFamily: "Normal",
-  //   fontSize: 14,
-  //   color: colors.white,
-  //   textAlign: "center",
-  //   lineHeight: 24,
-  //   letterSpacing: 0.15,
-  // },
 });

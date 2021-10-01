@@ -15,19 +15,28 @@ import fonts from "../config/fonts";
 
 export default function GetStarted() {
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.top}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: colors.blue }}>
+      <View style={[styles.container, styles.top]}>
         <Image style={styles.sun} source={require("../assets/sun.png")} />
         <Image
           style={styles.smarthome}
           source={require("../assets/smarthome.png")}
         />
       </View>
-      <View style={{ flex: 0.52, justifyContent: "flex-start" }}>
-        <Text style={[fonts.h1, { color: colors.yellow }]}>Sunlight</Text>
-        <Text style={[fonts.h1, { color: colors.white }]}>Detector App</Text>
-        <View style={{ maxWidth: "90%", height: "25%", top: "4%" }}>
-          <Text style={[fonts.p, { color: colors.white }]}>
+      <View
+        style={{
+          flex: 1,
+          justifyContent: "flex-start",
+        }}
+      >
+        <Text style={[fonts.h1, { color: colors.yellow, lineHeight: 53.5 }]}>
+          Sunlight
+        </Text>
+        <Text style={[fonts.h1, { color: colors.white, lineHeight: 53.5 }]}>
+          Detector App
+        </Text>
+        <View style={{ height: "25%", top: "4%" }}>
+          <Text style={[fonts.p, { color: colors.white, flexWrap: "wrap" }]}>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
             velit tellus, sodales id placerat at, finibus non urna. Morbi a
             lacus tellus.
@@ -45,7 +54,6 @@ export default function GetStarted() {
           </TouchableHighlight>
         </View>
       </View>
-      <StatusBar style="auto" />
     </SafeAreaView>
   );
 }
@@ -53,11 +61,8 @@ export default function GetStarted() {
 const styles = StyleSheet.create({
   container: {
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
-    fontSize: 100,
     flex: 1,
     backgroundColor: colors.blue,
-    alignItems: "center",
-    justifyContent: "flex-end",
   },
   button: {
     width: 278,
@@ -67,20 +72,19 @@ const styles = StyleSheet.create({
     backgroundColor: colors.yellow,
     justifyContent: "center",
   },
-  top: {
-    flex: 0.48,
-    justifyContent: "flex-end",
+  top: {},
+  sun: {
+    width: 70,
+    height: 140,
+    position: "absolute",
+    right: "0%",
+    bottom: Dimensions.get("window").height * 0.25,
   },
   smarthome: {
-    flexBasis: "75%",
-    aspectRatio: 1.24,
-    bottom: 5,
-  },
-  sun: {
-    width: 75,
-    height: 150,
-    alignSelf: "flex-end",
-    left: "10.5%",
-    top: "25%",
+    width: 299,
+    height: 242,
+    position: "absolute",
+    alignSelf: "center",
+    bottom: Dimensions.get("window").height * 0.02,
   },
 });
