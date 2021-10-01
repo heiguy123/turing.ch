@@ -15,7 +15,7 @@ import fonts from "../config/fonts";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-export default function GetStarted({ navigation: { navigation } }) {
+export default function GetStarted({ navigation: { navigate } }) {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: colors.primary }}>
       <View style={[styles.container, styles.top]}>
@@ -53,9 +53,11 @@ export default function GetStarted({ navigation: { navigation } }) {
         >
           <TouchableHighlight
             style={styles.button}
-            onPress={() => navigation("")}
+            onPress={() => navigate("")}
           >
-            <Text style={[fonts.h4, { color: colors.white }]}>Get Started</Text>
+            <Text style={[fonts.h4, { color: colors.white, lineHeight: 24 }]}>
+              Get Started
+            </Text>
           </TouchableHighlight>
         </View>
       </View>
@@ -77,7 +79,6 @@ const styles = StyleSheet.create({
     backgroundColor: colors.secondary,
     justifyContent: "center",
   },
-  top: {},
   sun: {
     width: 70,
     height: 140,

@@ -20,7 +20,9 @@ import GetStarted from "./screens/GetStarted";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-export default function App() {
+const Stack = createNativeStackNavigator();
+
+function App() {
   let [fontloaded, error] = useFonts({
     Regular: Roboto_400Regular,
     Normal: Roboto_500Medium,
@@ -42,6 +44,7 @@ export default function App() {
   );
 }
 
+export default App;
 const styles = StyleSheet.create({
   container: {
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
