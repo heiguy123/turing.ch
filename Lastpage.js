@@ -32,7 +32,7 @@ export default function App() {
 
             <View style={[styles.box, {alignSelf: "center"}]}>
               <Text style={[styles.title4, {alignSelf: "center", marginTop: "25%"}]}>
-                Display your graph here jj
+                Display your graph here
               </Text>
             </View>
 
