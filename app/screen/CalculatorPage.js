@@ -47,13 +47,13 @@ function DefCal({navigation}) {
             <Text style={[Calculation.textBase1,{left:"6%", top:"29.5%",}]}>Specification 1</Text>
             <View style={[Calculation.textBox, {left: "5%" , top:"55%", width:"90%", height: "5%"}]}>
                 <TextInput
-                    placeholder="Electricity price per kWh in your area (US Dollar)" 
+                    placeholder="Electricity price per kWh in your area(US Dollar)" 
                     style={{alignSelf:"center", left:"30%"}} />
             </View>
             <Text style={[Calculation.textBase1,{left:"6%", top:"38%",}]}>Specification 2</Text>
             <View style={[Calculation.textBox, {left: "5%" , top:"66%", width:"90%", height: "5%"}]}>
                 <TextInput  
-                    placeholder="Estimate your electricity bill per month (US Dollar)" 
+                    placeholder="Estimate your electricity bill per month(US Dollar)" 
                     style={{alignSelf:"center", left:"30%"}} />
             </View>
             <TouchableOpacity style={Calculation.DoneBut} onPress={() => console.log('CalCulation Time!!')}>
@@ -80,7 +80,7 @@ function CusCal({navigation : {navigate}}) {
             <Text style={[Calculation.textBase1,{left:"55%", top:"15.5%",}]}>Specification 3</Text>
             <View style={[Calculation.textBox, {left: "5%" , top:"34%", width:"40%", height: "5%"}]}>
                 <TextInput  
-                    placeholder="Area of panels (m^2)" 
+                    placeholder="Area of panels(m^2)" 
                     style={{alignSelf:"center", left:"30%"}} />
             </View>
             <View style={[Calculation.textBox, {left: "55%" , top:"34%", width:"40%", height: "5%"}]}>
@@ -92,13 +92,13 @@ function CusCal({navigation : {navigate}}) {
             <Text style={[Calculation.textBase1,{left:"6%", top:"29.5%",}]}>Specification 1</Text>
             <View style={[Calculation.textBox, {left: "5%" , top:"55%", width:"90%", height: "5%"}]}>
                 <TextInput  
-                    placeholder="Electricity price per kWh in your area (US Dollar)" 
+                    placeholder="Electricity price per kWh in your area(US Dollar)" 
                     style={{alignSelf:"center", left:"30%"}} />
             </View>
             <Text style={[Calculation.textBase1,{left:"6%", top:"38%",}]}>Specification 2</Text>
             <View style={[Calculation.textBox, {left: "5%" , top:"66%", width:"90%", height: "5%"}]}>
                 <TextInput  
-                    placeholder="Estimate your electricity bill per month (US Dollar)" 
+                    placeholder="Estimate your electricity bill per month(US Dollar)" 
                     style={{alignSelf:"center", left:"30%"}} />
             </View>
             <TouchableOpacity style={Calculation.DoneBut} onPress={() => console.log('CalCulation Time!!')}>
