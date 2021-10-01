@@ -6,7 +6,6 @@ export default StyleSheet.create({
     fontFamily: "Bold",
     fontSize: 48,
     color: colors.black,
-    textAlign: "center",
     letterSpacing: 0.15,
     marginBottom: 24
   },
@@ -14,7 +13,6 @@ export default StyleSheet.create({
     fontFamily: "Bold",
     fontSize: 32,
     color: colors.black,
-    textAlign: "center",
     letterSpacing: 0.15,
     marginBottom: 24
   },
@@ -22,7 +20,6 @@ export default StyleSheet.create({
     fontFamily: "Normal",
     fontSize: 24,
     color: colors.black,
-    textAlign: "center",
     letterSpacing: 0.15,
     marginBottom: 24
   },
@@ -30,14 +27,12 @@ export default StyleSheet.create({
     fontFamily: "Normal",
     fontSize: 18,
     color: colors.black,
-    textAlign: "center",
     letterSpacing: 0.15,
   },
   p: {
     fontFamily: "Regular",
     fontSize: 14,
     color: colors.black,
-    textAlign: "center",
     letterSpacing: 0.15,
     marginBottom: 24
   },

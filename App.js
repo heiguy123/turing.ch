@@ -23,6 +23,7 @@ import fonts from "./config/fonts";
 import GetStarted from "./screens/GetStarted";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import Dashboard from "./screens/Dashboard";
 
 const Stack = createNativeStackNavigator();
 
@@ -39,10 +40,11 @@ function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="GetStarted"
+        initialRouteName="Dashboard"
         screenOptions={{ headerShown: false }}
       >
         <Stack.Screen name="GetStarted" component={GetStarted} />
+        <Stack.Screen name="Dashboard" component={Dashboard} />
       </Stack.Navigator>
     </NavigationContainer>
   );

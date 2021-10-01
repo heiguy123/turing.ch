@@ -31,14 +31,14 @@ export default function GetStarted({ navigation: { navigate } }) {
           justifyContent: "flex-start",
         }}
       >
-        <Text style={[fonts.h1, { color: colors.secondary, lineHeight: 53.5 }]}>
+        <Text style={[fonts.h1, { color: colors.secondary, lineHeight: 53.5, textAlign: "center" }]}>
           Sunlight
         </Text>
-        <Text style={[fonts.h1, { color: colors.white, lineHeight: 53.5 }]}>
+        <Text style={[fonts.h1, { color: colors.white, lineHeight: 53.5, textAlign: "center" }]}>
           Detector App
         </Text>
         <View style={{ height: "25%", top: "4%" }}>
-          <Text style={[fonts.p, { color: colors.white, flexWrap: "wrap" }]}>
+          <Text style={[fonts.p, { color: colors.white, flexWrap: "wrap", textAlign: "center" }]}>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
             velit tellus, sodales id placerat at, finibus non urna. Morbi a
             lacus tellus.
@@ -53,9 +53,9 @@ export default function GetStarted({ navigation: { navigate } }) {
         >
           <TouchableHighlight
             style={styles.button}
-            onPress={() => navigate("")}
+            onPress={() => navigate("Dashboard")}
           >
-            <Text style={[fonts.h4, { color: colors.white, lineHeight: 24 }]}>
+            <Text style={[fonts.h4, { color: colors.white, lineHeight: 24, textAlign: "center" }]}>
               Get Started
             </Text>
           </TouchableHighlight>
