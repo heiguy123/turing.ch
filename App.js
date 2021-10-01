@@ -1,56 +1,35 @@
-import * as React from "react";
-import {
-  Platform,
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  View,
-  StatusBar,
-} from "react-native";
-import AppLoading from "expo-app-loading";
-import {
-  Roboto_400Regular,
-  Roboto_500Medium,
-  Roboto_700Bold,
-} from "@expo-google-fonts/roboto";
-import { useFonts } from "expo-font";
-import colors from "./config/colors";
-import fonts from "./config/fonts";
-import GetStarted from "./screens/GetStarted";
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import React from 'react';
+import { StyleSheet, SafeAreaView, Text, View, StatusBar, Platform } from 'react-native';
 
-const Stack = createNativeStackNavigator();
-
-function App() {
-  let [fontloaded, error] = useFonts({
-    Regular: Roboto_400Regular,
-    Normal: Roboto_500Medium,
-    Bold: Roboto_700Bold,
-  });
-  if (!fontloaded) {
-    return <AppLoading />;
-  }
-
-  return (
-    <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName="GetStarted"
-        screenOptions={{ headerShown: false }}
-      >
-        <Stack.Screen name="GetStarted" component={GetStarted} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
+export default function App() {
+    return (
+    <SafeAreaView style={styles.container}>
+        <View style={styles.container1}>
+            <View>
+                <Text style={styles.h1}>
+                    Back
+                </Text>
+            </View>
+        </View>
+    </SafeAreaView>
+    );
 }
 
-export default App;
+
 const styles = StyleSheet.create({
-  container: {
-    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
-    flex: 2,
-    backgroundColor: colors.blue,
-    alignItems: "center",
-    justifyContent: "flex-end",
-  },
+    container: {
+      flex: 1,
+      backgroundColor: "#fff",
+      paddingTop: Platform.OS === "android"? StatusBar.currentHeight : 0,
+    },
+    container1: {
+      width: "90%",
+    },
+    h1: {
+      fontWeight: "bold",
+      fontSize: 18,
+      color: "black",
+      textAlign: "left",
+      letterSpacing: 0.15,
+    },
 });
