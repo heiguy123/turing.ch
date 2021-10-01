@@ -17,6 +17,8 @@ import { useFonts } from "expo-font";
 import colors from "./config/colors";
 import fonts from "./config/fonts";
 import GetStarted from "./screens/GetStarted";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 export default function App() {
   let [fontloaded, error] = useFonts({
@@ -28,13 +30,21 @@ export default function App() {
     return <AppLoading />;
   }
 
-  return GetStarted();
+  return (
+    <NavigationContainer>
+      <Stack.Navigator
+        initialRouteName="GetStarted"
+        screenOptions={{ headerShown: false }}
+      >
+        <Stack.Screen name="GetStarted" component={GetStarted} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
 }
 
 const styles = StyleSheet.create({
   container: {
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
-    fontSize: 100,
     flex: 1,
     backgroundColor: colors.blue,
     alignItems: "center",

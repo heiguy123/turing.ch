@@ -12,10 +12,12 @@ import {
 } from "react-native";
 import colors from "../config/colors";
 import fonts from "../config/fonts";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-export default function GetStarted() {
+export default function GetStarted({ navigation: { navigation } }) {
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: colors.blue }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: colors.primary }}>
       <View style={[styles.container, styles.top]}>
         <Image style={styles.sun} source={require("../assets/sun.png")} />
         <Image
@@ -29,7 +31,7 @@ export default function GetStarted() {
           justifyContent: "flex-start",
         }}
       >
-        <Text style={[fonts.h1, { color: colors.yellow, lineHeight: 53.5 }]}>
+        <Text style={[fonts.h1, { color: colors.secondary, lineHeight: 53.5 }]}>
           Sunlight
         </Text>
         <Text style={[fonts.h1, { color: colors.white, lineHeight: 53.5 }]}>
@@ -49,7 +51,10 @@ export default function GetStarted() {
             top: "8%",
           }}
         >
-          <TouchableHighlight style={styles.button}>
+          <TouchableHighlight
+            style={styles.button}
+            onPress={() => navigation("")}
+          >
             <Text style={[fonts.h4, { color: colors.white }]}>Get Started</Text>
           </TouchableHighlight>
         </View>
@@ -62,14 +67,14 @@ const styles = StyleSheet.create({
   container: {
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
     flex: 1,
-    backgroundColor: colors.blue,
+    backgroundColor: colors.primary,
   },
   button: {
     width: 278,
     height: 46,
     borderWidth: 0,
     borderRadius: 16,
-    backgroundColor: colors.yellow,
+    backgroundColor: colors.secondary,
     justifyContent: "center",
   },
   top: {},
