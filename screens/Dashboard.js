@@ -23,6 +23,7 @@ export default function Dashboard({ navigation: { navigate } }) {
           style={styles.topImage}
           source={require("../assets/dashboard.png")}
         />
+        <View style={styles.topImageBorder}></View>
       </View>
       <View style={styles.solarIrradiance}>
         <View style={styles.greyLabel}>
@@ -32,13 +33,13 @@ export default function Dashboard({ navigation: { navigate } }) {
           />
           <Text style={[fonts.p, {marginTop: -4, paddingLeft: 4, marginBottom: 0}]}>Miri, Sarawak</Text>
         </View>
-        <Text style={[fonts.h1, {fontSize: 72, marginBottom: 0}]}>25%</Text>
+        <Text style={[fonts.h1, {fontSize: 70, marginBottom: 0}]}>25%</Text>
         <Text style={fonts.p}>Average Solar Irradiance</Text>
       </View>
       <View
         style={{
-          flex: 1,
-          top: -85,
+          height: "50%",
+          top: "-2%",
           paddingLeft: "5%",
           paddingRight: "5%"
         }}
@@ -46,8 +47,8 @@ export default function Dashboard({ navigation: { navigate } }) {
         <Text style={[fonts.h3, { color: colors.black, fontFamily: "Bold", marginBottom: 0}]}>
           Summary
         </Text>
-        <View style={[styles.row, {paddingTop: 30, paddingBottom: 30}]}>
-          <View style={[styles.col6, styles.row, {paddingLeft: 20, paddingRight: 20}]}>
+        <View style={[styles.row, {paddingTop: "8%", paddingBottom: "8%"}]}>
+          <View style={[styles.col6, styles.row, {paddingLeft: "5%", paddingRight: "5%"}]}>
             <View style={styles.col1, styles.progressBar}>
               <View style={styles.progressBarFilled}></View>
               <View style={styles.progressBarFilledCap}></View>
@@ -57,10 +58,10 @@ export default function Dashboard({ navigation: { navigate } }) {
               <Text style={[fonts.h3, {marginBottom: 0}]}>22.3°</Text>
             </View>
           </View>
-          <View style={[styles.col6, styles.row, {paddingLeft: 20, paddingRight: 20}]}>
+          <View style={[styles.col6, styles.row, {paddingLeft: "5%", paddingRight: "5%"}]}>
             <View style={styles.col1, styles.progressBar}>
-              <View style={[styles.progressBarFilled, {height: 20}]}></View>
-              <View style={[styles.progressBarFilledCap, {bottom: 20}]}></View>
+              <View style={[styles.progressBarFilled, {height: "20%"}]}></View>
+              <View style={[styles.progressBarFilledCap, {bottom: "20%"}]}></View>
             </View>
             <View style={[styles.col11, {paddingLeft: 14}]}>
               <Text style={[fonts.p, {marginBottom: 4, marginTop: 8}]}>Avg. Humidity</Text>
@@ -69,21 +70,21 @@ export default function Dashboard({ navigation: { navigate } }) {
           </View>
         </View>
         <View style={styles.hr}></View>
-        <View style={[styles.row, {paddingTop: 30, paddingBottom: 60}]}>
-          <View style={[styles.col6, styles.row, {paddingLeft: 20, paddingRight: 20}]}>
+        <View style={[styles.row, {paddingTop: "8%", paddingBottom: "10%"}]}>
+          <View style={[styles.col6, styles.row, {paddingLeft: "5%", paddingRight: "5%"}]}>
             <View style={styles.col1, styles.progressBar}>
-              <View style={styles.progressBarFilled}></View>
-              <View style={styles.progressBarFilledCap}></View>
+              <View style={[styles.progressBarFilled, {height: "55%"}]}></View>
+              <View style={[styles.progressBarFilledCap, {bottom: "55%"}]}></View>
             </View>
             <View style={[styles.col11, {paddingLeft: 14}]}>
               <Text style={[fonts.p, {marginBottom: 4, marginTop: 8}]}>Avg. Percipitation</Text>
               <Text style={[fonts.h3, {marginBottom: 0}]}>4.08 mm</Text>
             </View>
           </View>
-          <View style={[styles.col6, styles.row, {paddingLeft: 20, paddingRight: 20}]}>
+          <View style={[styles.col6, styles.row, {paddingLeft: "5%", paddingRight: "5%"}]}>
             <View style={styles.col1, styles.progressBar}>
-              <View style={[styles.progressBarFilled, {height: 20}]}></View>
-              <View style={[styles.progressBarFilledCap, {bottom: 20}]}></View>
+              <View style={[styles.progressBarFilled, {height: "25%"}]}></View>
+              <View style={[styles.progressBarFilledCap, {bottom: "25%"}]}></View>
             </View>
             <View style={[styles.col11, {paddingLeft: 14}]}>
               <Text style={[fonts.p, {marginBottom: 4, marginTop: 8}]}>Avg. Cloud Amount</Text>
@@ -92,10 +93,7 @@ export default function Dashboard({ navigation: { navigate } }) {
           </View>
         </View>
         <View
-          style={{
-            flexDirection: "row",
-            justifyContent: "center"
-          }}
+          style={[styles.buttonPlacement, { flexDirection: "row", alignSelf: "center"}]}
         >
           <TouchableHighlight
             style={styles.button}
@@ -107,22 +105,22 @@ export default function Dashboard({ navigation: { navigate } }) {
           </TouchableHighlight>
         </View>
         <View style={styles.navBottom}>
-          <View style={[styles.row, {paddingTop: 30, paddingBottom: 60}]}>
-            <View style={[styles.col4, {paddingLeft: 30, paddingRight: 30, alignItems: "center"}]}>
+          <View style={[styles.row, {paddingTop: "6%", paddingBottom: "16%"}]}>
+            <View style={[styles.col4, {paddingLeft: "8%", paddingRight: "8%", alignItems: "center"}]}>
               <Image 
                 style={styles.navIcon}
                 source={require("../assets/icon-calculator-inactive.png")} 
               />
               <Text style={[fonts.p, styles.navInactive, { marginBottom: 0}]}>Calculator</Text>
             </View>
-            <View style={[styles.col4, {paddingLeft: 30, paddingRight: 30, alignItems: "center"}]}>
+            <View style={[styles.col4, {paddingLeft: "8%", paddingRight: "8%", alignItems: "center"}]}>
               <Image 
                 style={styles.navIcon}
                 source={require("../assets/icon-home.png")} 
               />
               <Text style={[fonts.p, { marginBottom: 0}]}>Dashboard</Text>
             </View>
-            <View style={[styles.col4, {paddingLeft: 30, paddingRight: 30, alignItems: "center"}]}>
+            <View style={[styles.col4, {paddingLeft: "8%", paddingRight: "8%", alignItems: "center"}]}>
               <Image 
                 style={styles.navIcon}
                 source={require("../assets/icon-settings-inactive.png")} 
@@ -138,8 +136,8 @@ export default function Dashboard({ navigation: { navigate } }) {
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
-    flex: 1
+    marginTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+    height: "40%"
   },
   button: {
     width: 278,
@@ -149,13 +147,24 @@ const styles = StyleSheet.create({
     backgroundColor: colors.primary,
     justifyContent: "center",
   },
+  buttonPlacement: {
+    position: "absolute",
+    bottom: "12%"
+  },
   topImage: {
     resizeMode: "contain",
     width: Dimensions.get("window").width,
+    height: "88%",
     position: "absolute",
     alignSelf: "center",
-    top: -110,
+    top: 0,
+    right: Dimensions.get("window").width < 380 ? "-10%" : 0,
     zIndex: 0
+  },
+  topImageBorder: {
+    borderBottomColor: "#888787",
+    borderBottomWidth: 1,
+    top: "87.5%"
   },
   plane: {
     resizeMode: "contain",
@@ -174,17 +183,18 @@ const styles = StyleSheet.create({
   },
   solarIrradiance: {
     position: "absolute",
-    top: "12%",
+    top: "10%",
     left: "10%"
   },
   progressBar: {
-    height: 70,
+    height: "100%",
+    maxHeight: 80,
     width: 2,
     backgroundColor: "#DDDDDD"
   },
   progressBarFilled: {
     position: "absolute",
-    height: 40,
+    height: "40%",
     width: 6,
     bottom: 0,
     right: -2,
@@ -194,7 +204,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     height: 2,
     width: 10,
-    bottom: 40,
+    bottom: "39%",
     right: -4,
     backgroundColor: colors.primary
   },
