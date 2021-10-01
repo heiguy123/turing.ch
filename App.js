@@ -17,6 +17,7 @@ import { useFonts } from "expo-font";
 import colors from "./config/colors";
 import fonts from "./config/fonts";
 import GetStarted from "./screens/GetStarted";
+import Location from "./screens/Location";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
@@ -31,14 +32,15 @@ function App() {
   if (!fontloaded) {
     return <AppLoading />;
   }
-
+  //return SetLocation();
   return (
     <NavigationContainer>
       <Stack.Navigator
         initialRouteName="GetStarted"
-        screenOptions={{ headerShown: false }}
+        screenOptions={{ headerShown: false, animation: "none" }}
       >
         <Stack.Screen name="GetStarted" component={GetStarted} />
+        <Stack.Screen name="Location" component={Location} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -12,17 +12,15 @@ import {
 } from "react-native";
 import colors from "../config/colors";
 import fonts from "../config/fonts";
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-export default function GetStarted({ navigation: { navigate } }) {
+export default function Location({ navigation }) {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: colors.primary }}>
       <View style={styles.container}>
         <Image style={styles.sun} source={require("../assets/sun.png")} />
         <Image
           style={styles.smarthome}
-          source={require("../assets/smarthome.png")}
+          source={require("../assets/undraw_map.png")}
         />
       </View>
       <View
@@ -31,17 +29,18 @@ export default function GetStarted({ navigation: { navigate } }) {
           justifyContent: "flex-start",
         }}
       >
-        <Text style={[fonts.h1, { color: colors.secondary, lineHeight: 53.5 }]}>
-          Sunlight
-        </Text>
         <Text style={[fonts.h1, { color: colors.white, lineHeight: 53.5 }]}>
-          Detector App
+          Where is {"\n"} your{" "}
+          <Text
+            style={[fonts.h1, { color: colors.secondary, lineHeight: 53.5 }]}
+          >
+            Location?
+          </Text>
         </Text>
         <View style={{ height: "25%", top: "4%" }}>
           <Text style={[fonts.p, styles.desc]}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
-            velit tellus, sodales id placerat at, finibus non urna. Morbi a
-            lacus tellus.
+            We would like to access your GPS information {"\n"} for us to
+            calibrate the past history records of the {"\n"} solar irradiance.
           </Text>
         </View>
         <View
@@ -53,12 +52,24 @@ export default function GetStarted({ navigation: { navigate } }) {
         >
           <TouchableHighlight
             style={styles.button}
-            onPress={() => navigate("Location")}
+            //onPress={() => navigate("SetTime")}
+            onPress={() => navigation.goBack()}
           >
             <Text style={[fonts.h4, { color: colors.white, lineHeight: 24 }]}>
-              Get Started
+              Locate Me
             </Text>
           </TouchableHighlight>
+        </View>
+        <View style={{ top: 44 }}>
+          <Text style={[fonts.p, { color: colors.white }]}>
+            Prefer a specific location?{" "}
+            <Text
+              style={{ fontFamily: "Bold" }}
+              //onPress={() => navigate.("SetLocation")}
+            >
+              Click Here
+            </Text>
+          </Text>
         </View>
       </View>
     </SafeAreaView>
@@ -95,8 +106,8 @@ const styles = StyleSheet.create({
     bottom: Dimensions.get("window").height * 0.3 - 2,
   },
   smarthome: {
-    width: 299,
-    height: 242,
+    width: 280,
+    height: 225,
     position: "absolute",
     alignSelf: "center",
     bottom: Dimensions.get("window").height * 0.015,
