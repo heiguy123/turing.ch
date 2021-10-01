@@ -40,7 +40,7 @@ function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="Dashboard"
+        initialRouteName="GetStarted"
         screenOptions={{ headerShown: false }}
       >
         <Stack.Screen name="GetStarted" component={GetStarted} />
@@ -51,37 +51,15 @@ function App() {
 }
 
 export default App;
-const styles = StyleSheet.create({
-  container: {
-    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
-    flex: 1,
-    backgroundColor: colors.primaryColor,
-    alignItems: "center"
-  },
-  image: {
-    resizeMode: 'contain',
-    maxWidth: Math.round(calculateMaxWidth() * 0.75),
-    maxHeight: calculateMaxHeight('100%')
-  },
-  button: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingVertical: 14,
-    borderRadius: 16,
-    elevation: 3,
-    backgroundColor: colors.secondaryColor,
-    width: "80%"
-  },
-});
 
-function calculateMaxWidth() {
-  const dimensions = Dimensions.get('window');
-  return dimensions.width;
-}
+// function calculateMaxWidth() {
+//   const dimensions = Dimensions.get('window');
+//   return dimensions.width;
+// }
 
-function calculateMaxHeight(ratio) {
-  const dimensions = Dimensions.get('window');
-  if (ratio == '100%') { return dimensions.width}
-  if (ratio == '75%') { return Math.round(dimensions.width * 3 / 4) }
-  if (ratio == '56.25%') { return Math.round(dimensions.width * 9 / 16) }
-}
+// function calculateMaxHeight(ratio) {
+//   const dimensions = Dimensions.get('window');
+//   if (ratio == '100%') { return dimensions.width}
+//   if (ratio == '75%') { return Math.round(dimensions.width * 3 / 4) }
+//   if (ratio == '56.25%') { return Math.round(dimensions.width * 9 / 16) }
+// }

@@ -105,27 +105,28 @@ export default function Dashboard({ navigation: { navigate } }) {
           </TouchableHighlight>
         </View>
         <View style={styles.navBottom}>
-          <View style={[styles.row, {paddingTop: "6%", paddingBottom: "16%"}]}>
+          <View style={[styles.row, {paddingTop: "5%", paddingBottom: "16%"}]}>
             <View style={[styles.col4, {paddingLeft: "8%", paddingRight: "8%", alignItems: "center"}]}>
               <Image 
                 style={styles.navIcon}
                 source={require("../assets/icon-calculator-inactive.png")} 
               />
-              <Text style={[fonts.p, styles.navInactive, { marginBottom: 0}]}>Calculator</Text>
+              <Text style={[fonts.p, styles.navInactive, { marginBottom: 5}]}>Calculator</Text>
             </View>
             <View style={[styles.col4, {paddingLeft: "8%", paddingRight: "8%", alignItems: "center"}]}>
               <Image 
                 style={styles.navIcon}
                 source={require("../assets/icon-home.png")} 
               />
-              <Text style={[fonts.p, { marginBottom: 0}]}>Dashboard</Text>
+              <Text style={[fonts.p, { marginBottom: 5}]}>Dashboard</Text>
+              <View style={styles.navLabelActive}></View>
             </View>
             <View style={[styles.col4, {paddingLeft: "8%", paddingRight: "8%", alignItems: "center"}]}>
               <Image 
                 style={styles.navIcon}
                 source={require("../assets/icon-settings-inactive.png")} 
               />
-              <Text style={[fonts.p, styles.navInactive, { marginBottom: 0}]}>Settings</Text>
+              <Text style={[fonts.p, styles.navInactive, { marginBottom: 5}]}>Settings</Text>
             </View>
           </View>
         </View>
@@ -231,6 +232,14 @@ const styles = StyleSheet.create({
   },
   navInactive: {
     color: "rgba(0,0,0,0.6)"
+  },
+  navLabelActive: {
+    backgroundColor: colors.primary,
+    borderRadius: 30,
+    width: "150%",
+    height: 26,
+    position: "absolute",
+    bottom: "-44%"
   },
   hr: {
     alignSelf: "center",
