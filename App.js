@@ -21,6 +21,7 @@ import { useFonts } from "expo-font";
 import GetStarted from "./screens/GetStarted";
 import Location from "./screens/Location";
 import SetLocation from "./screens/SetLocation";
+import ViewGraphIndex from "./screens/ViewGraphIndex";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Dashboard from "./screens/Dashboard";
@@ -47,6 +48,7 @@ function App() {
         <Stack.Screen name="Location" component={Location} />
         <Stack.Screen name="SetLocation" component={SetLocation} />
         <Stack.Screen name="Dashboard" component={Dashboard} />
+        <Stack.Screen name="ViewGraphIndex" component={ViewGraphIndex} />
       </Stack.Navigator>
     </NavigationContainer>
   );
