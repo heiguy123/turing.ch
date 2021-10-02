@@ -176,7 +176,6 @@ export default function Dashboard({ navigation: { navigate } }) {
             </Text>
           </TouchableHighlight>
         </View>
-        
       </View>
       <View style={navbar.navBottom}>
           <View

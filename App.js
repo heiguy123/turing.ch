@@ -38,7 +38,6 @@ function App() {
     return <AppLoading />;
   }
 
-  // return SetLocation();
   return (
     <NavigationContainer>
       <Stack.Navigator
