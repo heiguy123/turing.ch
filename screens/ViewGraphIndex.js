@@ -23,6 +23,7 @@ import MonthlyGraph from "../app/components/MonthlyGraph";
 import DailyGraph from "../app/components/DailyGraph";
 import HourlyGraph from "../app/components/HourlyGraph";
 import DataGetter from "../app/dataGetter";
+import fixassets from "../config/fixassets";
 
 export default function ViewGraphIndex({ route, navigation }) {
   const OVERVIEW = "Overview";
@@ -176,6 +177,20 @@ export default function ViewGraphIndex({ route, navigation }) {
           <Text style={[fonts.h4]}>Back</Text>
         </View>
       </View>
+      // <View style={{ flexDirection: "row" }}>
+      //   <TouchableOpacity
+      //     style={{
+      //       width: 50,
+      //       paddingLeft: SIZES.padding * 2
+      //     }}
+      //     onPress={() => navigation.goBack()}
+      //   >
+      //     <Image
+      //       source={require("../assets/blackback.png")}
+      //       style={[fixassets.back, {top: 30, left: SIZES.padding}]}
+      //     />
+      //   </TouchableOpacity>
+      // </View>
     );
   }
 
@@ -187,7 +202,7 @@ export default function ViewGraphIndex({ route, navigation }) {
           justifyContent: "space-evenly",
           backgroundColor: colors.lightGray,
           borderRadius: 30,
-          marginTop: 40,
+          marginTop: 80,
           height: 60,
           marginLeft: SIZES.padding * 1.5,
           marginRight: SIZES.padding * 1.5,
@@ -552,10 +567,12 @@ const styles = StyleSheet.create({
   },
   topMenuTitle: {
     fontFamily: "Bold",
-    fontSize: 12,
+    fontSize: 14,
     color: colors.black,
     textAlign: "center",
     letterSpacing: 0.15,
+    paddingLeft: SIZES.padding,
+    paddingRight: SIZES.padding,
   },
   topMenuButton: {
     justifyContent: "center",
