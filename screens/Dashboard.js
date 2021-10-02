@@ -175,7 +175,9 @@ export default function Dashboard({ navigation: { navigate } }) {
             </Text>
           </TouchableHighlight>
         </View>
-        <View style={styles.navBottom}>
+        
+      </View>
+      <View style={styles.navBottom}>
           <View
             style={[styles.row, { paddingTop: "5%", paddingBottom: "16%" }]}
           >
@@ -256,7 +258,6 @@ export default function Dashboard({ navigation: { navigate } }) {
             </TouchableHighlight>
           </View>
         </View>
-      </View>
     </SafeAreaView>
   );
 }
@@ -276,7 +277,7 @@ const styles = StyleSheet.create({
   },
   buttonPlacement: {
     position: "absolute",
-    bottom: Math.round(60 * 1.3),
+    bottom: Math.round(60 * 1.5),
   },
   topImage: {
     resizeMode: "cover",
@@ -337,7 +338,7 @@ const styles = StyleSheet.create({
   },
   navBottom: {
     position: "absolute",
-    bottom: -140,
+    bottom: -105,
     height: 200,
     alignSelf: "center",
     width: Math.round(Dimensions.get("screen").width * 1.02),
