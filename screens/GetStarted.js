@@ -14,7 +14,7 @@ import colors from "../config/colors";
 import fonts from "../config/fonts";
 import fixassets from "../config/fixassets";
 
-export default function GetStarted({ navigation }) {
+export default function GetStarted({ navigation: { navigate } }) {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: colors.primary }}>
       <View style={styles.container}>
@@ -73,7 +73,7 @@ export default function GetStarted({ navigation }) {
         >
           <TouchableOpacity
             style={fixassets.button}
-            onPress={() => navigation.navigate("Location")}
+            onPress={() => navigate("Location")}
           >
             <Text
               style={[

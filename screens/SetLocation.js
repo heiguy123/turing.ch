@@ -16,11 +16,10 @@ import MapView, { Marker } from "react-native-maps";
 import colors from "../config/colors";
 import fonts from "../config/fonts";
 import fixassets from "../config/fixassets";
+import useLocation from "../config/useLocation";
 
 const latitudeDelta = 0.002;
 const longitudeDelta = 0.002;
-
-const sbspace = Platform.OS === "android" ? StatusBar.currentHeight : 0;
 class Map extends React.Component {
   state = {
     region: {
@@ -31,8 +30,8 @@ class Map extends React.Component {
     },
   };
   onChangeValue = (region) => {
-    // if (Platform.OS === "android")
-    //   ToastAndroid.show(JSON.stringify(region), ToastAndroid.SHORT);
+    if (Platform.OS === "android")
+      ToastAndroid.show(JSON.stringify(region), ToastAndroid.SHORT);
     this.setState({
       region,
     });
@@ -72,8 +71,8 @@ function savecoordinate(coords) {
   coordinate = coords;
 }
 
-const SetLocation = ({ navigation, route }) => {
-  location = route.params.location;
+coordinate = null;
+export default function SetLocation({ navigation: { navigate }, route }) {
   initLatitude = route.params.location.latitude;
   initLongitude = route.params.location.longitude;
   return (
@@ -81,11 +80,8 @@ const SetLocation = ({ navigation, route }) => {
       <View style={styles.container}>
         <Image style={fixassets.sun} source={require("../assets/sun.png")} />
         <TouchableOpacity
-          style={[
-            fixassets.back,
-            { top: Dimensions.get("window").height * 0.04 + sbspace },
-          ]}
-          onPress={() => navigation.goBack()}
+          style={[fixassets.back]}
+          onPress={() => navigate("Location")}
         >
           <Image
             style={{ width: 53, height: 24 }}
@@ -124,12 +120,8 @@ const SetLocation = ({ navigation, route }) => {
       >
         <TouchableOpacity
           style={fixassets.button}
-          //onPress={() => navigation("SetTime")}
-          onPress={() =>
-            navigation.navigate("Dashboard", {
-              location: location,
-            })
-          }
+          //onPress={() => navigate("SetTime")}
+          onPress={() => navigate("Dashboard", route.params.position)}
         >
           <Text
             style={[
@@ -143,8 +135,8 @@ const SetLocation = ({ navigation, route }) => {
       </View>
     </SafeAreaView>
   );
-};
-export default SetLocation;
+}
+
 const styles = StyleSheet.create({
   container: {
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,

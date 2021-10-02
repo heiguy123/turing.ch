@@ -7,7 +7,7 @@ export default StyleSheet.create({
     width: 53,
     height: 24,
     left: Dimensions.get("window").width * 0.06,
-    top: Dimensions.get("window").height * 0.04,
+    top: Dimensions.get("window").height * 0.04 + sbspace,
     position: "absolute",
   },
   button: {
