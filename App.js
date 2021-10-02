@@ -26,8 +26,10 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Dashboard from "./screens/Dashboard";
 import Settings from "./screens/Settings";
+import CalculatorPage from './app/screen/CalculatorPage';
 
-const Stack = createNativeStackNavigator();
+
+export default function App() {
 
 function App() {
   let [fontloaded, error] = useFonts({
@@ -39,7 +41,6 @@ function App() {
     return <AppLoading />;
   }
 
-  // return SetLocation();
   return (
     <NavigationContainer>
       <Stack.Navigator
@@ -57,4 +58,4 @@ function App() {
   );
 }
 
-export default App;
+

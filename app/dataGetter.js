@@ -1,10 +1,10 @@
-// import axios from "axios";
+
 const axios = require("axios");
 //const source = CancelToken.source();
 let cancelToken;
 
-const m = require("./monthlyDataDemo");
-const h = require("./hourlyDataDemo");
+// const m = require("./monthlyDataDemo");
+// const h = require("./hourlyDataDemo");
 
 const DataGetter = {
   unit: {
@@ -116,6 +116,26 @@ const DataGetter = {
     return await axios.get(url, {
       cancelToken: cancelToken.token,
     });
+  },
+
+  getSolarMean: async function (longitude, latitude) {
+    // getMean: async function (longitude, latitude) {
+    const param = "ALLSKY_SFC_SW_DWN";
+    // let longitude = 113.997; //change this to actual longitude
+    // let latitude = 4.372; //change this to actual latitude
+    let mean = await DataGetter.getOverViewData({
+      longitude: longitude,
+      latitude: latitude,
+    }).then(({ data }) => {
+      const d = data.properties.parameter;
+      const desiredData = DataGetter.filterOverViewData(d, param);
+      let sum = 0;
+      desiredData.forEach((ele) => {
+        sum += ele.data;
+      });
+      return sum / 12;
+    });
+    return mean;
   },
 
   formatMonthlyData: (data, param, year) => {

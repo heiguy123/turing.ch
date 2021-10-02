@@ -6,17 +6,15 @@ import {
   Text,
   View,
   StatusBar,
-  TouchableHighlight,
+  TouchableOpacity,
   Image,
   Dimensions,
 } from "react-native";
 import colors from "../config/colors";
 import fonts from "../config/fonts";
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import fixassets from "../config/fixassets";
 
-export default function GetStarted({ navigation: { navigate } }) {
+export default function GetStarted({ navigation }) {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: colors.primary }}>
       <View style={styles.container}>
@@ -32,17 +30,33 @@ export default function GetStarted({ navigation: { navigate } }) {
           justifyContent: "flex-start",
         }}
       >
-        <Text style={[fonts.h1, { color: colors.secondary, lineHeight: 53.5, textAlign: "center" }]}>
+        <Text
+          style={[
+            fonts.h1,
+            { color: colors.secondary, lineHeight: 53.5, textAlign: "center" },
+          ]}
+        >
           Sunlight
         </Text>
-        <Text style={[fonts.h1, { color: colors.white, lineHeight: 53.5, textAlign: "center" }]}>
+        <Text
+          style={[
+            fonts.h1,
+            { color: colors.white, lineHeight: 53.5, textAlign: "center" },
+          ]}
+        >
           Detector App
         </Text>
         <View style={{ height: "25%", top: "4%" }}>
           <Text
             style={[
               fonts.p,
-              { color: colors.white, flexWrap: "wrap", lineHeight: 24, textAlign: "center" },
+              styles.desc,
+              {
+                color: colors.white,
+                flexWrap: "wrap",
+                lineHeight: 24,
+                textAlign: "center",
+              },
             ]}
           >
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
@@ -57,20 +71,24 @@ export default function GetStarted({ navigation: { navigate } }) {
             top: "8%",
           }}
         >
-          <TouchableHighlight
+          <TouchableOpacity
             style={fixassets.button}
-            onPress={() => navigate("Location")}
+            onPress={() => navigation.navigate("Location")}
           >
-            <Text style={[fonts.h4, { color: colors.white, lineHeight: 24, textAlign: "center" }]}>
+            <Text
+              style={[
+                fonts.h4,
+                { color: colors.white, lineHeight: 24, textAlign: "center" },
+              ]}
+            >
               Get Started
             </Text>
-          </TouchableHighlight>
+          </TouchableOpacity>
         </View>
       </View>
     </SafeAreaView>
   );
 }
-
 const styles = StyleSheet.create({
   container: {
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
@@ -82,5 +100,13 @@ const styles = StyleSheet.create({
     position: "absolute",
     alignSelf: "center",
     bottom: Dimensions.get("window").height * 0.015,
+  },
+  desc: {
+    marginHorizontal: "8%",
+    alignContent: "center",
+    flexDirection: "row",
+    color: colors.white,
+    flexWrap: "wrap",
+    lineHeight: 24,
   },
 });
