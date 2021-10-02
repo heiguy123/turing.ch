@@ -3,7 +3,13 @@ import { StyleSheet, Text, TouchableOpacity, View, StatusBar, Platform, SafeArea
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import fixassets from '../../config/fixassets';
+import DataGetter from "../dataGetter";
 
+// let longitude = 113.997; //change this to actual longitude
+// let latitude = 4.372; //change this to actual latitude
+// DataGetter.getSolarMean(longitude, latitude).then((mean) => {
+//   console.log(mean);
+// });
 var MPP = parseFloat(435), areaPanels = parseFloat(2), usedTime = parseFloat(10), fixPrice = parseFloat(0), totPrice = parseFloat(0), 
     powerGenerated, moneySaved, percentageSaved, solarIrr, numberOfPanels;
 const calculates = () => {
