@@ -10,14 +10,14 @@ import {
   Image,
   Dimensions,
   Alert,
-  ScrollView,
-  FlatList,
+  ScrollView
 } from "react-native";
 import colors from "../config/colors";
 import fonts from "../config/fonts";
 import navbar from "../config/navbar";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import DataGetter from '../app/dataGetter'
 
 const Dashboard = ({ navigation, route }) => {
   return (
@@ -89,7 +89,7 @@ const Dashboard = ({ navigation, route }) => {
                   <Text style={[fonts.p, { marginBottom: 4, marginTop: 8 }]}>
                     Avg. Solar Irradiance
                   </Text>
-                  <Text style={[fonts.h3, { marginBottom: 0 }]}>25%</Text>
+                  <Text style={[fonts.h3, { marginBottom: 0 }]}>return averageMonthlyData()</Text>
                 </View>
               </View>
               <View

@@ -59,15 +59,6 @@ export default StyleSheet.create({
   },
   p: {
     fontFamily: "Regular",
-<<<<<<< HEAD
-    fontSize: 14,
-    color: colors.white,
-    textAlign: "center",
-    lineHeight: 24,
-    letterSpacing: 0.15,
-  },
-});
-=======
     fontSize: 14 * widthmul,
     color: colors.black,
     letterSpacing: 0.15,
