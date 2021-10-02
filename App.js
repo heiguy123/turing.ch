@@ -24,6 +24,7 @@ import SetLocation from "./screens/SetLocation";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Dashboard from "./screens/Dashboard";
+import ViewGraphIndex from "./screens/ViewGraphIndex";
 
 const Stack = createNativeStackNavigator();
 
@@ -44,10 +45,11 @@ function App() {
         initialRouteName="GetStarted"
         screenOptions={{ headerShown: false, animation: "none" }}
       >
-        <Stack.Screen name="GetStarted" component={GetStarted} /> 
+        <Stack.Screen name="GetStarted" component={GetStarted} />
         <Stack.Screen name="Location" component={Location} />
         <Stack.Screen name="SetLocation" component={SetLocation} />
         <Stack.Screen name="Dashboard" component={Dashboard} />
+        <Stack.Screen name="ViewGraphIndex" component={ViewGraphIndex} />
       </Stack.Navigator>
     </NavigationContainer>
   );

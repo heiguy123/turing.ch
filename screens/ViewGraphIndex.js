@@ -11,6 +11,7 @@ import {
   Dimensions,
   TouchableOpacity,
   ScrollView,
+  ActivityIndicator,
 } from "react-native";
 import colors from "../config/colors";
 import fonts, { SIZES } from "../config/fonts";
@@ -51,6 +52,11 @@ export default function ViewGraphIndex({ route, navigation }) {
     if (graph == HOURLY) initHourlyGraph();
 
     checkParams();
+
+    //the return will run when the function component unmount
+    return () => {
+      DataGetter.checkAndResetCancelToken();
+    };
   }, [graph]); //only listen to changes of graph state
 
   function initOverviewGraph() {
