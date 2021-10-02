@@ -14,7 +14,7 @@ import colors from "../config/colors";
 import fonts from "../config/fonts";
 import fixassets from "../config/fixassets";
 
-export default function Location({ navigation }) {
+export default function Location({ navigation: {navigate} }) {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: colors.primary }}>
       <View style={styles.container}>
@@ -51,7 +51,8 @@ export default function Location({ navigation }) {
           <TouchableHighlight
             style={fixassets.button}
             //onPress={() => navigate("SetTime")}
-            onPress={() => navigation.goBack()}
+            // onPress={() => navigation.goBack()}
+            onPress={() => navigate("Dashboard")}
           >
             <Text style={[fonts.h4, { color: colors.white, lineHeight: 24 }]}>
               Locate Me
@@ -63,7 +64,7 @@ export default function Location({ navigation }) {
             Prefer a specific location?{" "}
             <Text
               style={{ fontFamily: "Bold" }}
-              //onPress={() => navigate.("SetLocation")}
+              onPress={() => navigate("SetLocation")}
             >
               Click Here
             </Text>
