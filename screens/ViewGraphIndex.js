@@ -152,45 +152,45 @@ export default function ViewGraphIndex({ route, navigation }) {
 
   function renderHeader() {
     return (
-      // <View style={{ flexDirection: "row" }}>
-      //   <TouchableOpacity
-      //     style={{
-      //       width: 50,
-      //       paddingLeft: SIZES.padding * 2,
-      //       justifyContent: "center",
-      //     }}
-      //     onPress={() => navigation.goBack()}
-      //   >
-      //     <FontAwesome5
-      //       name="chevron-left"
-      //       size={SIZES.h4}
-      //       color="black"
-      //       resizeMode="contain"
-      //       style={{
-      //         width: 30,
-      //         height: 30,
-      //         paddingTop: 7,
-      //       }}
-      //     />
-      //   </TouchableOpacity>
-      //   <View>
-      //     <Text style={[fonts.h4]}>Back</Text>
-      //   </View>
-      // </View>
       <View style={{ flexDirection: "row" }}>
         <TouchableOpacity
           style={{
             width: 50,
-            paddingLeft: SIZES.padding * 2
+            paddingLeft: SIZES.padding * 2,
+            justifyContent: "center",
           }}
           onPress={() => navigation.goBack()}
         >
-          <Image
-            source={require("../assets/blackback.png")}
-            style={[fixassets.back, {top: 30, left: SIZES.padding}]}
+          <FontAwesome5
+            name="chevron-left"
+            size={SIZES.h4}
+            color="black"
+            resizeMode="contain"
+            style={{
+              width: 30,
+              height: 30,
+              paddingTop: 7,
+            }}
           />
         </TouchableOpacity>
+        <View>
+          <Text style={[fonts.h4]}>Back</Text>
+        </View>
       </View>
+      // <View style={{ flexDirection: "row" }}>
+      //   <TouchableOpacity
+      //     style={{
+      //       width: 50,
+      //       paddingLeft: SIZES.padding * 2
+      //     }}
+      //     onPress={() => navigation.goBack()}
+      //   >
+      //     <Image
+      //       source={require("../assets/blackback.png")}
+      //       style={[fixassets.back, {top: 30, left: SIZES.padding}]}
+      //     />
+      //   </TouchableOpacity>
+      // </View>
     );
   }
 
