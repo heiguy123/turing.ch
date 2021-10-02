@@ -10,6 +10,7 @@ import {
   View,
   StatusBar,
   Button,
+  StatusBarIOS,
 } from "react-native";
 import AppLoading from "expo-app-loading";
 import {
@@ -25,6 +26,7 @@ import ViewGraphIndex from "./screens/ViewGraphIndex";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Dashboard from "./screens/Dashboard";
+import CalculatorPage from "./screens/CalculatorPage";
 
 const Stack = createNativeStackNavigator();
 
@@ -49,6 +51,7 @@ function App() {
         <Stack.Screen name="SetLocation" component={SetLocation} />
         <Stack.Screen name="Dashboard" component={Dashboard} />
         <Stack.Screen name="ViewGraphIndex" component={ViewGraphIndex} />
+        <Stack.Screen name="CalculatorPage" component={CalculatorPage} />
       </Stack.Navigator>
     </NavigationContainer>
   );
