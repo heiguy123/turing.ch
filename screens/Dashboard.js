@@ -9,6 +9,7 @@ import {
   TouchableHighlight,
   Image,
   Dimensions,
+  Alert,
 } from "react-native";
 import colors from "../config/colors";
 import fonts from "../config/fonts";
@@ -23,23 +24,29 @@ export default function Dashboard({ navigation: { navigate } }) {
           style={styles.topImage}
           source={require("../assets/dashboard.png")}
         />
-        <View style={styles.topImageBorder}></View>
       </View>
       <View style={styles.solarIrradiance}>
-        <View style={styles.greyLabel}>
-          <Image 
-            style={styles.plane}
-            source={require("../assets/plane.png")} 
-          />
-          <Text style={[fonts.p, {marginTop: -4, paddingLeft: 4, marginBottom: 0}]}>Miri, Sarawak</Text>
-        </View>
+        <TouchableHighlight 
+          style={[styles.greyLabel]}
+          onPress={ () => navigate("SetLocation") }
+          activeOpacity={0.65}
+          underlayColor={"rgba(0,0,0,0.1)"}
+        >
+          <View style={styles.greyLabelInner} >
+            <Image 
+              style={styles.plane}
+              source={require("../assets/plane.png")} 
+            />
+            <Text style={[fonts.p, {marginTop: -4, paddingLeft: 4, marginBottom: 0}]}>Miri, Sarawak</Text>
+          </View>
+        </TouchableHighlight>
         <Text style={[fonts.h1, {fontSize: 70, marginBottom: 0}]}>25%</Text>
         <Text style={fonts.p}>Average Solar Irradiance</Text>
       </View>
       <View
         style={{
           height: "50%",
-          top: "-2%",
+          top: "3%",
           paddingLeft: "5%",
           paddingRight: "5%"
         }}
@@ -70,7 +77,7 @@ export default function Dashboard({ navigation: { navigate } }) {
           </View>
         </View>
         <View style={styles.hr}></View>
-        <View style={[styles.row, {paddingTop: "8%", paddingBottom: "10%"}]}>
+        <View style={[styles.row, {paddingTop: "8%", paddingBottom: "8%"}]}>
           <View style={[styles.col6, styles.row, {paddingLeft: "5%", paddingRight: "5%"}]}>
             <View style={styles.col1, styles.progressBar}>
               <View style={[styles.progressBarFilled, {height: "55%"}]}></View>
@@ -86,7 +93,7 @@ export default function Dashboard({ navigation: { navigate } }) {
               <View style={[styles.progressBarFilled, {height: "25%"}]}></View>
               <View style={[styles.progressBarFilledCap, {bottom: "25%"}]}></View>
             </View>
-            <View style={[styles.col11, {paddingLeft: 14}]}>
+            <View style={[styles.col12, {paddingLeft: 14}]}>
               <Text style={[fonts.p, {marginBottom: 4, marginTop: 8}]}>Avg. Cloud Amount</Text>
               <Text style={[fonts.h3, {marginBottom: 0}]}>30%</Text>
             </View>
@@ -106,28 +113,49 @@ export default function Dashboard({ navigation: { navigate } }) {
         </View>
         <View style={styles.navBottom}>
           <View style={[styles.row, {paddingTop: "5%", paddingBottom: "16%"}]}>
-            <View style={[styles.col4, {paddingLeft: "8%", paddingRight: "8%", alignItems: "center"}]}>
-              <Image 
-                style={styles.navIcon}
-                source={require("../assets/icon-calculator-inactive.png")} 
-              />
-              <Text style={[fonts.p, styles.navInactive, { marginBottom: 5}]}>Calculator</Text>
-            </View>
-            <View style={[styles.col4, {paddingLeft: "8%", paddingRight: "8%", alignItems: "center"}]}>
-              <Image 
-                style={styles.navIcon}
-                source={require("../assets/icon-home.png")} 
-              />
-              <Text style={[fonts.p, { marginBottom: 5}]}>Dashboard</Text>
-              <View style={styles.navLabelActive}></View>
-            </View>
-            <View style={[styles.col4, {paddingLeft: "8%", paddingRight: "8%", alignItems: "center"}]}>
-              <Image 
-                style={styles.navIcon}
-                source={require("../assets/icon-settings-inactive.png")} 
-              />
-              <Text style={[fonts.p, styles.navInactive, { marginBottom: 5}]}>Settings</Text>
-            </View>
+            <TouchableHighlight 
+              style={styles.navButton, styles.col4}
+              onPress={() => Alert.alert("ABC")}
+              activeOpacity={0.65}
+              underlayColor={"rgba(255,255,255,0)"}
+            >
+              <View style={[{paddingLeft: "5%", paddingRight: "5%", alignItems: "center"}]}>
+                <Image 
+                  style={styles.navIcon}
+                  source={require("../assets/icon-calculator-inactive.png")} 
+                />
+                <Text style={[fonts.p, styles.navInactive, { marginBottom: 5}]}>Calculator</Text>
+              </View>
+            </TouchableHighlight>
+            <TouchableHighlight 
+              style={styles.navButton, styles.col4}
+              onPress={() => navigate("Dashboard")}
+              activeOpacity={0.65}
+              underlayColor={"rgba(255,255,255,0)"}
+            >
+              <View style={[{paddingLeft: "5%", paddingRight: "5%", alignItems: "center"}]}>
+                <Image 
+                  style={styles.navIcon}
+                  source={require("../assets/icon-home.png")} 
+                />
+                <Text style={[fonts.p, { marginBottom: 5}]}>Dashboard</Text>
+                <View style={styles.navLabelActive}></View>
+              </View>
+            </TouchableHighlight>
+            <TouchableHighlight 
+              style={styles.navButton, styles.col4}
+              onPress={() => Alert.alert("DEF")}
+              activeOpacity={0.65}
+              underlayColor={"rgba(255,255,255,0)"}
+            >
+              <View style={[{paddingLeft: "5%", paddingRight: "5%", alignItems: "center"}]}>
+                <Image 
+                  style={styles.navIcon}
+                  source={require("../assets/icon-settings-inactive.png")} 
+                />
+                <Text style={[fonts.p, styles.navInactive, { marginBottom: 5}]}>Settings</Text>
+              </View>
+            </TouchableHighlight>
           </View>
         </View>
       </View>
@@ -150,22 +178,17 @@ const styles = StyleSheet.create({
   },
   buttonPlacement: {
     position: "absolute",
-    bottom: "12%"
+    bottom: Math.round( 60 * 1.3 )
   },
   topImage: {
-    resizeMode: "contain",
-    width: Dimensions.get("window").width,
-    height: "88%",
+    resizeMode: "cover",
+    width: Dimensions.get("screen").width,
+    height: "100%",
     position: "absolute",
     alignSelf: "center",
     top: 0,
-    right: Dimensions.get("window").width < 380 ? "-10%" : 0,
+    right: 0,
     zIndex: 0
-  },
-  topImageBorder: {
-    borderBottomColor: "#888787",
-    borderBottomWidth: 1,
-    top: "87.5%"
   },
   plane: {
     resizeMode: "contain",
@@ -178,9 +201,14 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     padding: 10,
     paddingBottom: 0,
+    maxWidth: 130,
+    width: "100%",
+    alignItems: "center"
+  },
+  greyLabelInner: {
     display: "flex",
     flexDirection: "row",
-    width: 120
+    minWidth: 100
   },
   solarIrradiance: {
     position: "absolute",
@@ -211,10 +239,10 @@ const styles = StyleSheet.create({
   },
   navBottom: {
     position: "absolute",
-    bottom: -180,
-    minHeight: 200,
+    bottom: -140,
+    height: 200,
     alignSelf: "center",
-    width: Math.round(Dimensions.get('window').width * 1.02),
+    width: Math.round(Dimensions.get('screen').width * 1.02),
     backgroundColor: colors.white,
     borderRadius: 60,
     shadowColor: '#000',
@@ -223,12 +251,15 @@ const styles = StyleSheet.create({
     shadowRadius: 2,  
     elevation: 5
   },
+  navButton: {
+    alignItems: "center"
+  },
   navIcon: {
     resizeMode: "contain",
     width: 30,
     height: 30,
     marginBottom: 8,
-    zIndex: 9999
+    zIndex: 3
   },
   navInactive: {
     color: "rgba(0,0,0,0.6)"
@@ -236,10 +267,11 @@ const styles = StyleSheet.create({
   navLabelActive: {
     backgroundColor: colors.primary,
     borderRadius: 30,
-    width: "150%",
+    width: "100%",
     height: 26,
     position: "absolute",
-    bottom: "-44%"
+    bottom: "-44%",
+    zIndex: 10
   },
   hr: {
     alignSelf: "center",

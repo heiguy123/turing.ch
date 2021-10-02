@@ -59,7 +59,7 @@ export default function SetLocation({ navigation: { navigate } }) {
         <TouchableHighlight
           style={fixassets.button}
           //onPress={() => navigate("SetTime")}
-          onPress={() => navigate("Location")}
+          onPress={() => navigate("Dashboard")}
         >
           <Text style={[fonts.h4, { color: colors.white, lineHeight: 24 }]}>
             Locate Me
