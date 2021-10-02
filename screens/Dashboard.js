@@ -19,7 +19,7 @@ import navbar from "../config/navbar";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-export default function Dashboard({ navigation: { navigate } }) {
+const Dashboard = ({ navigation, route }) => {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: colors.whiteBg }}>
       <ScrollView
@@ -186,90 +186,84 @@ export default function Dashboard({ navigation: { navigate } }) {
         </View>
       </ScrollView>
       <View style={navbar.navBottom}>
-          <View
-            style={[styles.row, { paddingTop: "5%", paddingBottom: "16%" }]}
+        <View style={[styles.row, { paddingTop: "5%", paddingBottom: "16%" }]}>
+          <TouchableHighlight
+            style={(navbar.navButton, styles.col4)}
+            onPress={() => Alert.alert("ABC")}
+            activeOpacity={0.65}
+            underlayColor={"rgba(255,255,255,0)"}
           >
-            <TouchableHighlight
-              style={(navbar.navButton, styles.col4)}
-              onPress={() => Alert.alert("ABC")}
-              activeOpacity={0.65}
-              underlayColor={"rgba(255,255,255,0)"}
+            <View
+              style={[
+                {
+                  paddingLeft: "5%",
+                  paddingRight: "5%",
+                  alignItems: "center",
+                },
+              ]}
             >
-              <View
-                style={[
-                  {
-                    paddingLeft: "5%",
-                    paddingRight: "5%",
-                    alignItems: "center",
-                  },
-                ]}
-              >
-                <Image
-                  style={navbar.navIcon}
-                  source={require("../assets/icon-calculator-inactive.png")}
-                />
-                <Text
-                  style={[fonts.p, navbar.navInactive, { marginBottom: 5 }]}
-                >
-                  Calculator
-                </Text>
-              </View>
-            </TouchableHighlight>
-            <TouchableHighlight
-              style={(navbar.navButton, styles.col4)}
-              onPress={() => navigate("Dashboard")}
-              activeOpacity={0.65}
-              underlayColor={"rgba(255,255,255,0)"}
+              <Image
+                style={navbar.navIcon}
+                source={require("../assets/icon-calculator-inactive.png")}
+              />
+              <Text style={[fonts.p, navbar.navInactive, { marginBottom: 5 }]}>
+                Calculator
+              </Text>
+            </View>
+          </TouchableHighlight>
+          <TouchableHighlight
+            style={(navbar.navButton, styles.col4)}
+            onPress={() => navigate("Dashboard")}
+            activeOpacity={0.65}
+            underlayColor={"rgba(255,255,255,0)"}
+          >
+            <View
+              style={[
+                {
+                  paddingLeft: "5%",
+                  paddingRight: "5%",
+                  alignItems: "center",
+                },
+              ]}
             >
-              <View
-                style={[
-                  {
-                    paddingLeft: "5%",
-                    paddingRight: "5%",
-                    alignItems: "center",
-                  },
-                ]}
-              >
-                <Image
-                  style={navbar.navIcon}
-                  source={require("../assets/icon-home.png")}
-                />
-                <Text style={[fonts.p, { marginBottom: 5 }]}>Dashboard</Text>
-                <View style={navbar.navLabelActive}></View>
-              </View>
-            </TouchableHighlight>
-            <TouchableHighlight
-              style={(navbar.navButton, styles.col4)}
-              onPress={() => Alert.alert("DEF")}
-              activeOpacity={0.65}
-              underlayColor={"rgba(255,255,255,0)"}
+              <Image
+                style={navbar.navIcon}
+                source={require("../assets/icon-home.png")}
+              />
+              <Text style={[fonts.p, { marginBottom: 5 }]}>Dashboard</Text>
+              <View style={navbar.navLabelActive}></View>
+            </View>
+          </TouchableHighlight>
+          <TouchableHighlight
+            style={(navbar.navButton, styles.col4)}
+            onPress={() => Alert.alert("DEF")}
+            activeOpacity={0.65}
+            underlayColor={"rgba(255,255,255,0)"}
+          >
+            <View
+              style={[
+                {
+                  paddingLeft: "5%",
+                  paddingRight: "5%",
+                  alignItems: "center",
+                },
+              ]}
             >
-              <View
-                style={[
-                  {
-                    paddingLeft: "5%",
-                    paddingRight: "5%",
-                    alignItems: "center",
-                  },
-                ]}
-              >
-                <Image
-                  style={navbar.navIcon}
-                  source={require("../assets/icon-settings-inactive.png")}
-                />
-                <Text
-                  style={[fonts.p, navbar.navInactive, { marginBottom: 5 }]}
-                >
-                  Settings
-                </Text>
-              </View>
-            </TouchableHighlight>
-          </View>
+              <Image
+                style={navbar.navIcon}
+                source={require("../assets/icon-settings-inactive.png")}
+              />
+              <Text style={[fonts.p, navbar.navInactive, { marginBottom: 5 }]}>
+                Settings
+              </Text>
+            </View>
+          </TouchableHighlight>
         </View>
+      </View>
     </SafeAreaView>
   );
-}
-
+};
+export default Dashboard;
 const styles = StyleSheet.create({
   container: {
     marginTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
