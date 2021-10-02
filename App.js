@@ -25,7 +25,6 @@ import ViewGraphIndex from "./screens/ViewGraphIndex";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Dashboard from "./screens/Dashboard";
-import ViewGraphIndex from "./screens/ViewGraphIndex";
 
 const Stack = createNativeStackNavigator();
 
