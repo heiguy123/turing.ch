@@ -18,6 +18,7 @@ import {
 import _ from "lodash";
 
 import DataGetter from "../dataGetter";
+import loadingIndicator from "./loadingIndicator";
 
 export default class HourlyGraph extends Component {
   constructor(props) {
@@ -101,63 +102,64 @@ export default class HourlyGraph extends Component {
           },
         ]}
       >
-        <VictoryChart
-          height={300}
-          theme={VictoryTheme.material}
-          //scale={{ x: "time" }}
-          standalone={true}
-          maxDomain={{ y: 20 }}
-          containerComponent={
-            <VictoryVoronoiContainer
-              labels={function ({ datum }) {
-                const oriHour =
-                  Math.floor(datum["localHour"] / 12) == 1 &&
-                  datum["localHour"] - 12 == 0
-                    ? 24
-                    : datum["localHour"];
-                const hour =
-                  Math.floor(datum["localHour"] / 12) == 0
-                    ? `${oriHour}am`
-                    : `${oriHour - 12}pm`;
-                return `${hour}: ${datum[m]}`;
-              }}
+        {this.state.data.length != 0 ? (
+          <VictoryChart
+            height={300}
+            theme={VictoryTheme.material}
+            //scale={{ x: "time" }}
+            standalone={true}
+            maxDomain={{ y: 20 }}
+            containerComponent={
+              <VictoryVoronoiContainer
+                labels={function ({ datum }) {
+                  const oriHour =
+                    Math.floor(datum["localHour"] / 12) == 1 &&
+                    datum["localHour"] - 12 == 0
+                      ? 24
+                      : datum["localHour"];
+                  const hour =
+                    Math.floor(datum["localHour"] / 12) == 0
+                      ? `${oriHour}am`
+                      : `${oriHour - 12}pm`;
+                  return `${hour}: ${datum[m]}`;
+                }}
+              />
+            }
+          >
+            <VictoryAxis
+              // tickFormat={(datum) => {
+              //   console.log(datum);
+              //   const oriHour =
+              //     Math.floor(datum["localHour"] / 12) == 1 &&
+              //     datum["localHour"] - 12 == 0
+              //       ? 24
+              //       : datum["localHour"];
+              //   const hour =
+              //     Math.floor(datum["localHour"] / 12) == 0
+              //       ? `${oriHour}am`
+              //       : `${oriHour - 12}pm`;
+              // }}
+              // tickLabelComponent={
+              //   <VictoryLabel
+              //     angle={-15}
+              //     //dx={-20}
+              //   />
+              // }
+              label={"Hour"}
+              //tickCount={12}
+              tickValues={[0, 4, 8, 12, 16, 20, 24]}
+              style={{ axisLabel: { fontSize: 15, padding: 35 } }}
+              fixLabelOverlap={true}
             />
-          }
-        >
-          <VictoryAxis
-            // tickFormat={(datum) => {
-            //   console.log(datum);
-            //   const oriHour =
-            //     Math.floor(datum["localHour"] / 12) == 1 &&
-            //     datum["localHour"] - 12 == 0
-            //       ? 24
-            //       : datum["localHour"];
-            //   const hour =
-            //     Math.floor(datum["localHour"] / 12) == 0
-            //       ? `${oriHour}am`
-            //       : `${oriHour - 12}pm`;
-            // }}
-            // tickLabelComponent={
-            //   <VictoryLabel
-            //     angle={-15}
-            //     //dx={-20}
-            //   />
-            // }
-            label={"Hour"}
-            //tickCount={12}
-            tickValues={[0, 4, 8, 12, 16, 20, 24]}
-            style={{ axisLabel: { fontSize: 15, padding: 35 } }}
-            fixLabelOverlap={true}
-          />
 
-          <VictoryAxis
-            dependentAxis
-            offsetX={48}
-            label={DataGetter.getUnit("ALLSKY_SFC_SW_DWN")}
-            style={{ axisLabel: { fontSize: 15, padding: 30 } }}
-          />
+            <VictoryAxis
+              dependentAxis
+              offsetX={48}
+              label={DataGetter.getUnit("ALLSKY_SFC_SW_DWN")}
+              style={{ axisLabel: { fontSize: 15, padding: 30 } }}
+            />
 
-          {/* <VictoryLegend
+            {/* <VictoryLegend
             x={125}
             y={10}
             orientation="horizontal"
@@ -171,18 +173,21 @@ export default class HourlyGraph extends Component {
             ]}
           /> */}
 
-          <VictoryLine
-            // style={{
-            //   data: { stroke: "#c43a31" },
-            //   parent: { border: "1px solid #ccc" },
-            // }}
+            <VictoryLine
+              // style={{
+              //   data: { stroke: "#c43a31" },
+              //   parent: { border: "1px solid #ccc" },
+              // }}
 
-            interpolation="natural"
-            data={this.state.data}
-            x={"localhour"}
-            y={this.props.month}
-          />
-        </VictoryChart>
+              interpolation="natural"
+              data={this.state.data}
+              x={"localhour"}
+              y={this.props.month}
+            />
+          </VictoryChart>
+        ) : (
+          loadingIndicator()
+        )}
       </View>
     );
   }

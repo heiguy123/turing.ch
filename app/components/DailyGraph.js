@@ -14,6 +14,7 @@ import {
 import _ from "lodash";
 
 import DataGetter from "../dataGetter";
+import loadingIndicator from "./loadingIndicator";
 
 const VictoryZoomVoronoiContainer = createContainer("zoom", "voronoi");
 
@@ -224,76 +225,79 @@ export default class DailyGraph extends Component {
           },
         ]}
       >
-        <VictoryChart
-          height={300}
-          domain={this.state.entireDomain}
-          // maxDomain={{ y: this.state.highestY * 1.05 }}
-          // minDomain={{ y: this.state.smallestY * 0.95 }}
-          scale={{ x: "time" }}
-          standalone={true}
-          theme={VictoryTheme.material}
-          containerComponent={
-            <VictoryZoomVoronoiContainer
-              //allowZoom={false}
-              //downsample={5}
-              minimumZoom={{ x: 7 * 24 * 60 * 60 * 1000, y: 0.01 }} //minimum zoom for x is 7 days in ms, for y is 0
-              zoomDimension="x"
-              zoomDomain={this.state.zoomDomain}
-              voronoiPadding={5}
-              labels={({ datum }) => {
-                return `${datum["DY"]}/${datum["MO"]}/${datum["YEAR"]
-                  .toString()
-                  .substring(0, 2)}: ${datum[this.props.param]?.toString()}`;
-              }}
-              onZoomDomainChange={this.handleZoom.bind(this)}
-            />
-          }
-        >
-          <VictoryAxis
-            tickFormat={(x) => {
-              const d = new Date(x);
-              return `${
-                month[d.getMonth()]
-              } ${d.getDate()}, ${d.getFullYear()}`;
-            }}
-            tickLabelComponent={
-              <VictoryLabel
-                angle={-15}
-                //dx={-20}
+        {this.state.data.length != 0 ? (
+          <VictoryChart
+            height={300}
+            domain={this.state.entireDomain}
+            // maxDomain={{ y: this.state.highestY * 1.05 }}
+            // minDomain={{ y: this.state.smallestY * 0.95 }}
+            scale={{ x: "time" }}
+            standalone={true}
+            theme={VictoryTheme.material}
+            containerComponent={
+              <VictoryZoomVoronoiContainer
+                //allowZoom={false}
+                //downsample={5}
+                minimumZoom={{ x: 7 * 24 * 60 * 60 * 1000, y: 0.01 }} //minimum zoom for x is 7 days in ms, for y is 0
+                zoomDimension="x"
+                zoomDomain={this.state.zoomDomain}
+                voronoiPadding={5}
+                labels={({ datum }) => {
+                  return `${datum["DY"]}/${datum["MO"]}/${datum["YEAR"]
+                    .toString()
+                    .substring(0, 2)}: ${datum[this.props.param]?.toString()}`;
+                }}
+                onZoomDomainChange={this.handleZoom.bind(this)}
               />
             }
-            //label={"Time"}
-            //tickCount={7}
-            style={{ axisLabel: { fontSize: 15, padding: 35 } }}
-            fixLabelOverlap={true}
-          />
+          >
+            <VictoryAxis
+              tickFormat={(x) => {
+                const d = new Date(x);
+                return `${
+                  month[d.getMonth()]
+                } ${d.getDate()}, ${d.getFullYear()}`;
+              }}
+              tickLabelComponent={
+                <VictoryLabel
+                  angle={-15}
+                  //dx={-20}
+                />
+              }
+              //label={"Time"}
+              //tickCount={7}
+              style={{ axisLabel: { fontSize: 15, padding: 35 } }}
+              fixLabelOverlap={true}
+            />
 
-          <VictoryAxis
-            dependentAxis
-            label={DataGetter.getUnit(this.props.param)}
-            style={{ axisLabel: { fontSize: 15, padding: 35 } }}
-          />
-          <VictoryLine
-            // style={{
-            //   data: { stroke: "#c43a31" },
-            //   parent: { border: "1px solid #ccc" },
-            // }}
-            x={(d) => {
-              const { YEAR, MO, DY } = d;
-              return new Date(YEAR, MO - 1, DY);
-            }}
-            y={(d) => {
-              return d[this.props.param] ? d[this.props.param] : 0;
-            }}
-            data={this.getData()}
-            // x={(d) => {
-            //   const { YEAR, MO, DY } = d;
-            //   return new Date(YEAR, MO - 1, DY);
-            // }}
-            // y={this.props.param}
-          />
-        </VictoryChart>
-
+            <VictoryAxis
+              dependentAxis
+              label={DataGetter.getUnit(this.props.param)}
+              style={{ axisLabel: { fontSize: 15, padding: 35 } }}
+            />
+            <VictoryLine
+              // style={{
+              //   data: { stroke: "#c43a31" },
+              //   parent: { border: "1px solid #ccc" },
+              // }}
+              x={(d) => {
+                const { YEAR, MO, DY } = d;
+                return new Date(YEAR, MO - 1, DY);
+              }}
+              y={(d) => {
+                return d[this.props.param] ? d[this.props.param] : 0;
+              }}
+              data={this.getData()}
+              // x={(d) => {
+              //   const { YEAR, MO, DY } = d;
+              //   return new Date(YEAR, MO - 1, DY);
+              // }}
+              // y={this.props.param}
+            />
+          </VictoryChart>
+        ) : (
+          loadingIndicator()
+        )}
         {/* <VictoryChart
           scale={{ x: "time" }}
           //padding={{ top: 0, left: 50, right: 50, bottom: 30 }}

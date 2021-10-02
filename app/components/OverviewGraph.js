@@ -19,6 +19,7 @@ import {
 import _ from "lodash";
 
 import DataGetter from "../dataGetter";
+import loadingIndicator from "./loadingIndicator";
 
 export default class OverviewGraph extends Component {
   constructor(props) {
@@ -109,52 +110,53 @@ export default class OverviewGraph extends Component {
           },
         ]}
       >
-        <VictoryChart
-          height={300}
-          maxDomain={{ y: this.state.highestY * 1.05 }}
-          minDomain={{ y: this.state.smallestY * 0.95 }}
-          //maxDomain={{ y: 6.5 }}
-          theme={VictoryTheme.material}
-          //minDomain={{ y: 0.2 }}
-          //scale={{ x: "time" }}
-          standalone={true}
-          containerComponent={
-            <VictoryVoronoiContainer
-              //voronoiPadding={5}
-              labels={({ datum }) => {
-                //console.log(datum);
-                return `${month[datum.month - 1]}:${datum.data}`;
-              }}
-            />
-          }
-        >
-          <VictoryAxis
-            //minDomain={{ x: -1 }}
-            tickFormat={(x) => {
-              const d = new Date(x);
-              const label = month[x - 1] ? month[x - 1] : "";
-              return `${label}`;
-            }}
-            tickLabelComponent={
-              <VictoryLabel
-                angle={-15}
-                //dx={-20}
+        {this.state.data.length != 0 ? (
+          <VictoryChart
+            height={300}
+            maxDomain={{ y: this.state.highestY * 1.05 }}
+            minDomain={{ y: this.state.smallestY * 0.95 }}
+            //maxDomain={{ y: 6.5 }}
+            theme={VictoryTheme.material}
+            //minDomain={{ y: 0.2 }}
+            //scale={{ x: "time" }}
+            standalone={true}
+            containerComponent={
+              <VictoryVoronoiContainer
+                //voronoiPadding={5}
+                labels={({ datum }) => {
+                  //console.log(datum);
+                  return `${month[datum.month - 1]}:${datum.data}`;
+                }}
               />
             }
-            //label={"Month"}
-            tickCount={12}
-            style={{ axisLabel: { fontSize: 15, padding: 35 } }}
-            fixLabelOverlap={true}
-          />
+          >
+            <VictoryAxis
+              //minDomain={{ x: -1 }}
+              tickFormat={(x) => {
+                const d = new Date(x);
+                const label = month[x - 1] ? month[x - 1] : "";
+                return `${label}`;
+              }}
+              tickLabelComponent={
+                <VictoryLabel
+                  angle={-15}
+                  //dx={-20}
+                />
+              }
+              //label={"Month"}
+              tickCount={12}
+              style={{ axisLabel: { fontSize: 15, padding: 35 } }}
+              fixLabelOverlap={true}
+            />
 
-          <VictoryAxis
-            dependentAxis
-            offsetX={48}
-            label={DataGetter.getUnit(this.props.param)}
-            style={{ axisLabel: { fontSize: 15, padding: 30 } }}
-          />
+            <VictoryAxis
+              dependentAxis
+              offsetX={48}
+              label={DataGetter.getUnit(this.props.param)}
+              style={{ axisLabel: { fontSize: 15, padding: 30 } }}
+            />
 
-          {/* <VictoryLegend
+            {/* <VictoryLegend
             x={125}
             y={10}
             orientation="horizontal"
@@ -168,24 +170,27 @@ export default class OverviewGraph extends Component {
             ]}
           /> */}
 
-          {/* <VictoryBar
+            {/* <VictoryBar
             domain={{ x: [0, 13] }}
             data={this.state.data}
             x={"month"}
             y={"data"}
           /> */}
 
-          <VictoryLine
-            x={"month"}
-            y={"data"}
-            data={this.state.data}
-            // x={(d) => {
-            //   const { YEAR, MO, DY } = d;
-            //   return new Date(YEAR, MO - 1, DY);
-            // }}
-            // y={this.props.param}
-          />
-        </VictoryChart>
+            <VictoryLine
+              x={"month"}
+              y={"data"}
+              data={this.state.data}
+              // x={(d) => {
+              //   const { YEAR, MO, DY } = d;
+              //   return new Date(YEAR, MO - 1, DY);
+              // }}
+              // y={this.props.param}
+            />
+          </VictoryChart>
+        ) : (
+          loadingIndicator()
+        )}
       </View>
     );
   }

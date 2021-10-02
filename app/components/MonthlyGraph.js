@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Text, StyleSheet, View } from "react-native";
+import { Text, StyleSheet, View, ActivityIndicator } from "react-native";
 import {
   VictoryLine,
   VictoryChart,
@@ -17,8 +17,24 @@ import {
   VictoryLegend,
 } from "victory-native";
 import _ from "lodash";
+import colors from "../../config/colors";
 
 import DataGetter from "../dataGetter";
+import loadingIndicator from "./loadingIndicator";
+
+let month = new Array(12);
+month[0] = "Jan";
+month[1] = "Feb";
+month[2] = "Mar";
+month[3] = "Apr";
+month[4] = "May";
+month[5] = "Jun";
+month[6] = "Jul";
+month[7] = "Aug";
+month[8] = "Sep";
+month[9] = "Oct";
+month[10] = "Nov";
+month[11] = "Dec";
 
 export default class MonthlyGraph extends Component {
   constructor(props) {
@@ -171,21 +187,79 @@ export default class MonthlyGraph extends Component {
     this._isMounted = false;
   }
 
-  render() {
-    let month = new Array(12);
-    month[0] = "Jan";
-    month[1] = "Feb";
-    month[2] = "Mar";
-    month[3] = "Apr";
-    month[4] = "May";
-    month[5] = "Jun";
-    month[6] = "Jul";
-    month[7] = "Aug";
-    month[8] = "Sep";
-    month[9] = "Oct";
-    month[10] = "Nov";
-    month[11] = "Dec";
+  renderChart() {
+    return (
+      <VictoryChart
+        height={300}
+        maxDomain={{ y: this.state.highestY * 1.05 }}
+        minDomain={{ y: this.state.smallestY * 0.95 }}
+        //padding={{ top: 20 }}
+        //minDomain={{ y: 2 }}
+        theme={VictoryTheme.material}
+        //minDomain={{ y: 0.2 }}
+        //scale={{ x: "time" }}
+        standalone={true}
+        containerComponent={
+          <VictoryCursorContainer
+            cursorLabel={({ datum }) => {
+              return `                ${datum.y.toPrecision(2)}`;
+            }}
+          />
+        }
+      >
+        <VictoryAxis
+          //minDomain={{ x: -1 }}
+          tickFormat={(x) => {
+            const d = new Date(x);
+            return `${month[x - 1]}`;
+          }}
+          tickLabelComponent={
+            <VictoryLabel
+              angle={-15}
+              //dx={-20}
+            />
+          }
+          //label={"Month"}
+          tickCount={12}
+          style={{ axisLabel: { fontSize: 15, padding: 35 } }}
+          fixLabelOverlap={true}
+        />
 
+        <VictoryAxis
+          dependentAxis
+          offsetX={48}
+          label={DataGetter.getUnit(this.props.param)}
+          style={{ axisLabel: { fontSize: 15, padding: 30 } }}
+        />
+
+        <VictoryLegend
+          x={125}
+          y={10}
+          orientation="horizontal"
+          gutter={20}
+          //style={{ border: { stroke: "black" } }}
+          colorScale={["#586B9F", "#7791D9", "#233E8B"]}
+          data={[
+            { name: `${this.props.endTime.substr(0, 4) - 2}` },
+            { name: `${this.props.endTime.substr(0, 4) - 1}` },
+            { name: `${this.props.endTime.substr(0, 4)}` },
+          ]}
+        />
+
+        <VictoryGroup
+          offset={5}
+          //minDomain={{ x: -1, y: 2 }}
+          colorScale={["#586B9F", "#7791D9", "#233E8B"]}
+        >
+          <VictoryBar data={this.state.prevPrevData} x={"MONTH"} y={"DATA"} />
+          <VictoryBar data={this.state.prevData} x={"MONTH"} y={"DATA"} />
+          <VictoryBar data={this.state.currentData} x={"MONTH"} y={"DATA"} />
+        </VictoryGroup>
+      </VictoryChart>
+    );
+  }
+
+  render() {
     return (
       <View
         style={[
@@ -198,73 +272,9 @@ export default class MonthlyGraph extends Component {
           },
         ]}
       >
-        <VictoryChart
-          height={300}
-          maxDomain={{ y: this.state.highestY * 1.05 }}
-          minDomain={{ y: this.state.smallestY * 0.95 }}
-          //padding={{ top: 20 }}
-          //minDomain={{ y: 2 }}
-          theme={VictoryTheme.material}
-          //minDomain={{ y: 0.2 }}
-          //scale={{ x: "time" }}
-          standalone={true}
-          containerComponent={
-            <VictoryCursorContainer
-              cursorLabel={({ datum }) => {
-                return `                ${datum.y.toPrecision(2)}`;
-              }}
-            />
-          }
-        >
-          <VictoryAxis
-            //minDomain={{ x: -1 }}
-            tickFormat={(x) => {
-              const d = new Date(x);
-              return `${month[x - 1]}`;
-            }}
-            tickLabelComponent={
-              <VictoryLabel
-                angle={-15}
-                //dx={-20}
-              />
-            }
-            //label={"Month"}
-            tickCount={12}
-            style={{ axisLabel: { fontSize: 15, padding: 35 } }}
-            fixLabelOverlap={true}
-          />
-
-          <VictoryAxis
-            dependentAxis
-            offsetX={48}
-            label={DataGetter.getUnit(this.props.param)}
-            style={{ axisLabel: { fontSize: 15, padding: 30 } }}
-          />
-
-          <VictoryLegend
-            x={125}
-            y={10}
-            orientation="horizontal"
-            gutter={20}
-            //style={{ border: { stroke: "black" } }}
-            colorScale={["#586B9F", "#7791D9", "#233E8B"]}
-            data={[
-              { name: `${this.props.endTime.substr(0, 4) - 2}` },
-              { name: `${this.props.endTime.substr(0, 4) - 1}` },
-              { name: `${this.props.endTime.substr(0, 4)}` },
-            ]}
-          />
-
-          <VictoryGroup
-            offset={5}
-            //minDomain={{ x: -1, y: 2 }}
-            colorScale={["#586B9F", "#7791D9", "#233E8B"]}
-          >
-            <VictoryBar data={this.state.prevPrevData} x={"MONTH"} y={"DATA"} />
-            <VictoryBar data={this.state.prevData} x={"MONTH"} y={"DATA"} />
-            <VictoryBar data={this.state.currentData} x={"MONTH"} y={"DATA"} />
-          </VictoryGroup>
-        </VictoryChart>
+        {this.state.currentData.length != 0
+          ? this.renderChart()
+          : loadingIndicator()}
       </View>
     );
   }
