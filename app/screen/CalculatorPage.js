@@ -1,7 +1,11 @@
-import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View, StatusBar, Platform, SafeAreaView, Image, TextInput } from 'react-native';
+import React, { Component } from 'react';
+import { StyleSheet, Text, TouchableOpacity, View, StatusBar, Platform, SafeAreaView, Image, TextInput, Dimensions } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import fixassets from '../../config/fixassets';
+
+// var MPP = parseFloat(435), areaPanels = parseFloat(2), usedTime = parseFloat(10), fixPrice = parseFloat(fPrice), totPrice = parseFloat(tPrice);
+
 
 function ChooseScreen({ navigation: { navigate } }) {
     return (
@@ -25,40 +29,48 @@ function ChooseScreen({ navigation: { navigate } }) {
 }
 
 function DefCal({navigation}) {
+
+const [fPrice, setFix] = React.useState("")
+const [tPrice, setBill] = React.useState("")
+
+var MPP = parseFloat(435), areaPanels = parseFloat(2), usedTime = parseFloat(10), fixPrice = parseFloat(fPrice), totPrice = parseFloat(tPrice);
+
     return (
         <View style={Calculation.container}>
-            <Image resizeMode={"contain"} style={{alignSelf:"flex-start", left:"6%", top:"6%", width:"2%"}} source={require('./assets/arrow.png')}/>
-            <Text style={Calculation.h1} onPress={()=> navigation.goBack() }>Back</Text>
-            <Text style={[Calculation.textBase, {left:"6%", top:"8%"}]}>Panel Specification</Text>
-            <Text style={[Calculation.textBase1,{left:"6%", top:"10%",}]}>Specification 1</Text>
+            <TouchableOpacity style={[fixassets.back, {top: Dimensions.get("window").height * 0.04}]} onPress={()=> navigation.goBack()}>
+                <Image style={{ width:"100%",height:"100%"}} source={require('./assets/blackback.png')}/>
+            </TouchableOpacity>
             <View style={[Calculation.textBox, {top:"23%", width:"90%", height: "5%"}]}>
-                <Text style={{alignSelf:"center", left:"30%"}}  >Power at Mpp : 435 Watt</Text>
+                <Text style={[Calculation.textBase, { bottom:"200%",position:"absolute"}]}>Panel Specification</Text>
+                <Text style={[Calculation.textBase1,{ top:"-7%",}]}>Specification 1</Text>
+                <Text style={{alignSelf:"center", left:"3%", position:"absolute"}}  >Power at Mpp : 435 Watt</Text>
             </View>
-            <Text style={[Calculation.textBase1,{left:"6%", top:"18%",}]}>Specification 2</Text>
-            <Text style={[Calculation.textBase1,{left:"55%", top:"15.5%",}]}>Specification 3</Text>
             <View style={[Calculation.textBox, {left: "5%" , top:"34%", width:"40%", height: "5%"}]}>
-                <Text style={{alignSelf:"center", left:"30%"}} >Area: 2 m^2</Text>
+                <Text style={[Calculation.textBase1,{top:"-16%"}]}>Specification 2</Text>
+                <Text style={{alignSelf:"center", left:"6%",position:"absolute"}} >Area: 2 m^2</Text>
             </View>
             <View style={[Calculation.textBox, {left: "55%" , top:"34%", width:"40%", height: "5%"}]}>
-                <Text style={{alignSelf:"center", left:"30%"}} >Used time: 10 years</Text>
+                <Text style={[Calculation.textBase1,{ top:"-16%",}]}>Specification 3</Text>
+                <Text style={{alignSelf:"center", left:"6%",position:"absolute"}} >Used time: 10 years</Text>
             </View>
-            <Text style={[Calculation.textBase, {left:"6%", top:"27%"}]}>Electricity Settings</Text>
-            <Text style={[Calculation.textBase1,{left:"6%", top:"29.5%",}]}>Specification 1</Text>
-            <View style={[Calculation.textBox, {left: "5%" , top:"55%", width:"90%", height: "5%"}]}>
-                <TextInput
-                    onChangeText={() => console.log(value)}
-                    keyboardType='numeric'
-                    placeholder="Electricity price per kWh in your area(US Dollar)" 
-                    style={{alignSelf:"center", left:"30%"}} />
+            <View style={[Calculation.textBox, {left: "5%" , top:"53%", width:"90%", height: "5%"}]}>
+                <Text style={[Calculation.textBase1,{left:"0%", top:"-7%",}]}>Specification 1</Text>
+                <Text style={[Calculation.textBase, {left:"0%", bottom:"200%",position:"absolute"}]}>Electricity Settings</Text>
+                    <TextInput
+                        onChangeText= {(number) => setFix(number)}
+                        keyboardType='numeric'
+                        placeholder="Electricity price per kWh in your area(US Dollar)" 
+                        style={{alignSelf:"center", left:"3%",position:"absolute"}} />
             </View>
-            <Text style={[Calculation.textBase1,{left:"6%", top:"38%",}]}>Specification 2</Text>
             <View style={[Calculation.textBox, {left: "5%" , top:"66%", width:"90%", height: "5%"}]}>
+                <Text style={[Calculation.textBase1,{top:"-7%"}]}>Specification 2</Text>
                 <TextInput
+                    onChangeText= {(number) => setBill(number)}
                     keyboardType='numeric'
                     placeholder="Estimate your electricity bill per month(US Dollar)" 
-                    style={{alignSelf:"center", left:"30%"}} />
+                    style={{alignSelf:"center", left:"3%",position:"absolute"}} />
             </View>
-            <TouchableOpacity style={Calculation.DoneBut} onPress={() => navigation.navigate('LastPage')}>
+            <TouchableOpacity style={Calculation.DoneBut} onPress={() => navigation.navigate('calculate')}>
                 <Text style={{alignSelf:"center", color:"#fff", fontSize:16, fontWeight:"normal"}}>Done</Text>
             </TouchableOpacity>
         </View>
@@ -67,48 +79,63 @@ function DefCal({navigation}) {
 
 
 function CusCal({navigation : {navigate}}) {
+
+    const [Mpp, setMpp] = React.useState("")
+    const [area, setArea] = React.useState("")
+    const [year, setYear] = React.useState("")
+    const [fPrice, setFix] = React.useState("")
+    const [tPrice, setBill] = React.useState("")
+
+var MPP = parseFloat(Mpp), areaPanels = parseFloat(area), usedTime = parseFloat(year), fixPrice = parseFloat(fPrice), totPrice = parseFloat(tPrice);
+
     return (
         <View style={Calculation.container}>
-            <Image resizeMode={"contain"} style={{alignSelf:"flex-start", left:"6%", top:"6%", width:"2%"}} source={require('./assets/arrow.png')}/>
-            <Text style={Calculation.h1} onPress={()=> navigate('Choose') }>Back</Text>
-            <Text style={[Calculation.textBase, {left:"6%", top:"8%"}]}>Panel Specification</Text>
-            <Text style={[Calculation.textBase1,{left:"6%", top:"10%",}]}>Specification 1</Text>
+            <TouchableOpacity style={[fixassets.back, {top: Dimensions.get("window").height * 0.04}]} onPress={()=> navigate('Choose')}>
+                <Image style={{ width:"100%",height:"100%"}} source={require('./assets/blackback.png')}/>
+            </TouchableOpacity>
             <View style={[Calculation.textBox, {top:"23%", width:"90%", height: "5%"}]}>
-                <TextInput
-                    keyboardType='numeric'  
-                    placeholder="Power at Maximum Power Point (MPP)" 
-                    style={{alignSelf:"center", left:"30%"}} />
+                <Text style={[Calculation.textBase, { bottom:"200%", position:"absolute"}]}>Panel Specification</Text>
+                <Text style={[Calculation.textBase1,{top:"-7%"}]}>Specification 1</Text>
+                    <TextInput
+                        onChangeText= {(number) => setMpp(number)}
+                        keyboardType='numeric'  
+                        placeholder="Power at Maximum Power Point (MPP)" 
+                        style={{alignSelf:"center", left:"3%",position:"absolute"}} />
             </View>
-            <Text style={[Calculation.textBase1,{left:"6%", top:"18%",}]}>Specification 2</Text>
-            <Text style={[Calculation.textBase1,{left:"55%", top:"15.5%",}]}>Specification 3</Text>
             <View style={[Calculation.textBox, {left: "5%" , top:"34%", width:"40%", height: "5%"}]}>
+            <Text style={[Calculation.textBase1,{ top:"-16%" }]}>Specification 2</Text>
                 <TextInput
+                    onChangeText= {(number) => setArea(number)}
                     keyboardType='numeric'
                     placeholder="Area of panels(m^2)" 
-                    style={{alignSelf:"center", left:"30%"}} />
+                    style={{alignSelf:"center", left:"6%",position:"absolute"}} />
             </View>
             <View style={[Calculation.textBox, {left: "55%" , top:"34%", width:"40%", height: "5%"}]}>
-                <TextInput
-                    keyboardType='numeric'  
-                    placeholder="Used time (Year)" 
-                    style={{alignSelf:"center", left:"30%"}} />
+                <Text style={[Calculation.textBase1,{top:"-16%",}]}>Specification 3</Text>
+                    <TextInput
+                        onChangeText= {(number) => setYear(number)}
+                        keyboardType='numeric'  
+                        placeholder="Used time (Year)" 
+                        style={{alignSelf:"center", left:"6%",position:"absolute"}} />
             </View>
-            <Text style={[Calculation.textBase, {left:"6%", top:"27%"}]}>Electricity Settings</Text>
-            <Text style={[Calculation.textBase1,{left:"6%", top:"29.5%",}]}>Specification 1</Text>
             <View style={[Calculation.textBox, {left: "5%" , top:"55%", width:"90%", height: "5%"}]}>
-                <TextInput
-                    keyboardType='numeric'
-                    placeholder="Electricity price per kWh in your area(US Dollar)" 
-                    style={{alignSelf:"center", left:"30%"}} />
+                <Text style={[Calculation.textBase, {bottom:"200%",position:"absolute"}]}>Electricity Settings</Text>
+                <Text style={[Calculation.textBase1,{top:"-7%",}]}>Specification 1</Text>
+                    <TextInput
+                        onChangeText= {(number) => setFix(number)}
+                        keyboardType='numeric'
+                        placeholder="Electricity price per kWh in your area(US Dollar)" 
+                        style={{alignSelf:"center", left:"3%",position:"absolute"}} />
             </View>
-            <Text style={[Calculation.textBase1,{left:"6%", top:"38%",}]}>Specification 2</Text>
             <View style={[Calculation.textBox, {left: "5%" , top:"66%", width:"90%", height: "5%"}]}>
+                <Text style={[Calculation.textBase1,{ top:"-7%",}]}>Specification 2</Text>
                 <TextInput
+                    onChangeText= {(number) => setBill(number)}
                     keyboardType='numeric'
                     placeholder="Estimate your electricity bill per month(US Dollar)" 
-                    style={{alignSelf:"center", left:"30%"}} />
+                    style={{alignSelf:"center", left:"3%",position:"absolute"}} />
             </View>
-            <TouchableOpacity style={Calculation.DoneBut} onPress={() => navigate('LastPage')}>
+            <TouchableOpacity style={Calculation.DoneBut} onPress={() => navigate('calculate')}>
                 <Text style={{alignSelf:"center", color:"#fff", fontSize:16, fontWeight:"normal"}}>Done</Text>
             </TouchableOpacity>
         </View>
@@ -116,42 +143,27 @@ function CusCal({navigation : {navigate}}) {
 }
 function CalLastP({navigation : {navigate}}){
     return (
-                <View style={CalLast.container1}>
-                        
-                        <View  style={CalLast.container2}>
-                            <View>
-                            <Text style={CalLast.title1}>
-                            Congrats!{"\n"}You will save up to
-                            </Text>
-                            <Text style={CalLast.title2}>
-                            35%
-                            </Text>
-                            <Text style={CalLast.title3}>
-                            Estimated Electricity
-                            </Text>
-                            </View>
-        
-                            <Image resizeMode={"contain"} style={CalLast.image} 
-                            source={require("./assets/officework.png")} />
-                        </View>
-        
-                        <View style={[CalLast.container3]}>
-                            <Text style={CalLast.title4}>
-                            Summary
-                            </Text>
-        
-                            <View style={[CalLast.box, {alignSelf: "center"}]}>
-                            <Text style={[CalLast.title4, {alignSelf: "center", marginTop: "23%"}]}>
-                                Display your graph here 
-                            </Text>
-                            </View>
-        
-                        </View>
-        
-                </View> 
+        <View style={CalLast.container}>
+            <View style={CalLast.upperText}>
+                <Text style={[CalLast.textBase, {fontSize:24}]} >Congrats!{"\n"}You will save up to</Text>
+                <Text style={[CalLast.textBase, {fontSize:72, }]} >35%</Text>                
+                <Text style={[CalLast.textBase, {fontSize:14,fontWeight:"normal"}]} >Estimated Electricity</Text>
+                <Image style={CalLast.picture} source={require('./assets/officework.png')} />
+            </View>
+            <View style={CalLast.Graph}>
+                <Text style={CalLast.SummaryText} >Summary</Text>
+                <View style={CalLast.GraphBox}/>
+            </View>
+        </View>
     );
 }
 
+function calculation({navigation : {navigate}}){
+    var answer;
+    return(
+        console.log(navigate('LastPage'))
+    );
+}
 
 const Stack = createNativeStackNavigator();
 function CalculatorPage() {
@@ -163,6 +175,7 @@ function CalculatorPage() {
             <Stack.Screen name="Default" component={DefCal} />
             <Stack.Screen name="Customise" component={CusCal} />
             <Stack.Screen name="LastPage" component={CalLastP} />
+            <Stack.Screen name="calculate" component={calculation} />
           </Stack.Navigator>
         </NavigationContainer>
     </SafeAreaView>        
@@ -173,6 +186,51 @@ function CalculatorPage() {
 
 
 export default CalculatorPage;
+
+const CalLast = StyleSheet.create({
+    container: {
+      flex: 1,
+    },
+    upperText: {
+        height:"42%",
+        width:"100%",
+        justifyContent:"flex-end"
+    },
+    textBase:{
+        paddingLeft:"5%",
+        position:"relative",
+        bottom:"35%",
+        fontWeight:"bold",
+        color:"#000",
+    },
+    picture:{
+        position:"absolute",
+        left:"20%",
+        resizeMode:"contain",
+        height:"90%",
+    },
+    Graph:{
+        top:"42%",
+        position:"absolute",
+        width:"100%",
+        height:"58%",
+    },
+    SummaryText:{
+        paddingLeft:"5%",
+        position:"absolute",
+        paddingTop:"10%",
+        fontWeight:"bold",
+        color:"#000",
+    },
+    GraphBox:{
+        backgroundColor:"#DDDDDD",
+        width:"90%",
+        height:"45%",
+        position:"absolute",
+        left:"5%",
+        top:"18%"
+    }
+});
 
 const Calculation = StyleSheet.create({
     container:{
@@ -295,77 +353,3 @@ const styles = StyleSheet.create({
         color:"#233E8B"
     },
 })
-const CalLast = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: "#fff",
-      paddingTop: Platform.OS === "android"? StatusBar.currentHeight : 0,
-    },
-    container1: {
-      flex: 1,
-      backgroundColor:"#fff",
-    },
-    container2: {
-      left:"5%",
-      top:"5%",
-      height:"35%",
-      borderBottomWidth: 1,
-      borderBottomColor: "#233E8B",
-    },
-    container3: {
-        height:"30%",
-        width:"80%",
-        backgroundColor:"#fff",
-        position:"absolute",
-        alignSelf:"center",
-        justifyContent :"flex-end",
-        top: "47%",
-    },
-    image: {
-      position:"absolute",
-      alignSelf:"flex-start",
-      width: "50%",
-      top:"-45%",
-      right: "5%",
-    },
-    box: {
-      marginTop: "3%",
-      position:"absolute",
-      width: "100%",
-      height: "80%",
-      backgroundColor: "#c4c4c4",
-      borderRadius: 16,
-      borderWidth: 2,
-      borderColor: "#233E8B",
-    },
-    title1: {
-      fontWeight: "bold",
-      fontSize: 24,
-      color: "black",
-      textAlign: "left",
-      letterSpacing: 0.15,
-    },
-    title2: {
-      fontWeight: "bold",
-      fontSize: 72,
-      color: "black",
-      textAlign: "left",
-      letterSpacing: 0.15,
-    },
-    title3: {
-      fontWeight: "bold",
-      fontSize: 14,
-      color: "black",
-      textAlign: "left",
-      letterSpacing: 0.15,
-    },
-    title4: {
-      fontWeight: "bold",
-      position:"absolute",
-      fontSize: 18,
-      color: "black",
-      textAlign: "left",
-      letterSpacing: 0.15,
-      top:"1%",
-    },
-});
