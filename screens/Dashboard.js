@@ -104,7 +104,7 @@ export default function Dashboard({ navigation: { navigate } }) {
         >
           <TouchableHighlight
             style={styles.button}
-            onPress={() => navigate("GetStarted")}
+            onPress={() => navigate("ViewGraphIndex")}
           >
             <Text style={[fonts.h4, { color: colors.white, lineHeight: 24, textAlign: "center" }]}>
               More Details
