@@ -38,3 +38,25 @@ export default StyleSheet.create({
     letterSpacing: 0.15,
   },
 });
+
+export const SIZES = {
+  // global sizes
+  base: 8,
+  font: 14,
+  radius: 30,
+  padding: 10,
+  padding2: 12,
+
+  // font sizes
+  largeTitle: 50,
+  h1: 48,
+  h2: 32,
+  h3: 24,
+  h4: 18,
+  body1: 30,
+  body2: 20,
+  body3: 16,
+  body4: 14,
+  body5: 12,
+  p: 14,
+};

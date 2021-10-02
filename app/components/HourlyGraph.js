@@ -27,27 +27,51 @@ export default class HourlyGraph extends Component {
     };
   }
 
-  componentDidMount() {
-    console.log(`Getting data...`);
-    DataGetter.getHourlyData({
-      startYear: this.props.startTime,
-      endYear: this.props.endTime,
-      longitude: this.props.longitude,
-      latitude: this.props.latitude,
-    })
-      .then(({ data }) => {
-        console.log(`Data gotten!`);
-        const d = data.properties.parameter;
-        let desiredData = DataGetter.formatHourlyData(d);
-        this.setState({
-          data: desiredData,
-        });
-        this.forceUpdate();
-        //console.log(desiredData);
-      })
-      .catch((err) => {
-        console.log(err);
+  transformData() {
+    const { data } = this.props;
+    if (data.length != 0 && this.state.data.length == 0) {
+      //console.log(`Data gotten!`);
+      //console.log(data);
+      const d = data.properties.parameter;
+      let desiredData = DataGetter.formatHourlyData(d);
+      this.setState({
+        data: desiredData,
       });
+      console.log("=Updating hourly graph...");
+      this.forceUpdate();
+    }
+  }
+
+  //will run if new props passing in
+  componentDidUpdate() {
+    this.transformData();
+    console.log("=Hourly graph update DONE.");
+  }
+
+  componentDidMount() {
+    console.log(`Mounted Hourly graph`);
+    this.transformData();
+
+    // console.log(`Getting data...`);
+    // DataGetter.getHourlyData({
+    //   startYear: this.props.startTime,
+    //   endYear: this.props.endTime,
+    //   longitude: this.props.longitude,
+    //   latitude: this.props.latitude,
+    // })
+    //   .then(({ data }) => {
+    //     console.log(`Data gotten!`);
+    //     const d = data.properties.parameter;
+    //     let desiredData = DataGetter.formatHourlyData(d);
+    //     this.setState({
+    //       data: desiredData,
+    //     });
+    //     this.forceUpdate();
+    //     //console.log(desiredData);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
   }
 
   render() {
@@ -78,7 +102,7 @@ export default class HourlyGraph extends Component {
         ]}
       >
         <VictoryChart
-          height={200}
+          height={300}
           theme={VictoryTheme.material}
           //scale={{ x: "time" }}
           standalone={true}
