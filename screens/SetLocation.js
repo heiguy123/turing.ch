@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Platform,
   SafeAreaView,
@@ -6,65 +6,132 @@ import {
   Text,
   View,
   StatusBar,
-  TouchableHighlight,
   Image,
   Dimensions,
   TextInput,
+  TouchableOpacity,
+  ToastAndroid,
 } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import colors from "../config/colors";
 import fonts from "../config/fonts";
 import fixassets from "../config/fixassets";
+import useLocation from "../config/useLocation";
 
-export default function SetLocation({ navigation: { navigate } }) {
+const latitudeDelta = 0.002;
+const longitudeDelta = 0.002;
+class Map extends React.Component {
+  state = {
+    region: {
+      latitude: initLatitude,
+      longitude: initLongitude,
+      latitudeDelta,
+      longitudeDelta,
+    },
+  };
+  onChangeValue = (region) => {
+    if (Platform.OS === "android")
+      ToastAndroid.show(JSON.stringify(region), ToastAndroid.SHORT);
+    this.setState({
+      region,
+    });
+  };
+  render() {
+    return (
+      <MapView
+        style={styles.map}
+        loadingEnabled={true}
+        showsUserLocation={true}
+        initialRegion={this.state.region}
+        onRegionChangeComplete={this.onChangeValue}
+        ref={(ref) => (this.map = ref)}
+      >
+        <Marker
+          draggable
+          coordinate={{
+            latitude: this.state.region.latitude,
+            longitude: this.state.region.longitude,
+          }}
+          onDragEnd={(x) => {
+            this.map.animateToRegion({
+              ...this.state.region,
+              latitude: x.nativeEvent.coordinate.latitude,
+              longitude: x.nativeEvent.coordinate.longitude,
+            });
+            savecoordinate(x.nativeEvent.coordinate);
+          }}
+        />
+      </MapView>
+    );
+  }
+}
+var coordinate = null;
+
+function savecoordinate(coords) {
+  coordinate = coords;
+}
+
+coordinate = null;
+export default function SetLocation({ navigation: { navigate }, route }) {
+  initLatitude = route.params.location.latitude;
+  initLongitude = route.params.location.longitude;
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: colors.primary }}>
       <View style={styles.container}>
         <Image style={fixassets.sun} source={require("../assets/sun.png")} />
-        <Image
-          style={fixassets.back}
-          source={require("../assets/whiteback.png")}
-        />
-        <Text style={[fonts.h2, styles.title]}>
+        <TouchableOpacity
+          style={[fixassets.back]}
+          onPress={() => navigate("Location")}
+        >
+          <Image
+            style={{ width: 53, height: 24 }}
+            source={require("../assets/whiteback.png")}
+          />
+        </TouchableOpacity>
+        <Text style={[fonts.h2, styles.title, { textAlign: "center" }]}>
           Set The <Text style={{ color: colors.secondary }}>Location</Text>
         </Text>
-        <View style={styles.search}>
-          <Text style={[fonts.h4, { color: colors.white }]}>Search</Text>
-          <Image
-            style={styles.locate}
-            source={require("../assets/locate.png")}
-          />
+        <View style={styles.bar}>
+          <View style={styles.search}>
+            <Image
+              style={styles.searchicon}
+              source={require("../assets/searchicon.png")}
+            />
+            <TextInput
+              style={[fonts.h4]}
+              placeholder={"Search"}
+              onChangeText={(x) => (saveaddress = x)}
+            />
+          </View>
+          <TouchableOpacity style={styles.locate}>
+            <Image
+              style={styles.locateicon}
+              source={require("../assets/locate.png")}
+            />
+          </TouchableOpacity>
         </View>
-        <MapView
-          style={styles.map}
-          loadingEnabled={true}
-          initialRegion={{
-            latitude: 4.39757,
-            longitude: 113.98826,
-            latitudeDelta: 0.0022,
-            longitudeDelta: 0.0021,
-          }}
-        >
-          <Marker coordinate={{ latitude: 4.39757, longitude: 113.98826 }} />
-        </MapView>
+        <Map />
       </View>
       <View
         style={{
           flex: 0.22,
-          justifyContent: "flex-start",
           alignSelf: "center",
-          backgroundColor: colors.black,
         }}
       >
-        <TouchableHighlight
+        <TouchableOpacity
           style={fixassets.button}
           //onPress={() => navigate("SetTime")}
-          onPress={() => navigate("Location")}
+          onPress={() => navigate("Dashboard", route.params.position)}
         >
-          <Text style={[fonts.h4, { color: colors.white, lineHeight: 24 }]}>
+          <Text
+            style={[
+              fonts.h4,
+              { color: colors.white, lineHeight: 24, textAlign: "center" },
+            ]}
+          >
             Locate Me
           </Text>
-        </TouchableHighlight>
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
@@ -75,19 +142,36 @@ const styles = StyleSheet.create({
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
     flex: 1,
     justifyContent: "flex-end",
-    backgroundColor: "green",
   },
-  search: {
+  bar: {
     width: "90%",
     height: "8%",
-    backgroundColor: colors.black,
     flexDirection: "row",
     position: "absolute",
-    justifyContent: "center",
+    justifyContent: "space-between",
     alignSelf: "center",
     bottom: "60%",
+    flex: 1,
+  },
+  search: {
+    backgroundColor: colors.whiteBg,
+    flex: 0.95,
+    borderRadius: 6,
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  searchicon: {
+    width: 20,
+    height: 20,
+    justifyContent: "center",
+    margin: "5%",
+    marginRight: "2%",
   },
   locate: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  locateicon: {
     width: 45,
     height: 45,
   },
@@ -96,10 +180,10 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     width: "90%",
     height: "50%",
+    borderRadius: 6,
   },
   title: {
     color: colors.white,
-    //backgroundColor: colors.black,
     alignSelf: "center",
     position: "absolute",
     bottom: Dimensions.get("window").height * 0.58,

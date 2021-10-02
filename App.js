@@ -37,16 +37,16 @@ function App() {
     return <AppLoading />;
   }
 
-  // return SetLocation();
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="SetLocation"
+        initialRouteName="GetStarted"
         screenOptions={{ headerShown: false, animation: "none" }}
       >
-        <Stack.Screen name="GetStarted" component={GetStarted} /> 
+        <Stack.Screen name="GetStarted" component={GetStarted} />
         <Stack.Screen name="Location" component={Location} />
         <Stack.Screen name="SetLocation" component={SetLocation} />
+        <Stack.Screen name="Dashboard" component={Dashboard} />
       </Stack.Navigator>
     </NavigationContainer>
   );
