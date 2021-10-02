@@ -25,7 +25,6 @@ function ChooseScreen({ navigation: { navigate } }) {
 }
 
 function DefCal({navigation}) {
-
     return (
         <View style={Calculation.container}>
             <Image resizeMode={"contain"} style={{alignSelf:"flex-start", left:"6%", top:"6%", width:"2%"}} source={require('./assets/arrow.png')}/>
@@ -47,12 +46,15 @@ function DefCal({navigation}) {
             <Text style={[Calculation.textBase1,{left:"6%", top:"29.5%",}]}>Specification 1</Text>
             <View style={[Calculation.textBox, {left: "5%" , top:"55%", width:"90%", height: "5%"}]}>
                 <TextInput
+                    onChangeText={() => console.log(value)}
+                    keyboardType='numeric'
                     placeholder="Electricity price per kWh in your area(US Dollar)" 
                     style={{alignSelf:"center", left:"30%"}} />
             </View>
             <Text style={[Calculation.textBase1,{left:"6%", top:"38%",}]}>Specification 2</Text>
             <View style={[Calculation.textBox, {left: "5%" , top:"66%", width:"90%", height: "5%"}]}>
-                <TextInput  
+                <TextInput
+                    keyboardType='numeric'
                     placeholder="Estimate your electricity bill per month(US Dollar)" 
                     style={{alignSelf:"center", left:"30%"}} />
             </View>
@@ -72,32 +74,37 @@ function CusCal({navigation : {navigate}}) {
             <Text style={[Calculation.textBase, {left:"6%", top:"8%"}]}>Panel Specification</Text>
             <Text style={[Calculation.textBase1,{left:"6%", top:"10%",}]}>Specification 1</Text>
             <View style={[Calculation.textBox, {top:"23%", width:"90%", height: "5%"}]}>
-                <TextInput  
+                <TextInput
+                    keyboardType='numeric'  
                     placeholder="Power at Maximum Power Point (MPP)" 
                     style={{alignSelf:"center", left:"30%"}} />
             </View>
             <Text style={[Calculation.textBase1,{left:"6%", top:"18%",}]}>Specification 2</Text>
             <Text style={[Calculation.textBase1,{left:"55%", top:"15.5%",}]}>Specification 3</Text>
             <View style={[Calculation.textBox, {left: "5%" , top:"34%", width:"40%", height: "5%"}]}>
-                <TextInput  
+                <TextInput
+                    keyboardType='numeric'
                     placeholder="Area of panels(m^2)" 
                     style={{alignSelf:"center", left:"30%"}} />
             </View>
             <View style={[Calculation.textBox, {left: "55%" , top:"34%", width:"40%", height: "5%"}]}>
-                <TextInput  
+                <TextInput
+                    keyboardType='numeric'  
                     placeholder="Used time (Year)" 
                     style={{alignSelf:"center", left:"30%"}} />
             </View>
             <Text style={[Calculation.textBase, {left:"6%", top:"27%"}]}>Electricity Settings</Text>
             <Text style={[Calculation.textBase1,{left:"6%", top:"29.5%",}]}>Specification 1</Text>
             <View style={[Calculation.textBox, {left: "5%" , top:"55%", width:"90%", height: "5%"}]}>
-                <TextInput  
+                <TextInput
+                    keyboardType='numeric'
                     placeholder="Electricity price per kWh in your area(US Dollar)" 
                     style={{alignSelf:"center", left:"30%"}} />
             </View>
             <Text style={[Calculation.textBase1,{left:"6%", top:"38%",}]}>Specification 2</Text>
             <View style={[Calculation.textBox, {left: "5%" , top:"66%", width:"90%", height: "5%"}]}>
-                <TextInput  
+                <TextInput
+                    keyboardType='numeric'
                     placeholder="Estimate your electricity bill per month(US Dollar)" 
                     style={{alignSelf:"center", left:"30%"}} />
             </View>
@@ -124,29 +131,26 @@ function CalLastP({navigation : {navigate}}){
                             </Text>
                             </View>
         
-                            <View style={ {position: "absolute"}}>
-                            <Image  style={CalLast.image} 
+                            <Image resizeMode={"contain"} style={CalLast.image} 
                             source={require("./assets/officework.png")} />
-                            </View>
                         </View>
         
-                        <View style={[CalLast.container3, {marginTop: "5%"}]}>
+                        <View style={[CalLast.container3]}>
                             <Text style={CalLast.title4}>
                             Summary
                             </Text>
         
                             <View style={[CalLast.box, {alignSelf: "center"}]}>
-                            <Text style={[CalLast.title4, {alignSelf: "center", marginTop: "25%"}]}>
+                            <Text style={[CalLast.title4, {alignSelf: "center", marginTop: "23%"}]}>
                                 Display your graph here 
                             </Text>
                             </View>
         
                         </View>
         
-                        </View> 
+                </View> 
     );
 }
-
 
 
 const Stack = createNativeStackNavigator();
@@ -299,28 +303,36 @@ const CalLast = StyleSheet.create({
     },
     container1: {
       flex: 1,
-      marginHorizontal: "6%",
-      paddingTop: "10%",
+      backgroundColor:"#fff",
     },
     container2: {
-      flex: 0.8,
+      left:"5%",
+      top:"5%",
+      height:"35%",
       borderBottomWidth: 1,
       borderBottomColor: "#233E8B",
     },
     container3: {
-      flex: 1,
+        height:"30%",
+        width:"80%",
+        backgroundColor:"#fff",
+        position:"absolute",
+        alignSelf:"center",
+        justifyContent :"flex-end",
+        top: "47%",
     },
     image: {
-      resizeMode: "contain",
-      width: 290,
-      height: 290,
-      right: -140,
-      top: 30,
+      position:"absolute",
+      alignSelf:"flex-start",
+      width: "50%",
+      top:"-45%",
+      right: "5%",
     },
     box: {
-      marginTop: "10%",
-      width: 360,
-      height: 240,
+      marginTop: "3%",
+      position:"absolute",
+      width: "100%",
+      height: "80%",
       backgroundColor: "#c4c4c4",
       borderRadius: 16,
       borderWidth: 2,
@@ -349,9 +361,11 @@ const CalLast = StyleSheet.create({
     },
     title4: {
       fontWeight: "bold",
+      position:"absolute",
       fontSize: 18,
       color: "black",
       textAlign: "left",
       letterSpacing: 0.15,
+      top:"1%",
     },
 });
