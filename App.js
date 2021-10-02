@@ -18,9 +18,9 @@ import {
   Roboto_700Bold,
 } from "@expo-google-fonts/roboto";
 import { useFonts } from "expo-font";
-import colors from "./config/colors";
-import fonts from "./config/fonts";
 import GetStarted from "./screens/GetStarted";
+import Location from "./screens/Location";
+import SetLocation from "./screens/SetLocation";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Dashboard from "./screens/Dashboard";
@@ -37,29 +37,19 @@ function App() {
     return <AppLoading />;
   }
 
+  // return SetLocation();
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="GetStarted"
-        screenOptions={{ headerShown: false }}
+        initialRouteName="SetLocation"
+        screenOptions={{ headerShown: false, animation: "none" }}
       >
-        <Stack.Screen name="GetStarted" component={GetStarted} />
-        <Stack.Screen name="Dashboard" component={Dashboard} />
+        <Stack.Screen name="GetStarted" component={GetStarted} /> 
+        <Stack.Screen name="Location" component={Location} />
+        <Stack.Screen name="SetLocation" component={SetLocation} />
       </Stack.Navigator>
     </NavigationContainer>
   );
 }
 
 export default App;
-
-// function calculateMaxWidth() {
-//   const dimensions = Dimensions.get('window');
-//   return dimensions.width;
-// }
-
-// function calculateMaxHeight(ratio) {
-//   const dimensions = Dimensions.get('window');
-//   if (ratio == '100%') { return dimensions.width}
-//   if (ratio == '75%') { return Math.round(dimensions.width * 3 / 4) }
-//   if (ratio == '56.25%') { return Math.round(dimensions.width * 9 / 16) }
-// }
