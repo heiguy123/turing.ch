@@ -14,8 +14,6 @@ import {
   Roboto_700Bold,
 } from "@expo-google-fonts/roboto";
 import { useFonts } from "expo-font";
-import colors from "./config/colors";
-import fonts from "./config/fonts";
 import GetStarted from "./screens/GetStarted";
 import Location from "./screens/Location";
 import SetLocation from "./screens/SetLocation";
@@ -50,12 +48,3 @@ function App() {
 }
 
 export default App;
-const styles = StyleSheet.create({
-  container: {
-    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
-    flex: 1,
-    backgroundColor: colors.blue,
-    alignItems: "center",
-    justifyContent: "flex-end",
-  },
-});
