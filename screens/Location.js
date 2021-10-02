@@ -10,26 +10,28 @@ import {
   Dimensions,
   TouchableOpacity,
   ToastAndroid,
+  ActivityIndicator,
 } from "react-native";
 import colors from "../config/colors";
 import fonts from "../config/fonts";
 import fixassets from "../config/fixassets";
-import useLocation from "../config/useLocation";
+import useLocation from "../app/useLocation";
+import loadingIndicator from "../app/components/loadingIndicator";
 
-export default function Location({ navigation: { navigate } }) {
-  const location = useLocation();
-  if (Platform.OS === "android")
-    if (location)
-      ToastAndroid.show(JSON.stringify(location), ToastAndroid.SHORT);
-    else {
-      ToastAndroid.show("Waiting for location", ToastAndroid.SHORT);
-    }
-  else {
-    if (location) alert(JSON.stringify(location));
-    else {
-      alert("Waiting for location");
-    }
-  }
+const Location = ({ navigation }) => {
+  const currentlocation = useLocation();
+  // if (Platform.OS === "android")
+  //   if (location)
+  //     ToastAndroid.show(JSON.stringify(location), ToastAndroid.SHORT);
+  //   else {
+  //     ToastAndroid.show("Waiting for location", ToastAndroid.SHORT);
+  //   }
+  // else {
+  //   if (location) alert(JSON.stringify(location));
+  //   else {
+  //     alert("Waiting for location");
+  //   }
+  // }
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: colors.primary }}>
       <View style={styles.container}>
@@ -67,42 +69,63 @@ export default function Location({ navigation: { navigate } }) {
             top: "8%",
           }}
         >
-          <TouchableOpacity
-            style={fixassets.button}
-            //onPress={() => navigate("SetTime")}
-            onPress={() => navigate("Dashboard")}
-          >
-            <Text
-              style={[
-                fonts.h4,
-                { color: colors.white, lineHeight: 24, textAlign: "center" },
-              ]}
+          {currentlocation ? (
+            <TouchableOpacity
+              style={fixassets.button}
+              //onPress={() => navigate("SetTime")}
+              onPress={() =>
+                navigation.navigate("Dashboard", { location: currentlocation })
+              }
             >
-              Locate Me
-            </Text>
-          </TouchableOpacity>
+              <Text
+                style={[
+                  fonts.h4,
+                  { color: colors.white, lineHeight: 24, textAlign: "center" },
+                ]}
+              >
+                Locate Me
+              </Text>
+            </TouchableOpacity>
+          ) : (
+            <View
+              style={{
+                height: 70,
+                width: 70,
+                top: 0,
+                justifyContent: "center",
+              }}
+            >
+              <ActivityIndicator size="large" color={colors.secondary} />
+            </View>
+          )}
         </View>
         <View style={{ top: 44 }}>
-          <Text style={[fonts.p, { color: colors.white, textAlign: "center" }]}>
-            Prefer a specific location?{" "}
+          {currentlocation ? (
             <Text
-              style={{
-                color: colors.white,
-                fontFamily: "Bold",
-              }}
-              onPress={() => {
-                navigate("SetLocation", { location });
-              }}
+              style={[fonts.p, { color: colors.white, textAlign: "center" }]}
             >
-              Click Here
+              Prefer a specific location?{" "}
+              <Text
+                style={{
+                  color: colors.white,
+                  fontFamily: "Bold",
+                }}
+                onPress={() => {
+                  navigation.navigate("SetLocation", {
+                    location: currentlocation,
+                  });
+                }}
+              >
+                Click Here
+              </Text>
             </Text>
-          </Text>
+          ) : null}
         </View>
       </View>
     </SafeAreaView>
   );
-}
-
+};
+export default Location;
 const styles = StyleSheet.create({
   container: {
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,

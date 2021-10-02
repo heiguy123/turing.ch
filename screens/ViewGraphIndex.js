@@ -24,15 +24,18 @@ import DailyGraph from "../app/components/DailyGraph";
 import HourlyGraph from "../app/components/HourlyGraph";
 import DataGetter from "../app/dataGetter";
 import fixassets from "../config/fixassets";
+import useLocation from "../app/useLocation";
 
 export default function ViewGraphIndex({ route, navigation }) {
+  const LOCATION = route.params.location;
   const OVERVIEW = "Overview";
   const MONTHLY = "Monthly";
   const DAILY = "Daily";
   const HOURLY = "Hourly";
   let _isMounted = false;
-  const [longitude, setLongitude] = React.useState(113.9798);
-  const [latitude, setLatitude] = React.useState(3.4345);
+  const [longitude, setLongitude] = React.useState(LOCATION.longitude);
+  const [latitude, setLatitude] = React.useState(LOCATION.latitude);
+  console.log(LOCATION);
   const [graph, setGraph] = React.useState(OVERVIEW);
   const [startTime, setStartTime] = React.useState("20190101");
   const [endTime, setEndTime] = React.useState("20210920");
@@ -154,28 +157,14 @@ export default function ViewGraphIndex({ route, navigation }) {
     return (
       <View style={{ flexDirection: "row" }}>
         <TouchableOpacity
-          style={{
-            width: 50,
-            paddingLeft: SIZES.padding * 2,
-            justifyContent: "center",
-          }}
+          style={[fixassets.back, ]}
           onPress={() => navigation.goBack()}
         >
-          <FontAwesome5
-            name="chevron-left"
-            size={SIZES.h4}
-            color="black"
-            resizeMode="contain"
-            style={{
-              width: 30,
-              height: 30,
-              paddingTop: 7,
-            }}
+          <Image
+            style={{ width: 53, height: 24 }}
+            source={require("../assets/blackback.png")}
           />
         </TouchableOpacity>
-        <View>
-          <Text style={[fonts.h4]}>Back</Text>
-        </View>
       </View>
       // <View style={{ flexDirection: "row" }}>
       //   <TouchableOpacity
