@@ -1,11 +1,12 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View, StatusBar, Platform, SafeAreaView, Image, TextInput, Dimensions } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import fixassets from '../../config/fixassets';
 
-// var MPP = parseFloat(435), areaPanels = parseFloat(2), usedTime = parseFloat(10), fixPrice = parseFloat(fPrice), totPrice = parseFloat(tPrice);
+var MPP = parseFloat(435), areaPanels = parseFloat(2), usedTime = parseFloat(10), fixPrice = parseFloat(0), totPrice = parseFloat(0);
 
+console.log(globalThis.MPP, globalThis.areaPanels, globalThis.usedTime, globalThis.fixPrice, globalThis.totPrice)
 
 function ChooseScreen({ navigation: { navigate } }) {
     return (
@@ -30,10 +31,10 @@ function ChooseScreen({ navigation: { navigate } }) {
 
 function DefCal({navigation}) {
 
-const [fPrice, setFix] = React.useState("")
-const [tPrice, setBill] = React.useState("")
+const [fPrice, setFix] = useState("")
+const [tPrice, setBill] = useState("")
 
-var MPP = parseFloat(435), areaPanels = parseFloat(2), usedTime = parseFloat(10), fixPrice = parseFloat(fPrice), totPrice = parseFloat(tPrice);
+MPP = parseFloat(435), areaPanels = parseFloat(2), usedTime = parseFloat(10), fixPrice = parseFloat(fPrice), totPrice = parseFloat(tPrice);
 
     return (
         <View style={Calculation.container}>
@@ -80,13 +81,13 @@ var MPP = parseFloat(435), areaPanels = parseFloat(2), usedTime = parseFloat(10)
 
 function CusCal({navigation : {navigate}}) {
 
-    const [Mpp, setMpp] = React.useState("")
-    const [area, setArea] = React.useState("")
-    const [year, setYear] = React.useState("")
-    const [fPrice, setFix] = React.useState("")
-    const [tPrice, setBill] = React.useState("")
+    const [Mpp, setMpp] = useState("")
+    const [area, setArea] = useState("")
+    const [year, setYear] = useState("")
+    const [fPrice, setFix] = useState("")
+    const [tPrice, setBill] = useState("")
 
-var MPP = parseFloat(Mpp), areaPanels = parseFloat(area), usedTime = parseFloat(year), fixPrice = parseFloat(fPrice), totPrice = parseFloat(tPrice);
+MPP = parseFloat(Mpp), areaPanels = parseFloat(area), usedTime = parseFloat(year), fixPrice = parseFloat(fPrice), totPrice = parseFloat(tPrice);
 
     return (
         <View style={Calculation.container}>
@@ -159,9 +160,13 @@ function CalLastP({navigation : {navigate}}){
 }
 
 function calculation({navigation : {navigate}}){
-    var answer;
+var powerGenerated, moneySaved, percentageSaved;
+    powerGenerated = 0.435*365*usedTime*(435/(1000*areaPanels))*((100-((usedTime+1)/4))/100)*areaPanels;
+    moneySaved = powerGenerated*fixPrice;
+    percentageSaved = (moneySaved/(usedTime*totPrice*12))*100;
+    console.log("Power:",powerGenerated,"Money:", moneySaved,"%:", percentageSaved)
     return(
-        console.log(navigate('LastPage'))
+        null
     );
 }
 
