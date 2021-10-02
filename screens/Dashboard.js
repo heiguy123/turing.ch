@@ -144,7 +144,7 @@ export default function Dashboard({ navigation: { navigate } }) {
             </TouchableHighlight>
             <TouchableHighlight 
               style={styles.navButton, styles.col4}
-              onPress={() => Alert.alert("DEF")}
+              onPress={() => navigate("Settings")}
               activeOpacity={0.65}
               underlayColor={"rgba(255,255,255,0)"}
             >

@@ -24,6 +24,7 @@ import SetLocation from "./screens/SetLocation";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Dashboard from "./screens/Dashboard";
+import Settings from "./screens/Settings";
 
 const Stack = createNativeStackNavigator();
 
@@ -48,6 +49,7 @@ function App() {
         <Stack.Screen name="Location" component={Location} />
         <Stack.Screen name="SetLocation" component={SetLocation} />
         <Stack.Screen name="Dashboard" component={Dashboard} />
+        <Stack.Screen name="Settings" component={Settings} />
       </Stack.Navigator>
     </NavigationContainer>
   );
