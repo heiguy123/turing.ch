@@ -3,9 +3,13 @@ import {
   Platform,
   SafeAreaView,
   StyleSheet,
+  Dimensions,
   Text,
+  Pressable,
+  Image,
   View,
   StatusBar,
+  Button,
 } from "react-native";
 import AppLoading from "expo-app-loading";
 import {
@@ -19,6 +23,7 @@ import Location from "./screens/Location";
 import SetLocation from "./screens/SetLocation";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import Dashboard from "./screens/Dashboard";
 
 const Stack = createNativeStackNavigator();
 
@@ -39,7 +44,7 @@ function App() {
         initialRouteName="SetLocation"
         screenOptions={{ headerShown: false, animation: "none" }}
       >
-        <Stack.Screen name="GetStarted" component={GetStarted} />
+        <Stack.Screen name="GetStarted" component={GetStarted} /> 
         <Stack.Screen name="Location" component={Location} />
         <Stack.Screen name="SetLocation" component={SetLocation} />
       </Stack.Navigator>

@@ -32,17 +32,17 @@ export default function GetStarted({ navigation: { navigate } }) {
           justifyContent: "flex-start",
         }}
       >
-        <Text style={[fonts.h1, { color: colors.secondary, lineHeight: 53.5 }]}>
+        <Text style={[fonts.h1, { color: colors.secondary, lineHeight: 53.5, textAlign: "center" }]}>
           Sunlight
         </Text>
-        <Text style={[fonts.h1, { color: colors.white, lineHeight: 53.5 }]}>
+        <Text style={[fonts.h1, { color: colors.white, lineHeight: 53.5, textAlign: "center" }]}>
           Detector App
         </Text>
         <View style={{ height: "25%", top: "4%" }}>
           <Text
             style={[
               fonts.p,
-              { color: colors.white, flexWrap: "wrap", lineHeight: 24 },
+              { color: colors.white, flexWrap: "wrap", lineHeight: 24, textAlign: "center" },
             ]}
           >
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
@@ -61,7 +61,7 @@ export default function GetStarted({ navigation: { navigate } }) {
             style={fixassets.button}
             onPress={() => navigate("Location")}
           >
-            <Text style={[fonts.h4, { color: colors.white, lineHeight: 24 }]}>
+            <Text style={[fonts.h4, { color: colors.white, lineHeight: 24, textAlign: "center" }]}>
               Get Started
             </Text>
           </TouchableHighlight>
