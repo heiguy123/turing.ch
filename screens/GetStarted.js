@@ -14,12 +14,13 @@ import colors from "../config/colors";
 import fonts from "../config/fonts";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import fixassets from "../config/fixassets";
 
 export default function GetStarted({ navigation: { navigate } }) {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: colors.primary }}>
-      <View style={[styles.container, styles.top]}>
-        <Image style={styles.sun} source={require("../assets/sun.png")} />
+      <View style={styles.container}>
+        <Image style={fixassets.sun} source={require("../assets/sun.png")} />
         <Image
           style={styles.smarthome}
           source={require("../assets/smarthome.png")}
@@ -31,14 +32,19 @@ export default function GetStarted({ navigation: { navigate } }) {
           justifyContent: "flex-start",
         }}
       >
-        <Text style={[fonts.h1, { color: colors.secondary, lineHeight: 53.5 }]}>
+        <Text style={[fonts.h1, { color: colors.secondary, lineHeight: 53.5, textAlign: "center" }]}>
           Sunlight
         </Text>
-        <Text style={[fonts.h1, { color: colors.white, lineHeight: 53.5 }]}>
+        <Text style={[fonts.h1, { color: colors.white, lineHeight: 53.5, textAlign: "center" }]}>
           Detector App
         </Text>
         <View style={{ height: "25%", top: "4%" }}>
-          <Text style={[fonts.p, { color: colors.white, flexWrap: "wrap" }]}>
+          <Text
+            style={[
+              fonts.p,
+              { color: colors.white, flexWrap: "wrap", lineHeight: 24, textAlign: "center" },
+            ]}
+          >
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
             velit tellus, sodales id placerat at, finibus non urna. Morbi a
             lacus tellus.
@@ -52,10 +58,10 @@ export default function GetStarted({ navigation: { navigate } }) {
           }}
         >
           <TouchableHighlight
-            style={styles.button}
-            onPress={() => navigate("")}
+            style={fixassets.button}
+            onPress={() => navigate("Location")}
           >
-            <Text style={[fonts.h4, { color: colors.white, lineHeight: 24 }]}>
+            <Text style={[fonts.h4, { color: colors.white, lineHeight: 24, textAlign: "center" }]}>
               Get Started
             </Text>
           </TouchableHighlight>
@@ -69,28 +75,12 @@ const styles = StyleSheet.create({
   container: {
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
     flex: 1,
-    backgroundColor: colors.primary,
-  },
-  button: {
-    width: 278,
-    height: 46,
-    borderWidth: 0,
-    borderRadius: 16,
-    backgroundColor: colors.secondary,
-    justifyContent: "center",
-  },
-  sun: {
-    width: 70,
-    height: 140,
-    position: "absolute",
-    right: "0%",
-    bottom: Dimensions.get("window").height * 0.25,
   },
   smarthome: {
     width: 299,
     height: 242,
     position: "absolute",
     alignSelf: "center",
-    bottom: Dimensions.get("window").height * 0.02,
+    bottom: Dimensions.get("window").height * 0.015,
   },
 });
