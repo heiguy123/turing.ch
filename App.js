@@ -26,7 +26,10 @@ import ViewGraphIndex from "./screens/ViewGraphIndex";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Dashboard from "./screens/Dashboard";
-import CalculatorPage from "./screens/CalculatorPage";
+import CalChoose from "./screens/CalChoose";
+import DefaultPage from "./screens/DefaultPage";
+import CustomisePage from "./screens/CustomisePage";
+import CalLastPage from "./screens/CalLastPage";
 
 const Stack = createNativeStackNavigator();
 
@@ -51,7 +54,10 @@ function App() {
         <Stack.Screen name="SetLocation" component={SetLocation} />
         <Stack.Screen name="Dashboard" component={Dashboard} />
         <Stack.Screen name="ViewGraphIndex" component={ViewGraphIndex} />
-        <Stack.Screen name="CalculatorPage" component={CalculatorPage} />
+        <Stack.Screen name="CalChoose" component={CalChoose} />
+        <Stack.Screen name="DefaultPage" component={DefaultPage} />
+        <Stack.Screen name="CustomisePage" component={CustomisePage} />
+        <Stack.Screen name="CalLastPage" component={CalLastPage} />
       </Stack.Navigator>
     </NavigationContainer>
   );
