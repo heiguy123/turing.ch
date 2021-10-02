@@ -25,9 +25,8 @@ import ViewGraphIndex from "./screens/ViewGraphIndex";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Dashboard from "./screens/Dashboard";
-import CalculatorPage from './app/screen/CalculatorPage';
 
-export default function App() {
+const Stack = createNativeStackNavigator();
 
 function App() {
   let [fontloaded, error] = useFonts({
@@ -55,4 +54,4 @@ function App() {
   );
 }
 
-
+export default App;
