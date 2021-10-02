@@ -1,5 +1,8 @@
 // import axios from "axios";
 const axios = require("axios");
+//const source = CancelToken.source();
+let cancelToken;
+
 const m = require("./monthlyDataDemo");
 const h = require("./hourlyDataDemo");
 
@@ -7,6 +10,7 @@ const DataGetter = {
   unit: {
     TS: { units: "C", longname: "Earth Skin Temperature" },
     CLOUD_AMT: { units: "%", longname: "Cloud Amount" },
+    CLOUD_AMT_DAY: { units: "%", longname: "Cloud Amount" },
     PRECTOTCORR: { units: "mm", longname: "Precipitation Corrected" },
     ALLSKY_SFC_SW_DWN: {
       units: "kW-hr/m^2/day",
@@ -22,6 +26,31 @@ const DataGetter = {
     return this.unit[param].longname;
   },
 
+  checkAndResetCancelToken: () => {
+    if (typeof cancelToken != typeof undefined) {
+      cancelToken.cancel("Operation canceled due to new request.");
+    }
+    //Save the cancel token for the current request
+    let token = axios.CancelToken;
+    cancelToken = token.source();
+  },
+
+  getOverViewData: async function (
+    param = {
+      longitude: 113.997,
+      latitude: 4.372,
+    }
+  ) {
+    this.checkAndResetCancelToken();
+    longitude = param.longitude ? param.longitude : 113.997;
+    latitude = param.latitude ? param.latitude : 4.372;
+    params = "ALLSKY_SFC_SW_DWN,CLOUD_AMT,TS,PRECTOTCORR";
+    const url = `https://power.larc.nasa.gov/api/temporal/climatology/point?latitude=${latitude}&longitude=${longitude}&community=re&parameters=${params}&format=JSON&header=false`;
+    return await axios.get(url, {
+      cancelToken: cancelToken.token,
+    });
+  },
+
   getDailyData: async function (
     param = {
       longitude: 113.997,
@@ -30,12 +59,16 @@ const DataGetter = {
       endTime: "20210920",
     }
   ) {
+    this.checkAndResetCancelToken();
     longitude = param.longitude ? param.longitude : 113.997;
     latitude = param.latitude ? param.latitude : 4.372;
     startTime = param.startTime ? param.startTime : "20210901";
     endTime = param.endTime ? param.endTime : "20210920";
     const url = `https://demo-r-solar-data.herokuapp.com/daily?longitude=${longitude}&latitude=${latitude}&startTime=${startTime}&endTime=${endTime}`;
-    let res = await axios.get(url);
+    console.log("Requesting data.....");
+    let res = await axios.get(url, {
+      cancelToken: cancelToken.token,
+    });
     //res.unit = this.unit;
     return res;
     //console.log(res.data);
@@ -50,31 +83,39 @@ const DataGetter = {
       endTime: "20210920",
     }
   ) {
+    this.checkAndResetCancelToken();
     longitude = param.longitude ? param.longitude : 113.997;
     latitude = param.latitude ? param.latitude : 4.372;
     startTime = param.startTime ? param.startTime : "20210901";
     endTime = param.endTime ? param.endTime : "20210920";
     const url = `https://demo-r-solar-data.herokuapp.com/monthly?longitude=${longitude}&latitude=${latitude}&startTime=${startTime}&endTime=${endTime}`;
-    let res = await axios.get(url);
+    let res = await axios.get(url, {
+      cancelToken: cancelToken.token,
+    });
     //res.unit = this.unit;
     return res;
   },
 
-  getHourlyData: async (
+  getHourlyData: async function (
     param = {
       longitude: 113.997,
       latitude: 4.372,
       startYear: "2015",
       endYear: "2019",
     }
-  ) => {
+  ) {
+    this.checkAndResetCancelToken();
     longitude = param.longitude ? param.longitude : 113.997;
     latitude = param.latitude ? param.latitude : 4.372;
     startYear = param.startYear ? param.startYear : "2015";
     endYear = param.endYear ? param.endYear : "2019";
     params = "ALLSKY_SFC_SW_DWN_HR";
     const url = `https://power.larc.nasa.gov/api/temporal/climatology/point?start=${startYear}&end=${endYear}&latitude=${latitude}&longitude=${longitude}&community=re&parameters=${params}&format=JSON&header=false`;
-    return await axios.get(url);
+    //console.log(`Getting data from ${url}`);
+    //console.log(url);
+    return await axios.get(url, {
+      cancelToken: cancelToken.token,
+    });
   },
 
   formatMonthlyData: (data, param, year) => {
@@ -151,10 +192,41 @@ const DataGetter = {
     });
     return newData.sort((d1, d2) => d1.localHour - d2.localHour);
   },
+
+  filterOverViewData: (oriData, param) => {
+    const data = oriData[param]; //convert the properties into array
+    let newData = [];
+    //console.log(data);
+    let month = new Array(12);
+    month[0] = "JAN";
+    month[1] = "FEB";
+    month[2] = "MAR";
+    month[3] = "APR";
+    month[4] = "MAY";
+    month[5] = "JUN";
+    month[6] = "JUL";
+    month[7] = "AUG";
+    month[8] = "SEP";
+    month[9] = "OCT";
+    month[10] = "NOV";
+    month[11] = "DEC";
+
+    for (let i = 0; i < 12; i++) {
+      newData.push({
+        data: data[month[i]],
+        month: i + 1,
+      });
+    }
+    return newData;
+  },
 };
 
 //console.log([ x: {jerry}}, y: {jerry} ]);
 export default DataGetter;
+
+// let d = DataGetter.getOverViewData();
+// d = DataGetter.filterOverViewData(d, "ALLSKY_SFC_SW_DWN");
+// console.log(d);
 
 // DataGetter.getDailyData().then(({ data }) => {
 //   console.log(data);

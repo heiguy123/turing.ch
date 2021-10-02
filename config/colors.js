@@ -3,5 +3,6 @@ export default {
   secondary: "#FFB319",
   white: "#fff",
   black: "#000",
+  lightGray: "#E4E4E4",
   whiteBg: "#f9f9f9"
 };

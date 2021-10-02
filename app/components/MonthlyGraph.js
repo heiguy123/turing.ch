@@ -23,28 +23,33 @@ import DataGetter from "../dataGetter";
 export default class MonthlyGraph extends Component {
   constructor(props) {
     super(props);
+    console.log(`Constructing monthly graph`);
+    //console.log(this.props.data);
+    this._isMounted = false;
     this.state = {
       currentData: [],
       prevData: [],
       prevPrevData: [],
+      highestY: 1,
+      smallestY: 1,
     };
   }
 
-  componentDidMount() {
-    console.log(`Getting data...`);
+  transformData() {
     let endT = this.props.endTime;
+    //console.log(`Start time: ${this.props.startTime}`);
+    //console.log(`Start time: ${endT}`);
+    const { data } = this.props;
+    //console.log(data);
 
-    DataGetter.getMonthlyData({
-      startTime: this.props.startTime,
-      endTime: this.props.endTime,
-      longitude: this.props.longitude,
-      latitude: this.props.latitude,
-    })
-      .then(({ data }) => {
-        console.log(`Data gotten!`);
-        // console.log(data);
-        let desiredData = DataGetter.formatMonthlyData(data, this.props.param);
-        const currentYear = endT.substr(0, 4);
+    if (data.length != 0 && this.state.currentData.length == 0) {
+      console.log("=transforming data");
+      //data transforming process
+      let desiredData = DataGetter.formatMonthlyData(data, this.props.param);
+      const currentYear = endT.substr(0, 4);
+      const highestData = _.maxBy(desiredData, (d) => d["DATA"])["DATA"];
+      const minData = _.minBy(desiredData, (d) => d["DATA"])["DATA"];
+      this._isMounted &&
         this.setState({
           currentData: desiredData.filter((d) => {
             return d.YEAR == currentYear;
@@ -55,18 +60,115 @@ export default class MonthlyGraph extends Component {
           prevPrevData: desiredData.filter((d) => {
             return d.YEAR == currentYear - 2;
           }),
+          highestY: highestData,
+          smallestY: minData,
         });
-        this.forceUpdate();
-        // console.log(this.state.prevPrevData);
-        // console.log("===");
-        // console.log(this.state.prevData);
-        // console.log("===");
-        // console.log(this.state.currentData);
-        // console.log("===");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      console.log("=Updating monthly graph...");
+      this.forceUpdate();
+    }
+  }
+
+  // static getDerivedStateFromProps(props, state) {
+  //   this.setState({ data: nextProps.data });
+  // }
+  componentDidUpdate() {
+    this.transformData();
+    console.log("=Monthly graph update DONE.");
+  }
+
+  componentDidMount() {
+    console.log("=Mounted monthly graph");
+    this._isMounted = true;
+    this.transformData();
+    // let endT = this.props.endTime;
+    // const { data } = this.props;
+    // console.log(data);
+    // if (data.length != 0) {
+    //   console.log("=transforming data");
+    //   //data transforming process
+    //   let desiredData = DataGetter.formatMonthlyData(data, this.props.param);
+    //   const currentYear = endT.substr(0, 4);
+    //   const highestData = _.maxBy(desiredData, (d) => d["DATA"])["DATA"];
+    //   const minData = _.minBy(desiredData, (d) => d["DATA"])["DATA"];
+    //   this._isMounted &&
+    //     this.setState({
+    //       currentData: desiredData.filter((d) => {
+    //         return d.YEAR == currentYear;
+    //       }),
+    //       prevData: desiredData.filter((d) => {
+    //         return d.YEAR == currentYear - 1;
+    //       }),
+    //       prevPrevData: desiredData.filter((d) => {
+    //         return d.YEAR == currentYear - 2;
+    //       }),
+    //       highestY: highestData,
+    //       smallestY: minData,
+    //     });
+    //   console.log("=force update");
+    //   this.forceUpdate();
+    // }
+
+    //       // console.log(this.state.prevPrevData);
+    //       // console.log("===");
+    //       // console.log(this.state.prevData);
+    //       // console.log("===");
+    //       // console.log(this.state.currentData);
+    //       // console.log("===");
+    //     })
+    //     .catch((err) => {
+    //       console.log(err);
+    //     });
+
+    // this._isMounted = true;
+    // console.log(`Getting data...`);
+    // let endT = this.props.endTime;
+    // this._isMounted &&
+    //   DataGetter.getMonthlyData({
+    //     startTime: this.props.startTime,
+    //     endTime: this.props.endTime,
+    //     longitude: this.props.longitude,
+    //     latitude: this.props.latitude,
+    //   })
+    //     .then(({ data }) => {
+    //       console.log(`Data gotten!`);
+    //       // console.log(data);
+    //       let desiredData = DataGetter.formatMonthlyData(
+    //         data,
+    //         this.props.param
+    //       );
+    //       const currentYear = endT.substr(0, 4);
+    //       const highestData = _.maxBy(desiredData, (d) => d["DATA"])["DATA"];
+    //       const minData = _.minBy(desiredData, (d) => d["DATA"])["DATA"];
+    //       this._isMounted &&
+    //         this.setState({
+    //           currentData: desiredData.filter((d) => {
+    //             return d.YEAR == currentYear;
+    //           }),
+    //           prevData: desiredData.filter((d) => {
+    //             return d.YEAR == currentYear - 1;
+    //           }),
+    //           prevPrevData: desiredData.filter((d) => {
+    //             return d.YEAR == currentYear - 2;
+    //           }),
+    //           highestY: highestData,
+    //           smallestY: minData,
+    //         });
+    //       this.forceUpdate();
+    //       // console.log(this.state.prevPrevData);
+    //       // console.log("===");
+    //       // console.log(this.state.prevData);
+    //       // console.log("===");
+    //       // console.log(this.state.currentData);
+    //       // console.log("===");
+    //     })
+    //     .catch((err) => {
+    //       console.log(err);
+    //     });
+  }
+
+  componentWillUnmount() {
+    console.log("=Monthly Graph unmounted");
+    this._isMounted = false;
   }
 
   render() {
@@ -92,13 +194,16 @@ export default class MonthlyGraph extends Component {
             backgroundColor: this.props.backgroundColor
               ? this.props.backgroundColor
               : styles.backgrond.backgroundColor,
+            justifyContent: "flex-start",
           },
         ]}
       >
         <VictoryChart
           height={300}
+          maxDomain={{ y: this.state.highestY * 1.05 }}
+          minDomain={{ y: this.state.smallestY * 0.95 }}
+          //padding={{ top: 20 }}
           //minDomain={{ y: 2 }}
-          maxDomain={{ y: 6.5 }}
           theme={VictoryTheme.material}
           //minDomain={{ y: 0.2 }}
           //scale={{ x: "time" }}
@@ -123,7 +228,7 @@ export default class MonthlyGraph extends Component {
                 //dx={-20}
               />
             }
-            label={"Month"}
+            //label={"Month"}
             tickCount={12}
             style={{ axisLabel: { fontSize: 15, padding: 35 } }}
             fixLabelOverlap={true}
@@ -159,18 +264,6 @@ export default class MonthlyGraph extends Component {
             <VictoryBar data={this.state.prevData} x={"MONTH"} y={"DATA"} />
             <VictoryBar data={this.state.currentData} x={"MONTH"} y={"DATA"} />
           </VictoryGroup>
-          {/* <VictoryLine
-            // style={{
-            //   data: { stroke: "#c43a31" },
-            //   parent: { border: "1px solid #ccc" },
-            // }}
-            data={this.state.data}
-            x={(d) => {
-              const { YEAR, MO, DY } = d;
-              return new Date(YEAR, MO - 1, DY);
-            }}
-            y={this.props.param}
-          /> */}
         </VictoryChart>
       </View>
     );
