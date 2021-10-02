@@ -13,6 +13,7 @@ import {
 } from "react-native";
 import colors from "../config/colors";
 import fonts from "../config/fonts";
+import navbar from "../config/navbar";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
@@ -177,12 +178,12 @@ export default function Dashboard({ navigation: { navigate } }) {
         </View>
         
       </View>
-      <View style={styles.navBottom}>
+      <View style={navbar.navBottom}>
           <View
             style={[styles.row, { paddingTop: "5%", paddingBottom: "16%" }]}
           >
             <TouchableHighlight
-              style={(styles.navButton, styles.col4)}
+              style={(navbar.navButton, styles.col4)}
               onPress={() => Alert.alert("ABC")}
               activeOpacity={0.65}
               underlayColor={"rgba(255,255,255,0)"}
@@ -197,18 +198,18 @@ export default function Dashboard({ navigation: { navigate } }) {
                 ]}
               >
                 <Image
-                  style={styles.navIcon}
+                  style={navbar.navIcon}
                   source={require("../assets/icon-calculator-inactive.png")}
                 />
                 <Text
-                  style={[fonts.p, styles.navInactive, { marginBottom: 5 }]}
+                  style={[fonts.p, navbar.navInactive, { marginBottom: 5 }]}
                 >
                   Calculator
                 </Text>
               </View>
             </TouchableHighlight>
             <TouchableHighlight
-              style={(styles.navButton, styles.col4)}
+              style={(navbar.navButton, styles.col4)}
               onPress={() => navigate("Dashboard")}
               activeOpacity={0.65}
               underlayColor={"rgba(255,255,255,0)"}
@@ -223,15 +224,15 @@ export default function Dashboard({ navigation: { navigate } }) {
                 ]}
               >
                 <Image
-                  style={styles.navIcon}
+                  style={navbar.navIcon}
                   source={require("../assets/icon-home.png")}
                 />
                 <Text style={[fonts.p, { marginBottom: 5 }]}>Dashboard</Text>
-                <View style={styles.navLabelActive}></View>
+                <View style={navbar.navLabelActive}></View>
               </View>
             </TouchableHighlight>
             <TouchableHighlight
-              style={(styles.navButton, styles.col4)}
+              style={(navbar.navButton, styles.col4)}
               onPress={() => Alert.alert("DEF")}
               activeOpacity={0.65}
               underlayColor={"rgba(255,255,255,0)"}
@@ -246,11 +247,11 @@ export default function Dashboard({ navigation: { navigate } }) {
                 ]}
               >
                 <Image
-                  style={styles.navIcon}
+                  style={navbar.navIcon}
                   source={require("../assets/icon-settings-inactive.png")}
                 />
                 <Text
-                  style={[fonts.p, styles.navInactive, { marginBottom: 5 }]}
+                  style={[fonts.p, navbar.navInactive, { marginBottom: 5 }]}
                 >
                   Settings
                 </Text>
@@ -335,42 +336,6 @@ const styles = StyleSheet.create({
     bottom: "39%",
     right: -4,
     backgroundColor: colors.primary,
-  },
-  navBottom: {
-    position: "absolute",
-    bottom: -105,
-    height: 200,
-    alignSelf: "center",
-    width: Math.round(Dimensions.get("screen").width * 1.02),
-    backgroundColor: colors.white,
-    borderRadius: 60,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.8,
-    shadowRadius: 2,
-    elevation: 5,
-  },
-  navButton: {
-    alignItems: "center",
-  },
-  navIcon: {
-    resizeMode: "contain",
-    width: 30,
-    height: 30,
-    marginBottom: 8,
-    zIndex: 3,
-  },
-  navInactive: {
-    color: "rgba(0,0,0,0.6)",
-  },
-  navLabelActive: {
-    backgroundColor: colors.primary,
-    borderRadius: 30,
-    width: "100%",
-    height: 26,
-    position: "absolute",
-    bottom: "-44%",
-    zIndex: 10,
   },
   hr: {
     alignSelf: "center",
