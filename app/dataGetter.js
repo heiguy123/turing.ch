@@ -118,6 +118,26 @@ const DataGetter = {
     });
   },
 
+  getSolarMean: async function (longitude, latitude) {
+    // getMean: async function (longitude, latitude) {
+    const param = "ALLSKY_SFC_SW_DWN";
+    // let longitude = 113.997; //change this to actual longitude
+    // let latitude = 4.372; //change this to actual latitude
+    let mean = await DataGetter.getOverViewData({
+      longitude: longitude,
+      latitude: latitude,
+    }).then(({ data }) => {
+      const d = data.properties.parameter;
+      const desiredData = DataGetter.filterOverViewData(d, param);
+      let sum = 0;
+      desiredData.forEach((ele) => {
+        sum += ele.data;
+      });
+      return sum / 12;
+    });
+    return mean;
+  },
+
   formatMonthlyData: (data, param, year) => {
     let monthlyData = data;
     //const param = "ALLSKY_SFC_SW_DWN";
@@ -222,7 +242,7 @@ const DataGetter = {
 };
 
 //console.log([ x: {jerry}}, y: {jerry} ]);
-export default DataGetter;
+//export default DataGetter;
 
 // let d = DataGetter.getOverViewData();
 // d = DataGetter.filterOverViewData(d, "ALLSKY_SFC_SW_DWN");
