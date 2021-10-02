@@ -4,9 +4,13 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import fixassets from '../../config/fixassets';
 
-var MPP = parseFloat(435), areaPanels = parseFloat(2), usedTime = parseFloat(10), fixPrice = parseFloat(0), totPrice = parseFloat(0);
-
-console.log(globalThis.MPP, globalThis.areaPanels, globalThis.usedTime, globalThis.fixPrice, globalThis.totPrice)
+var MPP = parseFloat(435), areaPanels = parseFloat(2), usedTime = parseFloat(10), fixPrice = parseFloat(0), totPrice = parseFloat(0), 
+    powerGenerated, moneySaved, percentageSaved, solarIrr, numberOfPanels;
+const calculates = () => {
+    powerGenerated = solarIrr*365*usedTime*(MPP/(1000*areaPanels))*((100-((usedTime+1)/4))/100)*areaPanels*numberOfPanels; 
+    moneySaved = powerGenerated*fixPrice;
+    percentageSaved = powerGenerated/((totPrice/fixPrice)*12*usedTime)*100;
+}
 
 function ChooseScreen({ navigation: { navigate } }) {
     return (
@@ -34,27 +38,31 @@ function DefCal({navigation}) {
 const [fPrice, setFix] = useState("")
 const [tPrice, setBill] = useState("")
 
-MPP = parseFloat(435), areaPanels = parseFloat(2), usedTime = parseFloat(10), fixPrice = parseFloat(fPrice), totPrice = parseFloat(tPrice);
+MPP = parseFloat(435), areaPanels = parseFloat(2), numberOfPanels = parseFloat(5), usedTime = parseFloat(5), fixPrice = parseFloat(fPrice), totPrice = parseFloat(tPrice);
 
     return (
         <View style={Calculation.container}>
             <TouchableOpacity style={[fixassets.back, {top: Dimensions.get("window").height * 0.04}]} onPress={()=> navigation.goBack()}>
                 <Image style={{ width:"100%",height:"100%"}} source={require('./assets/blackback.png')}/>
             </TouchableOpacity>
-            <View style={[Calculation.textBox, {top:"23%", width:"90%", height: "5%"}]}>
+            <View style={[Calculation.textBox, {top:"20%", width:"90%", height: "5%"}]}>
                 <Text style={[Calculation.textBase, { bottom:"200%",position:"absolute"}]}>Panel Specification</Text>
                 <Text style={[Calculation.textBase1,{ top:"-7%",}]}>Specification 1</Text>
                 <Text style={{alignSelf:"center", left:"3%", position:"absolute"}}  >Power at Mpp : 435 Watt</Text>
             </View>
-            <View style={[Calculation.textBox, {left: "5%" , top:"34%", width:"40%", height: "5%"}]}>
+            <View style={[Calculation.textBox, {left: "5%" , top:"30%", width:"40%", height: "5%"}]}>
                 <Text style={[Calculation.textBase1,{top:"-16%"}]}>Specification 2</Text>
                 <Text style={{alignSelf:"center", left:"6%",position:"absolute"}} >Area: 2 m^2</Text>
             </View>
-            <View style={[Calculation.textBox, {left: "55%" , top:"34%", width:"40%", height: "5%"}]}>
+            <View style={[Calculation.textBox, {left: "55%" , top:"30%", width:"40%", height: "5%"}]}>
                 <Text style={[Calculation.textBase1,{ top:"-16%",}]}>Specification 3</Text>
-                <Text style={{alignSelf:"center", left:"6%",position:"absolute"}} >Used time: 10 years</Text>
+                <Text style={{alignSelf:"center", left:"6%",position:"absolute"}} >Numbers of panels: 5</Text>
             </View>
-            <View style={[Calculation.textBox, {left: "5%" , top:"53%", width:"90%", height: "5%"}]}>
+            <View style={[Calculation.textBox, {top:"40%", width:"90%", height: "5%"}]}>
+                <Text style={[Calculation.textBase1,{ top:"-7%",}]}>Specification 4</Text>
+                <Text style={{color:"#000",alignSelf:"center", left:"3%", position:"absolute"}}  >Estimate years : 5 years</Text>
+            </View>
+            <View style={[Calculation.textBox, {left: "5%" , top:"59%", width:"90%", height: "5%"}]}>
                 <Text style={[Calculation.textBase1,{left:"0%", top:"-7%",}]}>Specification 1</Text>
                 <Text style={[Calculation.textBase, {left:"0%", bottom:"200%",position:"absolute"}]}>Electricity Settings</Text>
                     <TextInput
@@ -63,7 +71,7 @@ MPP = parseFloat(435), areaPanels = parseFloat(2), usedTime = parseFloat(10), fi
                         placeholder="Electricity price per kWh in your area(US Dollar)" 
                         style={{alignSelf:"center", left:"3%",position:"absolute"}} />
             </View>
-            <View style={[Calculation.textBox, {left: "5%" , top:"66%", width:"90%", height: "5%"}]}>
+            <View style={[Calculation.textBox, {left: "5%" , top:"69%", width:"90%", height: "5%"}]}>
                 <Text style={[Calculation.textBase1,{top:"-7%"}]}>Specification 2</Text>
                 <TextInput
                     onChangeText= {(number) => setBill(number)}
@@ -71,7 +79,7 @@ MPP = parseFloat(435), areaPanels = parseFloat(2), usedTime = parseFloat(10), fi
                     placeholder="Estimate your electricity bill per month(US Dollar)" 
                     style={{alignSelf:"center", left:"3%",position:"absolute"}} />
             </View>
-            <TouchableOpacity style={Calculation.DoneBut} onPress={() => navigation.navigate('calculate')}>
+            <TouchableOpacity style={Calculation.DoneBut} onPressIn={calculates} onPress={() => navigation.navigate('LastPage')}>
                 <Text style={{alignSelf:"center", color:"#fff", fontSize:16, fontWeight:"normal"}}>Done</Text>
             </TouchableOpacity>
         </View>
@@ -81,20 +89,22 @@ MPP = parseFloat(435), areaPanels = parseFloat(2), usedTime = parseFloat(10), fi
 
 function CusCal({navigation : {navigate}}) {
 
+
     const [Mpp, setMpp] = useState("")
     const [area, setArea] = useState("")
     const [year, setYear] = useState("")
     const [fPrice, setFix] = useState("")
     const [tPrice, setBill] = useState("")
+    const [ numofP, setNumOfP] = useState("")
 
-MPP = parseFloat(Mpp), areaPanels = parseFloat(area), usedTime = parseFloat(year), fixPrice = parseFloat(fPrice), totPrice = parseFloat(tPrice);
+MPP = parseFloat(Mpp), areaPanels = parseFloat(area), numberOfPanels = parseFloat(numofP), usedTime = parseFloat(year), fixPrice = parseFloat(fPrice), totPrice = parseFloat(tPrice);
 
     return (
         <View style={Calculation.container}>
             <TouchableOpacity style={[fixassets.back, {top: Dimensions.get("window").height * 0.04}]} onPress={()=> navigate('Choose')}>
                 <Image style={{ width:"100%",height:"100%"}} source={require('./assets/blackback.png')}/>
             </TouchableOpacity>
-            <View style={[Calculation.textBox, {top:"23%", width:"90%", height: "5%"}]}>
+            <View style={[Calculation.textBox, {top:"20%", width:"90%", height: "5%"}]}>
                 <Text style={[Calculation.textBase, { bottom:"200%", position:"absolute"}]}>Panel Specification</Text>
                 <Text style={[Calculation.textBase1,{top:"-7%"}]}>Specification 1</Text>
                     <TextInput
@@ -103,23 +113,31 @@ MPP = parseFloat(Mpp), areaPanels = parseFloat(area), usedTime = parseFloat(year
                         placeholder="Power at Maximum Power Point (MPP)" 
                         style={{alignSelf:"center", left:"3%",position:"absolute"}} />
             </View>
-            <View style={[Calculation.textBox, {left: "5%" , top:"34%", width:"40%", height: "5%"}]}>
+            <View style={[Calculation.textBox, {left: "5%" , top:"30%", width:"40%", height: "5%"}]}>
             <Text style={[Calculation.textBase1,{ top:"-16%" }]}>Specification 2</Text>
                 <TextInput
                     onChangeText= {(number) => setArea(number)}
                     keyboardType='numeric'
-                    placeholder="Area of panels(m^2)" 
+                    placeholder="Area per panel(m^2)" 
                     style={{alignSelf:"center", left:"6%",position:"absolute"}} />
             </View>
-            <View style={[Calculation.textBox, {left: "55%" , top:"34%", width:"40%", height: "5%"}]}>
+            <View style={[Calculation.textBox, {left: "55%" , top:"30%", width:"40%", height: "5%"}]}>
                 <Text style={[Calculation.textBase1,{top:"-16%",}]}>Specification 3</Text>
+                    <TextInput
+                        onChangeText= {(number) => setNumOfP(number)}
+                        keyboardType='numeric'  
+                        placeholder="Numbers of panels" 
+                        style={{alignSelf:"center", left:"6%",position:"absolute"}} />
+            </View>
+            <View style={[Calculation.textBox, {top:"40%", width:"90%", height: "5%"}]}>
+                <Text style={[Calculation.textBase1,{top:"-7%"}]}>Specification 4</Text>
                     <TextInput
                         onChangeText= {(number) => setYear(number)}
                         keyboardType='numeric'  
-                        placeholder="Used time (Year)" 
-                        style={{alignSelf:"center", left:"6%",position:"absolute"}} />
+                        placeholder="Duration you want to check (Year)" 
+                        style={{alignSelf:"center", left:"3%",position:"absolute"}} />
             </View>
-            <View style={[Calculation.textBox, {left: "5%" , top:"55%", width:"90%", height: "5%"}]}>
+            <View style={[Calculation.textBox, {left: "5%" , top:"59%", width:"90%", height: "5%"}]}>
                 <Text style={[Calculation.textBase, {bottom:"200%",position:"absolute"}]}>Electricity Settings</Text>
                 <Text style={[Calculation.textBase1,{top:"-7%",}]}>Specification 1</Text>
                     <TextInput
@@ -128,7 +146,7 @@ MPP = parseFloat(Mpp), areaPanels = parseFloat(area), usedTime = parseFloat(year
                         placeholder="Electricity price per kWh in your area(US Dollar)" 
                         style={{alignSelf:"center", left:"3%",position:"absolute"}} />
             </View>
-            <View style={[Calculation.textBox, {left: "5%" , top:"66%", width:"90%", height: "5%"}]}>
+            <View style={[Calculation.textBox, {left: "5%" , top:"69%", width:"90%", height: "5%"}]}>
                 <Text style={[Calculation.textBase1,{ top:"-7%",}]}>Specification 2</Text>
                 <TextInput
                     onChangeText= {(number) => setBill(number)}
@@ -136,7 +154,7 @@ MPP = parseFloat(Mpp), areaPanels = parseFloat(area), usedTime = parseFloat(year
                     placeholder="Estimate your electricity bill per month(US Dollar)" 
                     style={{alignSelf:"center", left:"3%",position:"absolute"}} />
             </View>
-            <TouchableOpacity style={Calculation.DoneBut} onPress={() => navigate('calculate')}>
+            <TouchableOpacity style={Calculation.DoneBut} onPressIn={calculates} onPress={() => navigate('LastPage')} >
                 <Text style={{alignSelf:"center", color:"#fff", fontSize:16, fontWeight:"normal"}}>Done</Text>
             </TouchableOpacity>
         </View>
@@ -147,7 +165,7 @@ function CalLastP({navigation : {navigate}}){
         <View style={CalLast.container}>
             <View style={CalLast.upperText}>
                 <Text style={[CalLast.textBase, {fontSize:24}]} >Congrats!{"\n"}You will save up to</Text>
-                <Text style={[CalLast.textBase, {fontSize:72, }]} >35%</Text>                
+                <Text style={[CalLast.textBase, {fontSize:72, }]} >{parseInt(percentageSaved)}%</Text>                
                 <Text style={[CalLast.textBase, {fontSize:14,fontWeight:"normal"}]} >Estimated Electricity</Text>
                 <Image style={CalLast.picture} source={require('./assets/officework.png')} />
             </View>
@@ -159,16 +177,7 @@ function CalLastP({navigation : {navigate}}){
     );
 }
 
-function calculation({navigation : {navigate}}){
-var powerGenerated, moneySaved, percentageSaved;
-    powerGenerated = 0.435*365*usedTime*(435/(1000*areaPanels))*((100-((usedTime+1)/4))/100)*areaPanels;
-    moneySaved = powerGenerated*fixPrice;
-    percentageSaved = (moneySaved/(usedTime*totPrice*12))*100;
-    console.log("Power:",powerGenerated,"Money:", moneySaved,"%:", percentageSaved)
-    return(
-        null
-    );
-}
+
 
 const Stack = createNativeStackNavigator();
 function CalculatorPage() {
@@ -180,7 +189,6 @@ function CalculatorPage() {
             <Stack.Screen name="Default" component={DefCal} />
             <Stack.Screen name="Customise" component={CusCal} />
             <Stack.Screen name="LastPage" component={CalLastP} />
-            <Stack.Screen name="calculate" component={calculation} />
           </Stack.Navigator>
         </NavigationContainer>
     </SafeAreaView>        
