@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, {useState} from "react";
 import {
   Platform,
   SafeAreaView,
@@ -10,24 +10,32 @@ import {
   Image,
   Dimensions,
   Alert,
+  TouchableOpacity,
+  Modal,
+  Pressable,
 } from "react-native";
 import colors from "../config/colors";
 import fonts from "../config/fonts";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import fixassets from "../config/fixassets";
+import navbar from "../config/navbar";
 const sbspace = Platform.OS === "android" ? StatusBar.currentHeight : 0;
+const mobileWidth = Dimensions.get("screen").width;
+const widthmul = mobileWidth / 400;
 
 export default function Settings({ navigation: { navigate } }) {
+  const [modalVisible, setModalVisible] = React.useState(false);
+
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: colors.white }}>
 
       <View style={ styles.container }>
-
-        <View>
+          
+          <TouchableOpacity onPress= {() => navigate("Dashboard")}>
             <Image style={ fixassets.back }
             source={ require("../assets/blackback.png") }/>
-        </View>
+          </TouchableOpacity>
 
         <View style={ styles.textcontainer }>
 
@@ -45,78 +53,153 @@ export default function Settings({ navigation: { navigate } }) {
                 Celcius {"\n"}{"\n"}{"\n"}
                 </Text>
                 <Text style={ fonts.h4 }>
-                Default Humidity Unit 
+                Default Precipitation Unit 
                 </Text>
                 <Text style={ fonts.p }>
-                g/kg {"\n"}{"\n"}{"\n"}
+                mm {"\n"}{"\n"}{"\n"}
                 </Text>
                 <Text style={ fonts.h4 }>
                 Default Solar Irradiance Unit
                 </Text>
                 <Text style={ fonts.p }>
-                kWh/m2 {"\n"}{"\n"}{"\n"}
+                kW-hr/m^2/day {"\n"}{"\n"}{"\n"}
                 </Text>
-                <Text style={ fonts.h4 }>
-                Reset to Default
+
+                <TouchableHighlight style={ styles.restbutton } onPress={() => navigate("GetStarted")}>
+                    <Text style={ styles.reseth1 }>
+                    Reset to Default
+                    </Text>
+                </TouchableHighlight>
+
+                <Text>
+                  {"\n"}{"\n"}{"\n"}
                 </Text>
-                <Text style={ fonts.p }>
-                Execute this if you found any bug {"\n"}{"\n"}{"\n"}
-                </Text>
-                <Text style={ fonts.h4 }>
-                Contributors
-                </Text>
-                <Text style={ fonts.p }>
-                Thanks for them who created the application {"\n"}{"\n"}{"\n"}
-                </Text>
+                
+                <Modal
+                animationType= "slide"
+                transparent= {true}
+                visible= {modalVisible}
+                onRequestClose= {() => {
+                  setModalVisible(!modalVisible);
+                }}>
+
+                  <Pressable
+                  style={ [styles.page, styles.pageclose] }
+                  onPress= {() => setModalVisible(!modalVisible)}>
+
+                  <Text style={ styles.reseth2 }>
+                    Leader:
+                  </Text>
+                  <Text style={ styles.reseth3 }>
+                    Moses Lau Yi Hieng{"\n"}
+                  </Text>
+                  <Text style={ styles.reseth2 }>
+                    Members:
+                  </Text>
+                  <Text style={ styles.reseth3 }>
+                    Howard Lim{"\n"}
+                    Chai Hong Jie{"\n"}
+                    Yong Vin Cent{"\n"}
+                    Kueh Tze Shuen{"\n"}
+                    Jeremy Lau Yi Quan
+                  </Text>
+
+                  </Pressable>
+                </Modal>
+
+                <Pressable
+                  onPress= {() => setModalVisible(true)}>
+                    <Text style={ fonts.h4 }>
+                  Contributors
+                  </Text>
+                  <Text style={ fonts.p }>
+                  Thanks for them who created the application
+                  </Text>
+                </Pressable>
+                
             </View>
 
         </View>
 
       </View>
 
-      <View style={styles.navBottom}>
-          <View style={[styles.row, {paddingTop: "5%", paddingBottom: "16%"}]}>
-            <TouchableHighlight 
-              style={styles.navButton, styles.col4}
+      <View style={navbar.navBottom}>
+          <View
+            style={[styles.row, { paddingTop: "5%", paddingBottom: "16%" }]}
+          >
+            <TouchableHighlight
+              style={(navbar.navButton, styles.col4)}
               onPress={() => Alert.alert("ABC")}
               activeOpacity={0.65}
               underlayColor={"rgba(255,255,255,0)"}
             >
-              <View style={[{paddingLeft: "5%", paddingRight: "5%", alignItems: "center"}]}>
-                <Image 
-                  style={styles.navIcon}
-                  source={require("../assets/icon-calculator-inactive.png")} 
+              <View
+                style={[
+                  {
+                    paddingLeft: "5%",
+                    paddingRight: "5%",
+                    alignItems: "center",
+                  },
+                ]}
+              >
+                <Image
+                  style={navbar.navIcon}
+                  source={require("../assets/icon-calculator-inactive.png")}
                 />
-                <Text style={[fonts.p, styles.navInactive, { marginBottom: 5}]}>Calculator</Text>
+                <Text
+                  style={[fonts.p, navbar.navInactive, { marginBottom: 5 }]}
+                >
+                  Calculator
+                </Text>
               </View>
             </TouchableHighlight>
-            <TouchableHighlight 
-              style={styles.navButton, styles.col4}
+            <TouchableHighlight
+              style={(navbar.navButton, styles.col4)}
               onPress={() => navigate("Dashboard")}
               activeOpacity={0.65}
               underlayColor={"rgba(255,255,255,0)"}
             >
-              <View style={[{paddingLeft: "5%", paddingRight: "5%", alignItems: "center"}]}>
-                <Image 
-                  style={styles.navIcon}
-                  source={require("../assets/icon-home-inactive.png")} 
+              <View
+                style={[
+                  {
+                    paddingLeft: "5%",
+                    paddingRight: "5%",
+                    alignItems: "center",
+                  },
+                ]}
+              >
+                <Image
+                  style={navbar.navIcon}
+                  source={require("../assets/icon-home-inactive.png")}
                 />
-                <Text style={[fonts.p, { marginBottom: 5}]}>Dashboard</Text>
-                <View style={styles.navInactive}></View>
+                <Text style={[fonts.p, navbar.navInactive, { marginBottom: 5 }]}>Dashboard</Text>
               </View>
             </TouchableHighlight>
             <TouchableHighlight 
-              style={styles.navButton, styles.col4}
+              style={navbar.navButton, styles.col4}
               onPress={() => navigate("Settings")}
               activeOpacity={0.65}
               underlayColor={"rgba(255,255,255,0)"}
             >
-              <View style={[{paddingLeft: "5%", paddingRight: "5%", alignItems: "center"}]}>
-                <Image 
-                  style={styles.navIcon}
-                  source={require("../assets/icon-settings.png")} 
+              <View
+                style={[
+                    {
+                        paddingLeft: "5%",
+                        paddingRight: "5%",
+                        alignItems: "center",
+                    },
+                ]}
+              >
+                <Image
+                  style={navbar.navIcon}
+                  source={require("../assets/icon-settings.png")}
                 />
-                <Text style={[fonts.p, styles.navLabelActive, { marginBottom: 5}]}>Settings</Text>
+                <Text
+                  style={[fonts.p, { marginBottom: 5 }]}
+                >
+                  Settings
+                </Text>
+                <View style={navbar.navLabelActive}></View>
               </View>
             </TouchableHighlight>
           </View>
@@ -128,55 +211,50 @@ export default function Settings({ navigation: { navigate } }) {
 
 const styles = StyleSheet.create({
   container: {
-      paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
-      flex: 1,
+    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+    flex: 1,
   },
   textcontainer: {
-      flex: 1,
-      left: Dimensions.get("window").width * 0.06,
+    flex: 1,
+    left: Dimensions.get("window").width * 0.06,
   },
   title1: {
-      top: Dimensions.get("window").height * 0.10 + sbspace,
+    top: Dimensions.get("window").height * 0.10 + sbspace,
   },
   title2: {
-      flex: 0.8,
-      top: Dimensions.get("window").height * 0.15 + sbspace,
+    flex: 0.8,
+    top: Dimensions.get("window").height * 0.15 + sbspace,
   },
-  navBottom: {
-    position: "absolute",
-    bottom: -140,
-    height: 200,
-    alignSelf: "center",
-    width: Math.round(Dimensions.get('screen').width * 1.02),
-    backgroundColor: colors.white,
-    borderRadius: 60,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.8,
-    shadowRadius: 2,  
-    elevation: 5
-  },
-  navButton: {
-    alignItems: "center"
-  },
-  navIcon: {
-    resizeMode: "contain",
-    width: 30,
-    height: 30,
-    marginBottom: 8,
-    zIndex: 3
-  },
-  navInactive: {
-    color: "rgba(0,0,0,0.6)"
-  },
-  navLabelActive: {
+  restbutton: {
+    right: Dimensions.get("window").width * 0.06,
+    width: 278,
+    height: 46,
+    borderWidth: 0,
+    borderRadius: 16,
     backgroundColor: colors.primary,
-    borderRadius: 30,
-    width: "100%",
-    height: 26,
-    position: "absolute",
-    bottom: "-44%",
-    zIndex: 10
+    alignSelf: "center",
+    justifyContent: "center",
+  },
+  reseth1: {
+    fontFamily: "Normal",
+    fontSize: 18 * widthmul,
+    color: colors.white,
+    letterSpacing: 0.15,
+    alignSelf: "center",
+  },
+  reseth2: {
+    fontWeight: "bold",
+    fontSize: 24 * widthmul,
+    color: colors.white,
+    letterSpacing: 0.15,
+    alignSelf: "flex-start",
+  },
+  reseth3: {
+    fontFamily: "Normal",
+    fontSize: 18 * widthmul,
+    color: colors.white,
+    letterSpacing: 0.15,
+    alignSelf: "flex-start",
   },
   col4: {
     maxWidth: "33%",
@@ -184,5 +262,18 @@ const styles = StyleSheet.create({
   },
   row: {
     flexDirection: "row"
+  },
+  page: {
+    borderRadius: 20,
+    padding: 30,
+    elevation: 10
+  },
+  pageclose: {
+    backgroundColor: colors.primary,
+    width: "80%",
+    height: "35%",
+    justifyContent: "center",
+    alignSelf: "center",
+    top: "30%",
   },
 });
