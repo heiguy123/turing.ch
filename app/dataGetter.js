@@ -242,7 +242,7 @@ const DataGetter = {
 };
 
 //console.log([ x: {jerry}}, y: {jerry} ]);
-//export default DataGetter;
+export default DataGetter;
 
 // let d = DataGetter.getOverViewData();
 // d = DataGetter.filterOverViewData(d, "ALLSKY_SFC_SW_DWN");
