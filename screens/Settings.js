@@ -32,10 +32,10 @@ export default function Settings({ navigation: { navigate } }) {
 
       <View style={ styles.container }>
           
-          <TouchableOpacity onPress= {() => navigate("Dashboard")}>
-            <Image style={ fixassets.back }
-            source={ require("../assets/blackback.png") }/>
-          </TouchableOpacity>
+        <TouchableOpacity style={[fixassets.back, {Top: Dimensions.get("window").height * 0.04}]} 
+        onPress={()=> navigate("Dashboard")}>
+          <Image style={{ width:"100%",height:"100%"}} source={require("../assets/blackback.png")}/>
+        </TouchableOpacity>
 
         <View style={ styles.textcontainer }>
 
@@ -88,13 +88,13 @@ export default function Settings({ navigation: { navigate } }) {
                   onPress= {() => setModalVisible(!modalVisible)}>
 
                   <Text style={ styles.reseth2 }>
-                    Leader:
+                    Team Leader:
                   </Text>
                   <Text style={ styles.reseth3 }>
                     Moses Lau Yi Hieng{"\n"}
                   </Text>
                   <Text style={ styles.reseth2 }>
-                    Members:
+                    Team Members:
                   </Text>
                   <Text style={ styles.reseth3 }>
                     Howard Lim{"\n"}
@@ -107,7 +107,7 @@ export default function Settings({ navigation: { navigate } }) {
                   </Pressable>
                 </Modal>
 
-                <Pressable
+                <TouchableOpacity
                   onPress= {() => setModalVisible(true)}>
                     <Text style={ fonts.h4 }>
                   Contributors
@@ -115,8 +115,8 @@ export default function Settings({ navigation: { navigate } }) {
                   <Text style={ fonts.p }>
                   Thanks for them who created the application
                   </Text>
-                </Pressable>
-                
+                </TouchableOpacity>
+
             </View>
 
         </View>
@@ -219,11 +219,11 @@ const styles = StyleSheet.create({
     left: Dimensions.get("window").width * 0.06,
   },
   title1: {
-    top: Dimensions.get("window").height * 0.10 + sbspace,
+    top: Dimensions.get("window").height * 0.08 + sbspace,
   },
   title2: {
     flex: 0.8,
-    top: Dimensions.get("window").height * 0.15 + sbspace,
+    top: Dimensions.get("window").height * 0.13 + sbspace,
   },
   restbutton: {
     right: Dimensions.get("window").width * 0.06,
@@ -266,7 +266,7 @@ const styles = StyleSheet.create({
   page: {
     borderRadius: 20,
     padding: 30,
-    elevation: 10
+    elevation: 10,
   },
   pageclose: {
     backgroundColor: colors.primary,
