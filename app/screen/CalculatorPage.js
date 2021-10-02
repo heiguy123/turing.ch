@@ -5,15 +5,17 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import fixassets from '../../config/fixassets';
 import DataGetter from "../dataGetter";
 
-// let longitude = 113.997; //change this to actual longitude
-// let latitude = 4.372; //change this to actual latitude
-// DataGetter.getSolarMean(longitude, latitude).then((mean) => {
-//   console.log(mean);
-// });
+let longitude = 113.997; //change this to actual longitude
+let latitude = 4.372; //change this to actual latitude
+let mean1 = 0;
+DataGetter.getSolarMean(longitude, latitude).then((mean) => {
+    mean1 = mean;
+    console.log(mean);
+});
 var MPP = parseFloat(435), areaPanels = parseFloat(2), usedTime = parseFloat(10), fixPrice = parseFloat(0), totPrice = parseFloat(0), 
-    powerGenerated, moneySaved, percentageSaved, solarIrr, numberOfPanels;
+    powerGenerated, moneySaved, percentageSaved, numberOfPanels;
 const calculates = () => {
-    powerGenerated = solarIrr*365*usedTime*(MPP/(1000*areaPanels))*((100-((usedTime+1)/4))/100)*areaPanels*numberOfPanels; 
+    powerGenerated = mean1*365*usedTime*(MPP/(1000*areaPanels))*((100-((usedTime+1)/4))/100)*areaPanels*numberOfPanels; 
     moneySaved = powerGenerated*fixPrice;
     percentageSaved = powerGenerated/((totPrice/fixPrice)*12*usedTime)*100;
 }
@@ -173,6 +175,8 @@ function CalLastP({navigation : {navigate}}){
                 <Text style={[CalLast.textBase, {fontSize:24}]} >Congrats!{"\n"}You will save up to</Text>
                 <Text style={[CalLast.textBase, {fontSize:72, }]} >{parseInt(percentageSaved)}%</Text>                
                 <Text style={[CalLast.textBase, {fontSize:14,fontWeight:"normal"}]} >Estimated Electricity</Text>
+                <Text style={[CalLast.textBase, {bottom:"13%", fontSize:36,fontWeight:"bold"}]} >{parseInt(powerGenerated)} kWh</Text>
+                <Text style={[CalLast.textBase, {bottom:"5%",position:"absolute", fontSize:24,fontWeight:"bold"}]} >generated !</Text>
                 <Image style={CalLast.picture} source={require('./assets/officework.png')} />
             </View>
             <View style={CalLast.Graph}>
@@ -218,7 +222,7 @@ const CalLast = StyleSheet.create({
     textBase:{
         paddingLeft:"5%",
         position:"relative",
-        bottom:"35%",
+        bottom:"25%",
         fontWeight:"bold",
         color:"#000",
     },
@@ -226,7 +230,7 @@ const CalLast = StyleSheet.create({
         position:"absolute",
         left:"20%",
         resizeMode:"contain",
-        height:"90%",
+        height:"75%",
     },
     Graph:{
         top:"42%",
