@@ -79,6 +79,7 @@ const SetLocation = ({ navigation, route }) => {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: colors.primary }}>
       <View style={styles.container}>
+        <Image style={fixassets.sun} source={require("../assets/sun.png")} />
         <TouchableOpacity
           style={[
             fixassets.back,
