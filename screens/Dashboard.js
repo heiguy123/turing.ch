@@ -10,178 +10,191 @@ import {
   Image,
   Dimensions,
   Alert,
+  ScrollView,
 } from "react-native";
 import colors from "../config/colors";
 import fonts from "../config/fonts";
 import navbar from "../config/navbar";
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 const Dashboard = ({ navigation, route }) => {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: colors.whiteBg }}>
-      <View style={[styles.container]}>
-        <Image
-          style={styles.topImage}
-          source={require("../assets/dashboard.png")}
-        />
-      </View>
-      <View style={styles.solarIrradiance}>
-        <TouchableHighlight
-          style={[styles.greyLabel]}
-          onPress={() => navigate("SetLocation")}
-          activeOpacity={0.65}
-          underlayColor={"rgba(0,0,0,0.1)"}
-        >
-          <View style={styles.greyLabelInner}>
+      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+        <View style={{ marginBottom: 170, flex: 1 }}>
+          <View style={[styles.container]}>
             <Image
-              style={styles.plane}
-              source={require("../assets/plane.png")}
+              style={styles.topImage}
+              source={require("../assets/dashboard.png")}
             />
-            <Text
-              style={[
-                fonts.p,
-                { marginTop: -4, paddingLeft: 4, marginBottom: 0 },
-              ]}
+          </View>
+          <View style={styles.solarIrradiance}>
+            <TouchableHighlight
+              style={[styles.greyLabel]}
+              onPress={() =>
+                navigation.navigate("SetLocation", {
+                  location: route.params.location,
+                })
+              }
+              activeOpacity={0.65}
+              underlayColor={"rgba(0,0,0,0.1)"}
             >
-              Miri, Sarawak
+              <View style={styles.greyLabelInner}>
+                <Image
+                  style={styles.plane}
+                  source={require("../assets/plane.png")}
+                />
+                <Text
+                  style={[
+                    fonts.p,
+                    { marginTop: -4, paddingLeft: 4, marginBottom: 0 },
+                  ]}
+                >
+                  Miri, Sarawak
+                </Text>
+              </View>
+            </TouchableHighlight>
+            <Text style={[fonts.h1, { fontSize: 60, marginBottom: 0 }]}>
+              Hi,
             </Text>
-          </View>
-        </TouchableHighlight>
-        <Text style={[fonts.h1, { fontSize: 70, marginBottom: 0 }]}>25%</Text>
-        <Text style={fonts.p}>Average Solar Irradiance</Text>
-      </View>
-      <View
-        style={{
-          height: "50%",
-          top: "3%",
-          paddingLeft: "5%",
-          paddingRight: "5%",
-        }}
-      >
-        <Text
-          style={[
-            fonts.h3,
-            { color: colors.black, fontFamily: "Bold", marginBottom: 0 },
-          ]}
-        >
-          Summary
-        </Text>
-        <View style={[styles.row, { paddingTop: "8%", paddingBottom: "8%" }]}>
-          <View
-            style={[
-              styles.col6,
-              styles.row,
-              { paddingLeft: "5%", paddingRight: "5%" },
-            ]}
-          >
-            <View style={(styles.col1, styles.progressBar)}>
-              <View style={styles.progressBarFilled}></View>
-              <View style={styles.progressBarFilledCap}></View>
-            </View>
-            <View style={[styles.col11, { paddingLeft: 14 }]}>
-              <Text style={[fonts.p, { marginBottom: 4, marginTop: 8 }]}>
-                Avg. Temperature
-              </Text>
-              <Text style={[fonts.h3, { marginBottom: 0 }]}>22.3°</Text>
-            </View>
+            <Text style={fonts.p}>Have a nice day.</Text>
           </View>
           <View
-            style={[
-              styles.col6,
-              styles.row,
-              { paddingLeft: "5%", paddingRight: "5%" },
-            ]}
-          >
-            <View style={(styles.col1, styles.progressBar)}>
-              <View
-                style={[styles.progressBarFilled, { height: "20%" }]}
-              ></View>
-              <View
-                style={[styles.progressBarFilledCap, { bottom: "20%" }]}
-              ></View>
-            </View>
-            <View style={[styles.col11, { paddingLeft: 14 }]}>
-              <Text style={[fonts.p, { marginBottom: 4, marginTop: 8 }]}>
-                Avg. Humidity
-              </Text>
-              <Text style={[fonts.h3, { marginBottom: 0 }]}>11.8 g/kg</Text>
-            </View>
-          </View>
-        </View>
-        <View style={styles.hr}></View>
-        <View style={[styles.row, { paddingTop: "8%", paddingBottom: "8%" }]}>
-          <View
-            style={[
-              styles.col6,
-              styles.row,
-              { paddingLeft: "5%", paddingRight: "5%" },
-            ]}
-          >
-            <View style={(styles.col1, styles.progressBar)}>
-              <View
-                style={[styles.progressBarFilled, { height: "55%" }]}
-              ></View>
-              <View
-                style={[styles.progressBarFilledCap, { bottom: "55%" }]}
-              ></View>
-            </View>
-            <View style={[styles.col11, { paddingLeft: 14 }]}>
-              <Text style={[fonts.p, { marginBottom: 4, marginTop: 8 }]}>
-                Avg. Percipitation
-              </Text>
-              <Text style={[fonts.h3, { marginBottom: 0 }]}>4.08 mm</Text>
-            </View>
-          </View>
-          <View
-            style={[
-              styles.col6,
-              styles.row,
-              { paddingLeft: "5%", paddingRight: "5%" },
-            ]}
-          >
-            <View style={(styles.col1, styles.progressBar)}>
-              <View
-                style={[styles.progressBarFilled, { height: "25%" }]}
-              ></View>
-              <View
-                style={[styles.progressBarFilledCap, { bottom: "25%" }]}
-              ></View>
-            </View>
-            <View style={[styles.col12, { paddingLeft: 14 }]}>
-              <Text style={[fonts.p, { marginBottom: 4, marginTop: 8 }]}>
-                Avg. Cloud Amount
-              </Text>
-              <Text style={[fonts.h3, { marginBottom: 0 }]}>30%</Text>
-            </View>
-          </View>
-        </View>
-        <View
-          style={[
-            styles.buttonPlacement,
-            { flexDirection: "row", alignSelf: "center" },
-          ]}
-        >
-          <TouchableHighlight
-            style={styles.button}
-            onPress={() => navigate("ViewGraphIndex")}
+            style={{
+              flex: 1,
+              top: "3%",
+              paddingLeft: "5%",
+              paddingRight: "5%",
+            }}
           >
             <Text
               style={[
-                fonts.h4,
-                { color: colors.white, lineHeight: 24, textAlign: "center" },
+                fonts.h3,
+                { color: colors.black, fontFamily: "Bold", marginBottom: 0 },
               ]}
             >
-              More Details
+              Summary
             </Text>
-          </TouchableHighlight>
+            <View style={[styles.row, { paddingTop: "8%", paddingBottom: "8%" }]}>
+              <View
+                style={[
+                  styles.col6,
+                  styles.row,
+                  { paddingLeft: "5%", paddingRight: "5%" },
+                ]}
+              >
+                <View style={(styles.col1, styles.progressBar)}>
+                  <View style={styles.progressBarFilled}></View>
+                  <View style={styles.progressBarFilledCap}></View>
+                </View>
+                <View style={[styles.col11, { paddingLeft: 14 }]}>
+                  <Text style={[fonts.p, { marginBottom: 4, marginTop: 8 }]}>
+                    Avg. Solar Iradiance
+                  </Text>
+                  <Text style={[fonts.h3, { marginBottom: 0 }]}>25%</Text>
+                </View>
+              </View>
+              <View
+                style={[
+                  styles.col6,
+                  styles.row,
+                  { paddingLeft: "5%", paddingRight: "5%" },
+                ]}
+              >
+                <View style={(styles.col1, styles.progressBar)}>
+                  <View
+                    style={[styles.progressBarFilled, { height: "20%" }]}
+                  ></View>
+                  <View
+                    style={[styles.progressBarFilledCap, { bottom: "20%" }]}
+                  ></View>
+                </View>
+                <View style={[styles.col11, { paddingLeft: 14 }]}>
+                  <Text style={[fonts.p, { marginBottom: 4, marginTop: 8 }]}>
+                    Avg. Temperature
+                  </Text>
+                  <Text style={[fonts.h3, { marginBottom: 0 }]}>22.3°</Text>
+                </View>
+              </View>
+            </View>
+            <View style={styles.hr}></View>
+            <View style={[styles.row, { paddingTop: "8%", paddingBottom: "8%" }]}>
+              <View
+                style={[
+                  styles.col6,
+                  styles.row,
+                  { paddingLeft: "5%", paddingRight: "5%" },
+                ]}
+              >
+                <View style={(styles.col1, styles.progressBar)}>
+                  <View
+                    style={[styles.progressBarFilled, { height: "55%" }]}
+                  ></View>
+                  <View
+                    style={[styles.progressBarFilledCap, { bottom: "55%" }]}
+                  ></View>
+                </View>
+                <View style={[styles.col11, { paddingLeft: 14 }]}>
+                  <Text style={[fonts.p, { marginBottom: 4, marginTop: 8 }]}>
+                    Avg. Percipitation
+                  </Text>
+                  <Text style={[fonts.h3, { marginBottom: 0 }]}>4.08 mm</Text>
+                </View>
+              </View>
+              <View
+                style={[
+                  styles.col6,
+                  styles.row,
+                  { paddingLeft: "5%", paddingRight: "5%" },
+                ]}
+              >
+                <View style={(styles.col1, styles.progressBar)}>
+                  <View
+                    style={[styles.progressBarFilled, { height: "25%" }]}
+                  ></View>
+                  <View
+                    style={[styles.progressBarFilledCap, { bottom: "25%" }]}
+                  ></View>
+                </View>
+                <View style={[styles.col12, { paddingLeft: 14 }]}>
+                  <Text style={[fonts.p, { marginBottom: 4, marginTop: 8 }]}>
+                    Avg. Cloud Amount
+                  </Text>
+                  <Text style={[fonts.h3, { marginBottom: 0 }]}>30%</Text>
+                </View>
+              </View>
+            </View>
+            <View
+              style={[
+                styles.buttonPlacement,
+                { flexDirection: "row", alignSelf: "center" },
+              ]}
+            >
+              <TouchableHighlight
+                style={styles.button}
+                onPress={() => navigate("ViewGraphIndex")}
+              >
+                <Text
+                  style={[
+                    fonts.h4,
+                    { color: colors.white, lineHeight: 24, textAlign: "center" },
+                  ]}
+                >
+                  More Details
+                </Text>
+              </TouchableHighlight>
+            </View>
+          </View>
         </View>
-      </View>
+      </ScrollView>
       <View style={navbar.navBottom}>
         <View style={[styles.row, { paddingTop: "5%", paddingBottom: "16%" }]}>
           <TouchableHighlight
             style={(navbar.navButton, styles.col4)}
-            onPress={() => Alert.alert("ABC")}
+            onPress={() =>
+              navigation.navigate("CalculatorPage", {
+                location: route.params.location,
+              })
+            }
             activeOpacity={0.65}
             underlayColor={"rgba(255,255,255,0)"}
           >
@@ -255,11 +268,14 @@ const Dashboard = ({ navigation, route }) => {
     </SafeAreaView>
   );
 };
+
 export default Dashboard;
+
 const styles = StyleSheet.create({
   container: {
     marginTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
-    height: "40%",
+    minHeight: 250,
+    height: "50%",
   },
   button: {
     width: 278,
