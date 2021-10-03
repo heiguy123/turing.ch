@@ -57,4 +57,3 @@ export const SIZES = {
   body5: 12,
   p: 14,
 };
-

@@ -81,16 +81,16 @@ const Dashboard = ({ navigation, route }) => {
                 style={[
                   styles.col6,
                   styles.row,
-                  { paddingLeft: "5%", paddingRight: "3%" },
+                  { paddingLeft: "5%", paddingRight: "5%" },
                 ]}
               >
                 <View style={(styles.col1, styles.progressBar)}>
                   <View style={styles.progressBarFilled}></View>
                   <View style={styles.progressBarFilledCap}></View>
                 </View>
-                <View style={[styles.col12, { paddingLeft: 14 }]}>
+                <View style={[styles.col11, { paddingLeft: 14 }]}>
                   <Text style={[fonts.p, { marginBottom: 4, marginTop: 8 }]}>
-                    Avg. Solar Irradiance
+                    Avg. Solar Iradiance
                   </Text>
                   <Text style={[fonts.h3, { marginBottom: 0 }]}>25%</Text>
                 </View>
@@ -131,10 +131,10 @@ const Dashboard = ({ navigation, route }) => {
               >
                 <View style={(styles.col1, styles.progressBar)}>
                   <View
-                    style={[styles.progressBarFilled, { height: "55%" }]}
+                    style={[styles.progressBarFilled, { height: "40%" }]}
                   ></View>
                   <View
-                    style={[styles.progressBarFilledCap, { bottom: "55%" }]}
+                    style={[styles.progressBarFilledCap, { bottom: "40%" }]}
                   ></View>
                 </View>
                 <View style={[styles.col11, { paddingLeft: 14 }]}>
@@ -203,7 +203,7 @@ const Dashboard = ({ navigation, route }) => {
           <TouchableHighlight
             style={(navbar.navButton, styles.col4)}
             onPress={() =>
-              navigation.navigate("CalculatorPage", {
+              navigation.navigate("CalChoose", {
                 location: route.params.location,
               })
             }
@@ -233,6 +233,8 @@ const Dashboard = ({ navigation, route }) => {
             onPress={() =>
               navigation.navigate("Dashboard", {
                 location: route.params.location,
+                startTime: route.params.startTime,
+                endTime: route.params.endTime,
               })
             }
             activeOpacity={0.65}
@@ -257,7 +259,11 @@ const Dashboard = ({ navigation, route }) => {
           </TouchableHighlight>
           <TouchableHighlight
             style={(navbar.navButton, styles.col4)}
-            onPress={() => Alert.alert("DEF")}
+            onPress={() =>
+              navigation.navigate("Settings", {
+                location: route.params.location,
+              })
+            }
             activeOpacity={0.65}
             underlayColor={"rgba(255,255,255,0)"}
           >
@@ -284,7 +290,9 @@ const Dashboard = ({ navigation, route }) => {
     </SafeAreaView>
   );
 };
+
 export default Dashboard;
+
 const styles = StyleSheet.create({
   container: {
     marginTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
@@ -304,7 +312,7 @@ const styles = StyleSheet.create({
     // bottom: Math.round(60 * 1.5),
   },
   topImage: {
-    resizeMode: "stretch",
+    resizeMode: "cover",
     width: Dimensions.get("screen").width,
     height: "100%",
     position: "absolute",
