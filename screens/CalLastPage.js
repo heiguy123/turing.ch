@@ -58,11 +58,11 @@ const CalLastPage = ({ navigation, route }) => {
         <View style={[styles.row, { paddingTop: "5%", paddingBottom: "16%" }]}>
           <TouchableHighlight
             style={(navbar.navButton, styles.col4)}
-            // onPress={() =>
-            //   navigation.navigate("CalChoose", {
-            //     location: route.params.location,
-            //   })
-            // }
+            onPress={() =>
+              navigation.navigate("CalChoose", {
+                location: route.params.location,
+              })
+            }
             activeOpacity={0.65}
             underlayColor={"rgba(255,255,255,0)"}
           >

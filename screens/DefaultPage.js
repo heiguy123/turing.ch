@@ -227,8 +227,6 @@ const DefaultPage = ({ navigation, route }) => {
           fixassets.back,
           {
             top: Dimensions.get("window").height * 0.06,
-            //left: 0, // Dimensions.get("window").width * 0.06,
-            //position: "absolute",
           },
         ]}
         onPress={() => navigation.goBack()}
@@ -242,11 +240,11 @@ const DefaultPage = ({ navigation, route }) => {
         <View style={[styles.row, { paddingTop: "5%", paddingBottom: "16%" }]}>
           <TouchableHighlight
             style={(navbar.navButton, styles.col4)}
-            // onPress={() =>
-            //   navigation.navigate("CalChoose", {
-            //     location: route.params.location,
-            //   })
-            // }
+            onPress={() =>
+              navigation.navigate("CalChoose", {
+                location: route.params.location,
+              })
+            }
             activeOpacity={0.65}
             underlayColor={"rgba(255,255,255,0)"}
           >
