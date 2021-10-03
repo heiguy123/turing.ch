@@ -90,7 +90,7 @@ const Dashboard = ({ navigation, route }) => {
                   <Text style={[fonts.p, { marginBottom: 4, marginTop: 8 }]}>
                     Avg. Solar Iradiance
                   </Text>
-                  <Text style={[fonts.h3, { marginBottom: 0 }]}>return averageMonthlyData()</Text>
+                  <Text style={[fonts.h3, { marginBottom: 0 }]}>25%</Text>
                 </View>
               </View>
               <View
@@ -102,10 +102,10 @@ const Dashboard = ({ navigation, route }) => {
               >
                 <View style={(styles.col1, styles.progressBar)}>
                   <View
-                    style={[styles.progressBarFilled, { height: "20%" }]}
+                    style={[styles.progressBarFilled, { height: "40%" }]}
                   ></View>
                   <View
-                    style={[styles.progressBarFilledCap, { bottom: "20%" }]}
+                    style={[styles.progressBarFilledCap, { bottom: "40%" }]}
                   ></View>
                 </View>
                 <View style={[styles.col11, { paddingLeft: 14 }]}>
@@ -127,10 +127,10 @@ const Dashboard = ({ navigation, route }) => {
               >
                 <View style={(styles.col1, styles.progressBar)}>
                   <View
-                    style={[styles.progressBarFilled, { height: "55%" }]}
+                    style={[styles.progressBarFilled, { height: "40%" }]}
                   ></View>
                   <View
-                    style={[styles.progressBarFilledCap, { bottom: "55%" }]}
+                    style={[styles.progressBarFilledCap, { bottom: "40%" }]}
                   ></View>
                 </View>
                 <View style={[styles.col11, { paddingLeft: 14 }]}>
@@ -149,10 +149,10 @@ const Dashboard = ({ navigation, route }) => {
               >
                 <View style={(styles.col1, styles.progressBar)}>
                   <View
-                    style={[styles.progressBarFilled, { height: "25%" }]}
+                    style={[styles.progressBarFilled, { height: "30%" }]}
                   ></View>
                   <View
-                    style={[styles.progressBarFilledCap, { bottom: "25%" }]}
+                    style={[styles.progressBarFilledCap, { bottom: "30%" }]}
                   ></View>
                 </View>
                 <View style={[styles.col12, { paddingLeft: 14 }]}>
@@ -171,7 +171,9 @@ const Dashboard = ({ navigation, route }) => {
             >
               <TouchableHighlight
                 style={styles.button}
-                onPress={() => navigate("ViewGraphIndex")}
+                onPress={() => navigation.navigate("ViewGraphIndex", {
+                  location: route.params.location,
+                })}
               >
                 <Text
                   style={[
@@ -290,8 +292,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   buttonPlacement: {
-    position: "absolute",
-    bottom: Math.round(60 * 1.5),
+    // position: "absolute",
+    // bottom: Math.round(60 * 1.5),
   },
   topImage: {
     resizeMode: "cover",
@@ -325,7 +327,7 @@ const styles = StyleSheet.create({
   },
   solarIrradiance: {
     position: "absolute",
-    top: "10%",
+    top: "15%",
     left: "10%",
   },
   progressBar: {
@@ -336,7 +338,7 @@ const styles = StyleSheet.create({
   },
   progressBarFilled: {
     position: "absolute",
-    height: "40%",
+    height: "25%",
     width: 6,
     bottom: 0,
     right: -2,
@@ -346,7 +348,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     height: 2,
     width: 10,
-    bottom: "39%",
+    bottom: "25%",
     right: -4,
     backgroundColor: colors.primary,
   },
