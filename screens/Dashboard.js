@@ -203,7 +203,7 @@ const Dashboard = ({ navigation, route }) => {
           <TouchableHighlight
             style={(navbar.navButton, styles.col4)}
             onPress={() =>
-              navigation.navigate("CalculatorPage", {
+              navigation.navigate("CalChoose", {
                 location: route.params.location,
               })
             }
