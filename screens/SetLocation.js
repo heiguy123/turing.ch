@@ -79,7 +79,6 @@ const SetLocation = ({ navigation, route }) => {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: colors.primary }}>
       <View style={styles.container}>
-        <Image style={fixassets.sun} source={require("../assets/sun.png")} />
         <TouchableOpacity
           style={[
             fixassets.back,
@@ -124,9 +123,8 @@ const SetLocation = ({ navigation, route }) => {
       >
         <TouchableOpacity
           style={fixassets.button}
-          //onPress={() => navigation("SetTime")}
           onPress={() =>
-            navigation.navigate("Dashboard", {
+            navigation.navigate("TimeRange", {
               location: location,
             })
           }

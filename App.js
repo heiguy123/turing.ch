@@ -30,6 +30,7 @@ import CalChoose from "./screens/CalChoose";
 import DefaultPage from "./screens/DefaultPage";
 import CustomisePage from "./screens/CustomisePage";
 import CalLastPage from "./screens/CalLastPage";
+import TimeRange from "./screens/TimeRange";
 
 const Stack = createNativeStackNavigator();
 
@@ -54,6 +55,7 @@ function App() {
         <Stack.Screen name="GetStarted" component={GetStarted} />
         <Stack.Screen name="Location" component={Location} />
         <Stack.Screen name="SetLocation" component={SetLocation} />
+        <Stack.Screen name="TimeRange" component={TimeRange} />
         <Stack.Screen name="Dashboard" component={Dashboard} />
         <Stack.Screen name="ViewGraphIndex" component={ViewGraphIndex} />
         <Stack.Screen name="CalChoose" component={CalChoose} />

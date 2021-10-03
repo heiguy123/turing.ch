@@ -35,7 +35,6 @@ export default function ViewGraphIndex({ route, navigation }) {
   let _isMounted = false;
   const [longitude, setLongitude] = React.useState(LOCATION.longitude);
   const [latitude, setLatitude] = React.useState(LOCATION.latitude);
-  console.log(LOCATION);
   const [graph, setGraph] = React.useState(OVERVIEW);
   const [startTime, setStartTime] = React.useState("20190101");
   const [endTime, setEndTime] = React.useState("20210920");
@@ -56,7 +55,6 @@ export default function ViewGraphIndex({ route, navigation }) {
     if (graph == HOURLY) initHourlyGraph();
 
     checkParams();
-
     //the return will run when the function component unmount
     return () => {
       DataGetter.checkAndResetCancelToken();
@@ -143,14 +141,13 @@ export default function ViewGraphIndex({ route, navigation }) {
   }
 
   function checkParams() {
-    let { longitude, latitude, startTime, endTime } = route.params
-      ? route.params
-      : {};
-    if (longitude) setLongitude(longitude);
-    if (latitude) setLatitude(latitude);
+    let { location, startTime, endTime } = route.params ? route.params : {};
+    if (location) {
+      setLongitude(location.longitude);
+      setLatitude(location.latitude);
+    }
     if (startTime) setStartTime(startTime);
     if (endTime) setEndTime(endTime);
-    //if (graph) setGraph(graph);
   }
 
   function renderHeader() {
@@ -166,20 +163,6 @@ export default function ViewGraphIndex({ route, navigation }) {
           />
         </TouchableOpacity>
       </View>
-      // <View style={{ flexDirection: "row" }}>
-      //   <TouchableOpacity
-      //     style={{
-      //       width: 50,
-      //       paddingLeft: SIZES.padding * 2
-      //     }}
-      //     onPress={() => navigation.goBack()}
-      //   >
-      //     <Image
-      //       source={require("../assets/blackback.png")}
-      //       style={[fixassets.back, {top: 30, left: SIZES.padding}]}
-      //     />
-      //   </TouchableOpacity>
-      // </View>
     );
   }
 
