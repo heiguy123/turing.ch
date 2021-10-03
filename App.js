@@ -26,7 +26,8 @@ import ViewGraphIndex from "./screens/ViewGraphIndex";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Dashboard from "./screens/Dashboard";
-import CalculatorPage from "./screens/CalculatorPage";
+//import CalculatorPage from "./screens/CalculatorPage";
+//the calculator is commented because no calculator found
 
 const Stack = createNativeStackNavigator();
 
@@ -51,7 +52,7 @@ function App() {
         <Stack.Screen name="SetLocation" component={SetLocation} />
         <Stack.Screen name="Dashboard" component={Dashboard} />
         <Stack.Screen name="ViewGraphIndex" component={ViewGraphIndex} />
-        <Stack.Screen name="CalculatorPage" component={CalculatorPage} />
+        {/* <Stack.Screen name="CalculatorPage" component={CalculatorPage} /> */}
       </Stack.Navigator>
     </NavigationContainer>
   );
