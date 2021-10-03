@@ -13,8 +13,8 @@ import {
 } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import fixassets from "../../config/fixassets";
-import DataGetter from "../dataGetter";
+import fixassets from "../config/fixassets";
+import DataGetter from "../app/dataGetter";
 
 let longitude = 113.997; //change this to actual longitude
 let latitude = 4.372; //change this to actual latitude
