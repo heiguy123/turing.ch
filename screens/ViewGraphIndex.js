@@ -157,7 +157,7 @@ export default function ViewGraphIndex({ route, navigation }) {
     return (
       <View style={{ flexDirection: "row" }}>
         <TouchableOpacity
-          style={[fixassets.back, ]}
+          style={[fixassets.back]}
           onPress={() => navigation.goBack()}
         >
           <Image
@@ -560,8 +560,8 @@ const styles = StyleSheet.create({
     color: colors.black,
     textAlign: "center",
     letterSpacing: 0.15,
-    paddingLeft: SIZES.padding,
-    paddingRight: SIZES.padding,
+    // paddingLeft: SIZES.padding,
+    // paddingRight: SIZES.padding,
   },
   topMenuButton: {
     justifyContent: "center",
