@@ -9,29 +9,15 @@ import {
   Image,
   Dimensions,
   TouchableOpacity,
-  ToastAndroid,
   ActivityIndicator,
 } from "react-native";
 import colors from "../config/colors";
 import fonts from "../config/fonts";
 import fixassets from "../config/fixassets";
 import useLocation from "../app/useLocation";
-import loadingIndicator from "../app/components/loadingIndicator";
 
 const Location = ({ navigation }) => {
   const currentlocation = useLocation();
-  // if (Platform.OS === "android")
-  //   if (location)
-  //     ToastAndroid.show(JSON.stringify(location), ToastAndroid.SHORT);
-  //   else {
-  //     ToastAndroid.show("Waiting for location", ToastAndroid.SHORT);
-  //   }
-  // else {
-  //   if (location) alert(JSON.stringify(location));
-  //   else {
-  //     alert("Waiting for location");
-  //   }
-  // }
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: colors.primary }}>
       <View style={styles.container}>

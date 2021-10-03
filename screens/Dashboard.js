@@ -15,17 +15,12 @@ import {
 import colors from "../config/colors";
 import fonts from "../config/fonts";
 import navbar from "../config/navbar";
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import DataGetter from '../app/dataGetter'
 
 const Dashboard = ({ navigation, route }) => {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: colors.whiteBg }}>
-      <ScrollView
-        contentContainerStyle={{ flexGrow: 1 }}
-      >
-        <View style={{marginBottom: 170, flex: 1}}>
+      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+        <View style={{ marginBottom: 170, flex: 1 }}>
           <View style={[styles.container]}>
             <Image
               style={styles.topImage}
@@ -35,7 +30,11 @@ const Dashboard = ({ navigation, route }) => {
           <View style={styles.solarIrradiance}>
             <TouchableHighlight
               style={[styles.greyLabel]}
-              onPress={() => navigate("SetLocation")}
+              onPress={() =>
+                navigation.navigate("SetLocation", {
+                  location: route.params.location,
+                })
+              }
               activeOpacity={0.65}
               underlayColor={"rgba(0,0,0,0.1)"}
             >
@@ -54,7 +53,9 @@ const Dashboard = ({ navigation, route }) => {
                 </Text>
               </View>
             </TouchableHighlight>
-            <Text style={[fonts.h1, { fontSize: 60, marginBottom: 0 }]}>Hi,</Text>
+            <Text style={[fonts.h1, { fontSize: 60, marginBottom: 0 }]}>
+              Hi,
+            </Text>
             <Text style={fonts.p}>Have a nice day.</Text>
           </View>
           <View
@@ -62,7 +63,7 @@ const Dashboard = ({ navigation, route }) => {
               flex: 1,
               top: "3%",
               paddingLeft: "5%",
-              paddingRight: "5%"
+              paddingRight: "5%",
             }}
           >
             <Text
@@ -78,16 +79,16 @@ const Dashboard = ({ navigation, route }) => {
                 style={[
                   styles.col6,
                   styles.row,
-                  { paddingLeft: "5%", paddingRight: "3%" },
+                  { paddingLeft: "5%", paddingRight: "5%" },
                 ]}
               >
                 <View style={(styles.col1, styles.progressBar)}>
                   <View style={styles.progressBarFilled}></View>
                   <View style={styles.progressBarFilledCap}></View>
                 </View>
-                <View style={[styles.col12, { paddingLeft: 14 }]}>
+                <View style={[styles.col11, { paddingLeft: 14 }]}>
                   <Text style={[fonts.p, { marginBottom: 4, marginTop: 8 }]}>
-                    Avg. Solar Irradiance
+                    Avg. Solar Iradiance
                   </Text>
                   <Text style={[fonts.h3, { marginBottom: 0 }]}>return averageMonthlyData()</Text>
                 </View>
@@ -101,10 +102,10 @@ const Dashboard = ({ navigation, route }) => {
               >
                 <View style={(styles.col1, styles.progressBar)}>
                   <View
-                    style={[styles.progressBarFilled, { height: "40%" }]}
+                    style={[styles.progressBarFilled, { height: "20%" }]}
                   ></View>
                   <View
-                    style={[styles.progressBarFilledCap, { bottom: "40%" }]}
+                    style={[styles.progressBarFilledCap, { bottom: "20%" }]}
                   ></View>
                 </View>
                 <View style={[styles.col11, { paddingLeft: 14 }]}>
@@ -148,10 +149,10 @@ const Dashboard = ({ navigation, route }) => {
               >
                 <View style={(styles.col1, styles.progressBar)}>
                   <View
-                    style={[styles.progressBarFilled, { height: "30%" }]}
+                    style={[styles.progressBarFilled, { height: "25%" }]}
                   ></View>
                   <View
-                    style={[styles.progressBarFilledCap, { bottom: "30%" }]}
+                    style={[styles.progressBarFilledCap, { bottom: "25%" }]}
                   ></View>
                 </View>
                 <View style={[styles.col12, { paddingLeft: 14 }]}>
@@ -189,7 +190,11 @@ const Dashboard = ({ navigation, route }) => {
         <View style={[styles.row, { paddingTop: "5%", paddingBottom: "16%" }]}>
           <TouchableHighlight
             style={(navbar.navButton, styles.col4)}
-            onPress={() => Alert.alert("ABC")}
+            onPress={() =>
+              navigation.navigate("CalculatorPage", {
+                location: route.params.location,
+              })
+            }
             activeOpacity={0.65}
             underlayColor={"rgba(255,255,255,0)"}
           >
@@ -263,12 +268,14 @@ const Dashboard = ({ navigation, route }) => {
     </SafeAreaView>
   );
 };
+
 export default Dashboard;
+
 const styles = StyleSheet.create({
   container: {
     marginTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
     minHeight: 250,
-    height: "50%"
+    height: "50%",
   },
   button: {
     width: 278,
@@ -279,11 +286,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   buttonPlacement: {
-    // position: "absolute",
-    // bottom: Math.round(60 * 1.5),
+    position: "absolute",
+    bottom: Math.round(60 * 1.5),
   },
   topImage: {
-    resizeMode: "stretch",
+    resizeMode: "cover",
     width: Dimensions.get("screen").width,
     height: "100%",
     position: "absolute",
@@ -314,7 +321,7 @@ const styles = StyleSheet.create({
   },
   solarIrradiance: {
     position: "absolute",
-    top: "15%",
+    top: "10%",
     left: "10%",
   },
   progressBar: {
@@ -325,7 +332,7 @@ const styles = StyleSheet.create({
   },
   progressBarFilled: {
     position: "absolute",
-    height: "25%",
+    height: "40%",
     width: 6,
     bottom: 0,
     right: -2,
@@ -335,7 +342,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     height: 2,
     width: 10,
-    bottom: "25%",
+    bottom: "39%",
     right: -4,
     backgroundColor: colors.primary,
   },
