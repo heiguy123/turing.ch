@@ -218,7 +218,11 @@ const Dashboard = ({ navigation, route }) => {
           </TouchableHighlight>
           <TouchableHighlight
             style={(navbar.navButton, styles.col4)}
-            onPress={() => navigate("Dashboard")}
+            onPress={() =>
+              navigation.navigate("Dashboard", {
+                location: route.params.location,
+              })
+            }
             activeOpacity={0.65}
             underlayColor={"rgba(255,255,255,0)"}
           >
