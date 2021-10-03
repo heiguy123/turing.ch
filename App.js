@@ -10,6 +10,7 @@ import {
   View,
   StatusBar,
   Button,
+  StatusBarIOS,
 } from "react-native";
 import AppLoading from "expo-app-loading";
 import {
@@ -26,10 +27,9 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Dashboard from "./screens/Dashboard";
 import Settings from "./screens/Settings";
-import CalculatorPage from './app/screen/CalculatorPage';
+import CalculatorPage from "./screens/CalculatorPage";
 
-
-export default function App() {
+const Stack = createNativeStackNavigator();
 
 function App() {
   let [fontloaded, error] = useFonts({
@@ -53,9 +53,10 @@ function App() {
         <Stack.Screen name="Dashboard" component={Dashboard} />
         <Stack.Screen name="Settings" component={Settings} />
         <Stack.Screen name="ViewGraphIndex" component={ViewGraphIndex} />
+        <Stack.Screen name="CalculatorPage" component={CalculatorPage} />
       </Stack.Navigator>
     </NavigationContainer>
   );
 }
 
-
+export default App;

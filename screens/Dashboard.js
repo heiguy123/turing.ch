@@ -11,21 +11,16 @@ import {
   Dimensions,
   Alert,
   ScrollView,
-  FlatList,
 } from "react-native";
 import colors from "../config/colors";
 import fonts from "../config/fonts";
 import navbar from "../config/navbar";
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 const Dashboard = ({ navigation, route }) => {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: colors.whiteBg }}>
-      <ScrollView
-        contentContainerStyle={{ flexGrow: 1 }}
-      >
-        <View style={{marginBottom: 170, flex: 1}}>
+      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+        <View style={{ marginBottom: 170, flex: 1 }}>
           <View style={[styles.container]}>
             <Image
               style={styles.topImage}
@@ -35,7 +30,11 @@ const Dashboard = ({ navigation, route }) => {
           <View style={styles.solarIrradiance}>
             <TouchableHighlight
               style={[styles.greyLabel]}
-              onPress={() => navigate("SetLocation")}
+              onPress={() =>
+                navigation.navigate("SetLocation", {
+                  location: route.params.location,
+                })
+              }
               activeOpacity={0.65}
               underlayColor={"rgba(0,0,0,0.1)"}
             >
@@ -54,7 +53,9 @@ const Dashboard = ({ navigation, route }) => {
                 </Text>
               </View>
             </TouchableHighlight>
-            <Text style={[fonts.h1, { fontSize: 60, marginBottom: 0 }]}>Hi,</Text>
+            <Text style={[fonts.h1, { fontSize: 60, marginBottom: 0 }]}>
+              Hi,
+            </Text>
             <Text style={fonts.p}>Have a nice day.</Text>
           </View>
           <View
@@ -62,7 +63,7 @@ const Dashboard = ({ navigation, route }) => {
               flex: 1,
               top: "3%",
               paddingLeft: "5%",
-              paddingRight: "5%"
+              paddingRight: "5%",
             }}
           >
             <Text
@@ -73,7 +74,9 @@ const Dashboard = ({ navigation, route }) => {
             >
               Summary
             </Text>
-            <View style={[styles.row, { paddingTop: "8%", paddingBottom: "8%" }]}>
+            <View
+              style={[styles.row, { paddingTop: "8%", paddingBottom: "8%" }]}
+            >
               <View
                 style={[
                   styles.col6,
@@ -116,7 +119,9 @@ const Dashboard = ({ navigation, route }) => {
               </View>
             </View>
             <View style={styles.hr}></View>
-            <View style={[styles.row, { paddingTop: "8%", paddingBottom: "8%" }]}>
+            <View
+              style={[styles.row, { paddingTop: "8%", paddingBottom: "8%" }]}
+            >
               <View
                 style={[
                   styles.col6,
@@ -170,12 +175,20 @@ const Dashboard = ({ navigation, route }) => {
             >
               <TouchableHighlight
                 style={styles.button}
-                onPress={() => navigate("ViewGraphIndex")}
+                onPress={() =>
+                  navigation.navigate("ViewGraphIndex", {
+                    location: route.params.location,
+                  })
+                }
               >
                 <Text
                   style={[
                     fonts.h4,
-                    { color: colors.white, lineHeight: 24, textAlign: "center" },
+                    {
+                      color: colors.white,
+                      lineHeight: 24,
+                      textAlign: "center",
+                    },
                   ]}
                 >
                   More Details
@@ -189,7 +202,11 @@ const Dashboard = ({ navigation, route }) => {
         <View style={[styles.row, { paddingTop: "5%", paddingBottom: "16%" }]}>
           <TouchableHighlight
             style={(navbar.navButton, styles.col4)}
-            onPress={() => Alert.alert("ABC")}
+            onPress={() =>
+              navigation.navigate("CalculatorPage", {
+                location: route.params.location,
+              })
+            }
             activeOpacity={0.65}
             underlayColor={"rgba(255,255,255,0)"}
           >
@@ -268,7 +285,7 @@ const styles = StyleSheet.create({
   container: {
     marginTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
     minHeight: 250,
-    height: "50%"
+    height: "50%",
   },
   button: {
     width: 278,
