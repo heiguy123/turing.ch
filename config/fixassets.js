@@ -10,6 +10,14 @@ export default StyleSheet.create({
     top: Dimensions.get("window").height * 0.04,
     position: "absolute",
   },
+  buttonb: {
+    width: 278,
+    height: 46,
+    borderWidth: 0,
+    borderRadius: 16,
+    backgroundColor: colors.primary,
+    justifyContent: "center",
+  },
   button: {
     width: 278,
     height: 46,
