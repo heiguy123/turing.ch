@@ -124,9 +124,8 @@ const SetLocation = ({ navigation, route }) => {
       >
         <TouchableOpacity
           style={fixassets.button}
-          //onPress={() => navigation("SetTime")}
           onPress={() =>
-            navigation.navigate("Dashboard", {
+            navigation.navigate("TimeRange", {
               location: location,
             })
           }
