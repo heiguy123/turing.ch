@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -10,19 +10,21 @@ import {
   Image,
   TextInput,
   Dimensions,
+  Keyboard,
+  KeyboardAvoidingView,
+  TouchableWithoutFeedback,
+  TouchableHighlight,
 } from "react-native";
 import fixassets from "../config/fixassets";
 import DataGetter from "../app/dataGetter";
 import colors from "../config/colors";
 import fonts from "../config/fonts";
+import navbar from "../config/navbar";
 const sbspace = Platform.OS === "android" ? StatusBar.currentHeight : 0;
 let longitude = 113.997; //change this to actual longitude
 let latitude = 4.372; //change this to actual latitude
 let mean1 = 0;
-DataGetter.getSolarMean(longitude, latitude).then((mean) => {
-  mean1 = mean;
-  console.log(mean);
-});
+
 var MPP = parseFloat(435),
   areaPanels = parseFloat(2),
   usedTime = parseFloat(10),
@@ -47,6 +49,11 @@ const calculates = () => {
 };
 
 const DefaultPage = ({ navigation, route }) => {
+  DataGetter.getSolarMean(longitude, latitude).then((mean) => {
+    mean1 = mean;
+    console.log(mean);
+  });
+
   const [fPrice, setFix] = useState("");
   const [tPrice, setBill] = useState("");
 
@@ -58,22 +65,18 @@ const DefaultPage = ({ navigation, route }) => {
     (totPrice = parseFloat(tPrice));
 
   return (
-    <SafeAreaView style={Calculation.container}>
-      <TouchableOpacity
-        style={[
-          fixassets.back,
-          {
-            top: Dimensions.get("window").height * 0.06,
-            position: "absolute",
-          },
-        ]}
-        onPress={() => navigation.goBack()}
-      >
-        <Image
-          style={{ width: "100%", height: "100%" }}
-          source={require("../assets/blackback.png")}
-        />
-      </TouchableOpacity>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={Calculation.container}
+    >
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View
+          style={{
+            height: "100%",
+            width: "100%",
+          }}
+        ></View>
+      </TouchableWithoutFeedback>
       <View
         style={[
           Calculation.textBox,
@@ -151,9 +154,6 @@ const DefaultPage = ({ navigation, route }) => {
           { left: "5%", top: "59%", width: "90%", height: "5%" },
         ]}
       >
-        <Text style={[fonts.p, { color: "#555555", left: "0%", top: "-7%" }]}>
-          Specification 1
-        </Text>
         <Text
           style={[
             fonts.h3,
@@ -166,9 +166,13 @@ const DefaultPage = ({ navigation, route }) => {
         >
           Electricity Settings
         </Text>
+        <Text style={[fonts.p, { color: "#555555", left: "0%", top: "-7%" }]}>
+          Specification 1
+        </Text>
         <TextInput
           onChangeText={(number) => setFix(number)}
           keyboardType="numeric"
+          onSubmitEditing={Keyboard.dismiss}
           placeholder="Electricity price per kWh in your area(US Dollar)"
           style={{ alignSelf: "center", left: "3%", position: "absolute" }}
         />
@@ -179,7 +183,7 @@ const DefaultPage = ({ navigation, route }) => {
           { left: "5%", top: "69%", width: "90%", height: "5%" },
         ]}
       >
-        <Text style={[Calculation.textBase1, { top: "-7%" }]}>
+        <Text style={[fonts.p, { color: "#555555", top: "-7%" }]}>
           Specification 2
         </Text>
         <TextInput
@@ -196,42 +200,128 @@ const DefaultPage = ({ navigation, route }) => {
           alignSelf: "center",
           justifyContent: "center",
         }}
-      >
-        <TouchableOpacity
-          style={fixassets.buttonb}
-          onPress={() =>
-            navigation.navigate("Dashboard", {
-              location: route.params.location,
-            })
-          }
-        >
-          <Text
-            style={[
-              fonts.h4,
-              { color: colors.white, lineHeight: 24, textAlign: "center" },
-            ]}
-          >
-            Done
-          </Text>
-        </TouchableOpacity>
-      </View>
-      {/* <TouchableOpacity
-        style={(fixassets.button, { backgroundColor: colors.primary })}
+      ></View>
+      <TouchableOpacity
+        style={[fixassets.buttonb, { position: "absolute", top: "78%" }]}
         onPressIn={calculates}
-        onPress={() => navigation.navigate("CalLast")}
+        onPress={() =>
+          navigation.navigate("CalLastPage", {
+            location: route.params.location,
+            powerGenerated: powerGenerated,
+            moneySaved: moneySaved,
+            percentageSaved: percentageSaved,
+          })
+        }
       >
         <Text
-          style={{
-            alignSelf: "center",
-            color: "#fff",
-            fontSize: 16,
-            fontWeight: "normal",
-          }}
+          style={[
+            fonts.h4,
+            { color: colors.white, lineHeight: 24, textAlign: "center" },
+          ]}
         >
           Done
         </Text>
-      </TouchableOpacity> */}
-    </SafeAreaView>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={[
+          fixassets.back,
+          {
+            top: Dimensions.get("window").height * 0.06,
+            //left: 0, // Dimensions.get("window").width * 0.06,
+            //position: "absolute",
+          },
+        ]}
+        onPress={() => navigation.goBack()}
+      >
+        <Image
+          style={{ width: "100%", height: "100%" }}
+          source={require("../assets/blackback.png")}
+        />
+      </TouchableOpacity>
+      <View style={navbar.navBottom}>
+        <View style={[styles.row, { paddingTop: "5%", paddingBottom: "16%" }]}>
+          <TouchableHighlight
+            style={(navbar.navButton, styles.col4)}
+            // onPress={() =>
+            //   navigation.navigate("CalChoose", {
+            //     location: route.params.location,
+            //   })
+            // }
+            activeOpacity={0.65}
+            underlayColor={"rgba(255,255,255,0)"}
+          >
+            <View
+              style={[
+                {
+                  paddingLeft: "5%",
+                  paddingRight: "5%",
+                  alignItems: "center",
+                },
+              ]}
+            >
+              <Image
+                style={navbar.navIcon}
+                source={require("../assets/icon-calculator.png")}
+              />
+              <Text style={[fonts.p, { marginBottom: 5 }]}>Calculator</Text>
+              <View style={navbar.navLabelActive}></View>
+            </View>
+          </TouchableHighlight>
+          <TouchableHighlight
+            style={(navbar.navButton, styles.col4)}
+            onPress={() =>
+              navigation.navigate("Dashboard", {
+                location: route.params.location,
+              })
+            }
+            activeOpacity={0.65}
+            underlayColor={"rgba(255,255,255,0)"}
+          >
+            <View
+              style={[
+                {
+                  paddingLeft: "5%",
+                  paddingRight: "5%",
+                  alignItems: "center",
+                },
+              ]}
+            >
+              <Image
+                style={navbar.navIcon}
+                source={require("../assets/icon-home-inactive.png")}
+              />
+              <Text style={[fonts.p, navbar.navInactive, { marginBottom: 5 }]}>
+                Dashboard
+              </Text>
+            </View>
+          </TouchableHighlight>
+          <TouchableHighlight
+            style={(navbar.navButton, styles.col4)}
+            onPress={() => Alert.alert("DEF")}
+            activeOpacity={0.65}
+            underlayColor={"rgba(255,255,255,0)"}
+          >
+            <View
+              style={[
+                {
+                  paddingLeft: "5%",
+                  paddingRight: "5%",
+                  alignItems: "center",
+                },
+              ]}
+            >
+              <Image
+                style={navbar.navIcon}
+                source={require("../assets/icon-settings-inactive.png")}
+              />
+              <Text style={[fonts.p, navbar.navInactive, { marginBottom: 5 }]}>
+                Settings
+              </Text>
+            </View>
+          </TouchableHighlight>
+        </View>
+      </View>
+    </KeyboardAvoidingView>
   );
 };
 
@@ -242,7 +332,6 @@ const Calculation = StyleSheet.create({
     backgroundColor: "#fff",
     flex: 1,
     alignItems: "center",
-    paddingTop: StatusBar.currentHeight,
   },
   textBase: {
     fontSize: 24,
@@ -285,5 +374,14 @@ const Calculation = StyleSheet.create({
     top: "3%",
     left: "10%",
     letterSpacing: 0.15,
+  },
+});
+const styles = StyleSheet.create({
+  row: {
+    flexDirection: "row",
+  },
+  col4: {
+    maxWidth: "33%",
+    flexBasis: "33%",
   },
 });

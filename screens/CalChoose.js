@@ -10,9 +10,11 @@ import {
   Image,
   TextInput,
   Dimensions,
+  TouchableHighlight,
 } from "react-native";
 import colors from "../config/colors";
 import fonts from "../config/fonts";
+import navbar from "../config/navbar";
 const CalChoose = ({ navigation, route }) => {
   return (
     <SafeAreaView style={styles.container}>
@@ -56,6 +58,89 @@ const CalChoose = ({ navigation, route }) => {
         style={styles.picture1}
         source={require("../assets/background.png")}
       />
+      <View style={navbar.navBottom}>
+        <View style={[styles.row, { paddingTop: "5%", paddingBottom: "16%" }]}>
+          <TouchableHighlight
+            style={(navbar.navButton, styles.col4)}
+            // onPress={() =>
+            //   navigation.navigate("CalChoose", {
+            //     location: route.params.location,
+            //   })
+            // }
+            activeOpacity={0.65}
+            underlayColor={"rgba(255,255,255,0)"}
+          >
+            <View
+              style={[
+                {
+                  paddingLeft: "5%",
+                  paddingRight: "5%",
+                  alignItems: "center",
+                },
+              ]}
+            >
+              <Image
+                style={navbar.navIcon}
+                source={require("../assets/icon-calculator.png")}
+              />
+              <Text style={[fonts.p, { marginBottom: 5 }]}>Calculator</Text>
+              <View style={navbar.navLabelActive}></View>
+            </View>
+          </TouchableHighlight>
+          <TouchableHighlight
+            style={(navbar.navButton, styles.col4)}
+            onPress={() =>
+              navigation.navigate("Dashboard", {
+                location: route.params.location,
+              })
+            }
+            activeOpacity={0.65}
+            underlayColor={"rgba(255,255,255,0)"}
+          >
+            <View
+              style={[
+                {
+                  paddingLeft: "5%",
+                  paddingRight: "5%",
+                  alignItems: "center",
+                },
+              ]}
+            >
+              <Image
+                style={navbar.navIcon}
+                source={require("../assets/icon-home-inactive.png")}
+              />
+              <Text style={[fonts.p, navbar.navInactive, { marginBottom: 5 }]}>
+                Dashboard
+              </Text>
+            </View>
+          </TouchableHighlight>
+          <TouchableHighlight
+            style={(navbar.navButton, styles.col4)}
+            onPress={() => Alert.alert("DEF")}
+            activeOpacity={0.65}
+            underlayColor={"rgba(255,255,255,0)"}
+          >
+            <View
+              style={[
+                {
+                  paddingLeft: "5%",
+                  paddingRight: "5%",
+                  alignItems: "center",
+                },
+              ]}
+            >
+              <Image
+                style={navbar.navIcon}
+                source={require("../assets/icon-settings-inactive.png")}
+              />
+              <Text style={[fonts.p, navbar.navInactive, { marginBottom: 5 }]}>
+                Settings
+              </Text>
+            </View>
+          </TouchableHighlight>
+        </View>
+      </View>
     </SafeAreaView>
   );
 };
@@ -130,5 +215,12 @@ const styles = StyleSheet.create({
     position: "absolute",
     lineHeight: 20,
     color: colors.primary,
+  },
+  row: {
+    flexDirection: "row",
+  },
+  col4: {
+    maxWidth: "33%",
+    flexBasis: "33%",
   },
 });

@@ -34,6 +34,8 @@ import CalLastPage from "./screens/CalLastPage";
 const Stack = createNativeStackNavigator();
 
 function App() {
+  //YellowBox.ignoreWarnings(["Require cycle"]);
+  console.disableYellowBox = true;
   let [fontloaded, error] = useFonts({
     Regular: Roboto_400Regular,
     Normal: Roboto_500Medium,

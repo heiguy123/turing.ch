@@ -10,10 +10,16 @@ import {
   Image,
   TextInput,
   Dimensions,
+  Keyboard,
+  KeyboardAvoidingView,
+  TouchableWithoutFeedback,
+  TouchableHighlight,
 } from "react-native";
 import fixassets from "../config/fixassets";
 import DataGetter from "../app/dataGetter";
-
+import fonts from "../config/fonts";
+import navbar from "../config/navbar";
+const sbspace = Platform.OS === "android" ? StatusBar.currentHeight : 0;
 let longitude = 113.997; //change this to actual longitude
 let latitude = 4.372; //change this to actual latitude
 let mean1 = 0;
@@ -45,6 +51,10 @@ const calculates = () => {
 };
 
 const CustomisePage = ({ navigation, route }) => {
+  DataGetter.getSolarMean(longitude, latitude).then((mean) => {
+    mean1 = mean;
+    console.log(mean);
+  });
   const [Mpp, setMpp] = useState("");
   const [area, setArea] = useState("");
   const [year, setYear] = useState("");
@@ -60,11 +70,25 @@ const CustomisePage = ({ navigation, route }) => {
     (totPrice = parseFloat(tPrice));
 
   return (
-    <View style={Calculation.container}>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={Calculation.container}
+    >
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View
+          style={{
+            height: "100%",
+            width: "100%",
+          }}
+        ></View>
+      </TouchableWithoutFeedback>
       <TouchableOpacity
         style={[
           fixassets.back,
-          { top: Dimensions.get("window").height * 0.04 },
+          {
+            top: Dimensions.get("window").height * 0.06,
+            position: "absolute",
+          },
         ]}
         onPress={() => navigation.goBack()}
       >
@@ -81,13 +105,17 @@ const CustomisePage = ({ navigation, route }) => {
       >
         <Text
           style={[
-            Calculation.textBase,
-            { bottom: "200%", position: "absolute" },
+            fonts.h3,
+            {
+              bottom: "200%",
+              position: "absolute",
+              fontFamily: "Bold",
+            },
           ]}
         >
           Panel Specification
         </Text>
-        <Text style={[Calculation.textBase1, { top: "-7%" }]}>
+        <Text style={[fonts.p, { color: "#555555", top: "-7%" }]}>
           Specification 1
         </Text>
         <TextInput
@@ -103,7 +131,7 @@ const CustomisePage = ({ navigation, route }) => {
           { left: "5%", top: "30%", width: "40%", height: "5%" },
         ]}
       >
-        <Text style={[Calculation.textBase1, { top: "-16%" }]}>
+        <Text style={[fonts.p, { color: "#555555", top: "-16%" }]}>
           Specification 2
         </Text>
         <TextInput
@@ -119,7 +147,7 @@ const CustomisePage = ({ navigation, route }) => {
           { left: "55%", top: "30%", width: "40%", height: "5%" },
         ]}
       >
-        <Text style={[Calculation.textBase1, { top: "-16%" }]}>
+        <Text style={[fonts.p, { color: "#555555", top: "-16%" }]}>
           Specification 3
         </Text>
         <TextInput
@@ -135,7 +163,7 @@ const CustomisePage = ({ navigation, route }) => {
           { top: "40%", width: "90%", height: "5%" },
         ]}
       >
-        <Text style={[Calculation.textBase1, { top: "-7%" }]}>
+        <Text style={[fonts.p, { color: "#555555", top: "-7%" }]}>
           Specification 4
         </Text>
         <TextInput
@@ -153,13 +181,17 @@ const CustomisePage = ({ navigation, route }) => {
       >
         <Text
           style={[
-            Calculation.textBase,
-            { bottom: "200%", position: "absolute" },
+            fonts.h3,
+            {
+              bottom: "200%",
+              position: "absolute",
+              fontFamily: "Bold",
+            },
           ]}
         >
           Electricity Settings
         </Text>
-        <Text style={[Calculation.textBase1, { top: "-7%" }]}>
+        <Text style={[fonts.p, { color: "#555555", top: "-7%" }]}>
           Specification 1
         </Text>
         <TextInput
@@ -175,7 +207,7 @@ const CustomisePage = ({ navigation, route }) => {
           { left: "5%", top: "69%", width: "90%", height: "5%" },
         ]}
       >
-        <Text style={[Calculation.textBase1, { top: "-7%" }]}>
+        <Text style={[fonts.p, { color: "#555555", top: "-7%" }]}>
           Specification 2
         </Text>
         <TextInput
@@ -186,9 +218,21 @@ const CustomisePage = ({ navigation, route }) => {
         />
       </View>
       <TouchableOpacity
-        style={Calculation.DoneBut}
+        style={[fixassets.buttonb, { position: "absolute", top: "78%" }]}
+        onPress={() =>
+          navigation.navigate("CalLastPage", {
+            location: route.params.location,
+          })
+        }
         onPressIn={calculates}
-        onPress={() => navigation.navigate("CalLastPage")}
+        onPress={() =>
+          navigation.navigate("CalLastPage", {
+            location: route.params.location,
+            powerGenerated: powerGenerated,
+            moneySaved: moneySaved,
+            percentageSaved: percentageSaved,
+          })
+        }
       >
         <Text
           style={{
@@ -201,7 +245,90 @@ const CustomisePage = ({ navigation, route }) => {
           Done
         </Text>
       </TouchableOpacity>
-    </View>
+      <View style={navbar.navBottom}>
+        <View style={[styles.row, { paddingTop: "5%", paddingBottom: "16%" }]}>
+          <TouchableHighlight
+            style={(navbar.navButton, styles.col4)}
+            // onPress={() =>
+            //   navigation.navigate("CalChoose", {
+            //     location: route.params.location,
+            //   })
+            // }
+            activeOpacity={0.65}
+            underlayColor={"rgba(255,255,255,0)"}
+          >
+            <View
+              style={[
+                {
+                  paddingLeft: "5%",
+                  paddingRight: "5%",
+                  alignItems: "center",
+                },
+              ]}
+            >
+              <Image
+                style={navbar.navIcon}
+                source={require("../assets/icon-calculator.png")}
+              />
+              <Text style={[fonts.p, { marginBottom: 5 }]}>Calculator</Text>
+              <View style={navbar.navLabelActive}></View>
+            </View>
+          </TouchableHighlight>
+          <TouchableHighlight
+            style={(navbar.navButton, styles.col4)}
+            onPress={() =>
+              navigation.navigate("Dashboard", {
+                location: route.params.location,
+              })
+            }
+            activeOpacity={0.65}
+            underlayColor={"rgba(255,255,255,0)"}
+          >
+            <View
+              style={[
+                {
+                  paddingLeft: "5%",
+                  paddingRight: "5%",
+                  alignItems: "center",
+                },
+              ]}
+            >
+              <Image
+                style={navbar.navIcon}
+                source={require("../assets/icon-home-inactive.png")}
+              />
+              <Text style={[fonts.p, navbar.navInactive, { marginBottom: 5 }]}>
+                Dashboard
+              </Text>
+            </View>
+          </TouchableHighlight>
+          <TouchableHighlight
+            style={(navbar.navButton, styles.col4)}
+            onPress={() => Alert.alert("DEF")}
+            activeOpacity={0.65}
+            underlayColor={"rgba(255,255,255,0)"}
+          >
+            <View
+              style={[
+                {
+                  paddingLeft: "5%",
+                  paddingRight: "5%",
+                  alignItems: "center",
+                },
+              ]}
+            >
+              <Image
+                style={navbar.navIcon}
+                source={require("../assets/icon-settings-inactive.png")}
+              />
+              <Text style={[fonts.p, navbar.navInactive, { marginBottom: 5 }]}>
+                Settings
+              </Text>
+            </View>
+          </TouchableHighlight>
+        </View>
+      </View>
+    </KeyboardAvoidingView>
   );
 };
 
@@ -250,5 +377,15 @@ const Calculation = StyleSheet.create({
     top: "3%",
     left: "10%",
     letterSpacing: 0.15,
+  },
+});
+
+const styles = StyleSheet.create({
+  row: {
+    flexDirection: "row",
+  },
+  col4: {
+    maxWidth: "33%",
+    flexBasis: "33%",
   },
 });
