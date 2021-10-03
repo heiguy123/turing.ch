@@ -10,7 +10,7 @@ import {
   Image,
   Dimensions,
   Alert,
-  ScrollView,
+  ScrollView
 } from "react-native";
 import colors from "../config/colors";
 import fonts from "../config/fonts";
@@ -74,23 +74,21 @@ const Dashboard = ({ navigation, route }) => {
             >
               Summary
             </Text>
-            <View
-              style={[styles.row, { paddingTop: "8%", paddingBottom: "8%" }]}
-            >
+            <View style={[styles.row, { paddingTop: "8%", paddingBottom: "8%" }]}>
               <View
                 style={[
                   styles.col6,
                   styles.row,
-                  { paddingLeft: "5%", paddingRight: "3%" },
+                  { paddingLeft: "5%", paddingRight: "5%" },
                 ]}
               >
                 <View style={(styles.col1, styles.progressBar)}>
                   <View style={styles.progressBarFilled}></View>
                   <View style={styles.progressBarFilledCap}></View>
                 </View>
-                <View style={[styles.col12, { paddingLeft: 14 }]}>
+                <View style={[styles.col11, { paddingLeft: 14 }]}>
                   <Text style={[fonts.p, { marginBottom: 4, marginTop: 8 }]}>
-                    Avg. Solar Irradiance
+                    Avg. Solar Iradiance
                   </Text>
                   <Text style={[fonts.h3, { marginBottom: 0 }]}>25%</Text>
                 </View>
@@ -119,9 +117,7 @@ const Dashboard = ({ navigation, route }) => {
               </View>
             </View>
             <View style={styles.hr}></View>
-            <View
-              style={[styles.row, { paddingTop: "8%", paddingBottom: "8%" }]}
-            >
+            <View style={[styles.row, { paddingTop: "8%", paddingBottom: "8%" }]}>
               <View
                 style={[
                   styles.col6,
@@ -131,10 +127,10 @@ const Dashboard = ({ navigation, route }) => {
               >
                 <View style={(styles.col1, styles.progressBar)}>
                   <View
-                    style={[styles.progressBarFilled, { height: "55%" }]}
+                    style={[styles.progressBarFilled, { height: "40%" }]}
                   ></View>
                   <View
-                    style={[styles.progressBarFilledCap, { bottom: "55%" }]}
+                    style={[styles.progressBarFilledCap, { bottom: "40%" }]}
                   ></View>
                 </View>
                 <View style={[styles.col11, { paddingLeft: 14 }]}>
@@ -175,20 +171,14 @@ const Dashboard = ({ navigation, route }) => {
             >
               <TouchableHighlight
                 style={styles.button}
-                onPress={() =>
-                  navigation.navigate("ViewGraphIndex", {
-                    location: route.params.location,
-                  })
-                }
+                onPress={() => navigation.navigate("ViewGraphIndex", {
+                  location: route.params.location,
+                })}
               >
                 <Text
                   style={[
                     fonts.h4,
-                    {
-                      color: colors.white,
-                      lineHeight: 24,
-                      textAlign: "center",
-                    },
+                    { color: colors.white, lineHeight: 24, textAlign: "center" },
                   ]}
                 >
                   More Details
@@ -284,7 +274,9 @@ const Dashboard = ({ navigation, route }) => {
     </SafeAreaView>
   );
 };
+
 export default Dashboard;
+
 const styles = StyleSheet.create({
   container: {
     marginTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
@@ -304,7 +296,7 @@ const styles = StyleSheet.create({
     // bottom: Math.round(60 * 1.5),
   },
   topImage: {
-    resizeMode: "stretch",
+    resizeMode: "cover",
     width: Dimensions.get("screen").width,
     height: "100%",
     position: "absolute",
