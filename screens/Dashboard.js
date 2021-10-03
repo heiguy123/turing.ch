@@ -10,7 +10,7 @@ import {
   Image,
   Dimensions,
   Alert,
-  ScrollView
+  ScrollView,
 } from "react-native";
 import colors from "../config/colors";
 import fonts from "../config/fonts";
@@ -74,7 +74,9 @@ const Dashboard = ({ navigation, route }) => {
             >
               Summary
             </Text>
-            <View style={[styles.row, { paddingTop: "8%", paddingBottom: "8%" }]}>
+            <View
+              style={[styles.row, { paddingTop: "8%", paddingBottom: "8%" }]}
+            >
               <View
                 style={[
                   styles.col6,
@@ -117,7 +119,9 @@ const Dashboard = ({ navigation, route }) => {
               </View>
             </View>
             <View style={styles.hr}></View>
-            <View style={[styles.row, { paddingTop: "8%", paddingBottom: "8%" }]}>
+            <View
+              style={[styles.row, { paddingTop: "8%", paddingBottom: "8%" }]}
+            >
               <View
                 style={[
                   styles.col6,
@@ -171,14 +175,20 @@ const Dashboard = ({ navigation, route }) => {
             >
               <TouchableHighlight
                 style={styles.button}
-                onPress={() => navigation.navigate("ViewGraphIndex", {
-                  location: route.params.location,
-                })}
+                onPress={() =>
+                  navigation.navigate("ViewGraphIndex", {
+                    location: route.params.location,
+                  })
+                }
               >
                 <Text
                   style={[
                     fonts.h4,
-                    { color: colors.white, lineHeight: 24, textAlign: "center" },
+                    {
+                      color: colors.white,
+                      lineHeight: 24,
+                      textAlign: "center",
+                    },
                   ]}
                 >
                   More Details
@@ -249,7 +259,11 @@ const Dashboard = ({ navigation, route }) => {
           </TouchableHighlight>
           <TouchableHighlight
             style={(navbar.navButton, styles.col4)}
-            onPress={() => Alert.alert("DEF")}
+            onPress={() =>
+              navigation.navigate("Settings", {
+                location: route.params.location,
+              })
+            }
             activeOpacity={0.65}
             underlayColor={"rgba(255,255,255,0)"}
           >

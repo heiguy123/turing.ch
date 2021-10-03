@@ -27,6 +27,8 @@ const CalChoose = ({ navigation, route }) => {
           onPress={() =>
             navigation.navigate("DefaultPage", {
               location: route.params.location,
+              startTime: route.params.startTime,
+              endTime: route.params.endTime,
             })
           }
         >
@@ -65,6 +67,8 @@ const CalChoose = ({ navigation, route }) => {
             onPress={() =>
               navigation.navigate("CalChoose", {
                 location: route.params.location,
+                startTime: route.params.startTime,
+                endTime: route.params.endTime,
               })
             }
             activeOpacity={0.65}
@@ -92,6 +96,8 @@ const CalChoose = ({ navigation, route }) => {
             onPress={() =>
               navigation.navigate("Dashboard", {
                 location: route.params.location,
+                startTime: route.params.startTime,
+                endTime: route.params.endTime,
               })
             }
             activeOpacity={0.65}
@@ -117,7 +123,13 @@ const CalChoose = ({ navigation, route }) => {
           </TouchableHighlight>
           <TouchableHighlight
             style={(navbar.navButton, styles.col4)}
-            onPress={() => Alert.alert("DEF")}
+            onPress={() =>
+              navigation.navigate("Settings", {
+                location: route.params.location,
+                startTime: route.params.startTime,
+                endTime: route.params.endTime,
+              })
+            }
             activeOpacity={0.65}
             underlayColor={"rgba(255,255,255,0)"}
           >

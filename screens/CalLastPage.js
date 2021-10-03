@@ -24,13 +24,25 @@ const CalLastPage = ({ navigation, route }) => {
         <Text style={[fonts.h3, CalLast.textBase]}>
           Congrats!{"\n"}You will save up to
         </Text>
-        <Text style={[fonts.h3, CalLast.textBase, { fontSize: 72 }]}>
+        <Text
+          style={[
+            fonts.h3,
+            CalLast.textBase,
+            { fontSize: 72, color: colors.primary },
+          ]}
+        >
           {parseInt(route.params.percentageSaved)}%
         </Text>
         <Text style={[fonts.p, CalLast.textBase, { fontFamily: "Normal" }]}>
           Estimated Electricity
         </Text>
-        <Text style={[fonts.h2, CalLast.textBase, { bottom: "13%" }]}>
+        <Text
+          style={[
+            fonts.h2,
+            CalLast.textBase,
+            { bottom: "13%", color: colors.primary },
+          ]}
+        >
           {parseInt(route.params.powerGenerated)} kWh
         </Text>
         <Text
@@ -52,7 +64,24 @@ const CalLastPage = ({ navigation, route }) => {
       </View>
       <View style={CalLast.Graph}>
         <Text style={CalLast.SummaryText}>Summary</Text>
-        <View style={CalLast.GraphBox} />
+        <View style={CalLast.GraphBox}>
+          <Text
+            style={[
+              fonts.h4,
+              {
+                flex: 1,
+                flexDirection: "column",
+                color: "grey",
+                textAlign: "center",
+                lineHeight: 28,
+                top: "30%",
+              },
+            ]}
+          >
+            Stay Tune!{"\n"}
+            Graph Coming Soon!
+          </Text>
+        </View>
       </View>
       <View style={navbar.navBottom}>
         <View style={[styles.row, { paddingTop: "5%", paddingBottom: "16%" }]}>
@@ -61,6 +90,8 @@ const CalLastPage = ({ navigation, route }) => {
             onPress={() =>
               navigation.navigate("CalChoose", {
                 location: route.params.location,
+                startTime: route.params.startTime,
+                endTime: route.params.endTime,
               })
             }
             activeOpacity={0.65}
@@ -88,6 +119,8 @@ const CalLastPage = ({ navigation, route }) => {
             onPress={() =>
               navigation.navigate("Dashboard", {
                 location: route.params.location,
+                startTime: route.params.startTime,
+                endTime: route.params.endTime,
               })
             }
             activeOpacity={0.65}
@@ -113,7 +146,13 @@ const CalLastPage = ({ navigation, route }) => {
           </TouchableHighlight>
           <TouchableHighlight
             style={(navbar.navButton, styles.col4)}
-            onPress={() => Alert.alert("DEF")}
+            onPress={() =>
+              navigation.navigate("Settings", {
+                location: route.params.location,
+                startTime: route.params.startTime,
+                endTime: route.params.endTime,
+              })
+            }
             activeOpacity={0.65}
             underlayColor={"rgba(255,255,255,0)"}
           >

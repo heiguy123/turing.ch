@@ -96,10 +96,10 @@ const DefaultPage = ({ navigation, route }) => {
           Panel Specification
         </Text>
         <Text style={[fonts.p, { color: "#555555", top: "-7%" }]}>
-          Specification 1
+          Nominal Power (Watt)
         </Text>
         <Text style={{ alignSelf: "center", left: "3%", position: "absolute" }}>
-          Power at Mpp : 435 Watt
+          435
         </Text>
       </View>
       <View
@@ -109,10 +109,10 @@ const DefaultPage = ({ navigation, route }) => {
         ]}
       >
         <Text style={[fonts.p, { color: "#555555", top: "-16%" }]}>
-          Specification 2
+          Area (m^2)
         </Text>
         <Text style={{ alignSelf: "center", left: "6%", position: "absolute" }}>
-          Area: 2 m^2
+          2
         </Text>
       </View>
       <View
@@ -122,10 +122,10 @@ const DefaultPage = ({ navigation, route }) => {
         ]}
       >
         <Text style={[fonts.p, { color: "#555555", top: "-16%" }]}>
-          Specification 3
+          Number of panels
         </Text>
         <Text style={{ alignSelf: "center", left: "6%", position: "absolute" }}>
-          Numbers of panels: 5
+          5
         </Text>
       </View>
       <View
@@ -135,7 +135,7 @@ const DefaultPage = ({ navigation, route }) => {
         ]}
       >
         <Text style={[fonts.p, { color: "#555555", top: "-7%" }]}>
-          Specification 4
+          Estimate use duration (year(s))
         </Text>
         <Text
           style={{
@@ -145,7 +145,7 @@ const DefaultPage = ({ navigation, route }) => {
             position: "absolute",
           }}
         >
-          Estimate years : 5 years
+          5
         </Text>
       </View>
       <View
@@ -167,13 +167,13 @@ const DefaultPage = ({ navigation, route }) => {
           Electricity Settings
         </Text>
         <Text style={[fonts.p, { color: "#555555", left: "0%", top: "-7%" }]}>
-          Specification 1
+          Electricity price (USD)
         </Text>
         <TextInput
           onChangeText={(number) => setFix(number)}
           keyboardType="numeric"
           onSubmitEditing={Keyboard.dismiss}
-          placeholder="Electricity price per kWh in your area(US Dollar)"
+          placeholder="Electricity price per kWh in your area"
           style={{ alignSelf: "center", left: "3%", position: "absolute" }}
         />
       </View>
@@ -184,12 +184,12 @@ const DefaultPage = ({ navigation, route }) => {
         ]}
       >
         <Text style={[fonts.p, { color: "#555555", top: "-7%" }]}>
-          Specification 2
+          Electricity bill usage per month (USD/month)
         </Text>
         <TextInput
           onChangeText={(number) => setBill(number)}
           keyboardType="numeric"
-          placeholder="Estimate your electricity bill per month(US Dollar)"
+          placeholder="Estimate your electricity bill per month"
           style={{ alignSelf: "center", left: "3%", position: "absolute" }}
         />
       </View>
@@ -207,6 +207,8 @@ const DefaultPage = ({ navigation, route }) => {
         onPress={() =>
           navigation.navigate("CalLastPage", {
             location: route.params.location,
+            startTime: route.params.startTime,
+            endTime: route.params.endTime,
             powerGenerated: powerGenerated,
             moneySaved: moneySaved,
             percentageSaved: percentageSaved,
@@ -243,6 +245,8 @@ const DefaultPage = ({ navigation, route }) => {
             onPress={() =>
               navigation.navigate("CalChoose", {
                 location: route.params.location,
+                startTime: route.params.startTime,
+                endTime: route.params.endTime,
               })
             }
             activeOpacity={0.65}
@@ -270,6 +274,8 @@ const DefaultPage = ({ navigation, route }) => {
             onPress={() =>
               navigation.navigate("Dashboard", {
                 location: route.params.location,
+                startTime: route.params.startTime,
+                endTime: route.params.endTime,
               })
             }
             activeOpacity={0.65}
@@ -295,7 +301,13 @@ const DefaultPage = ({ navigation, route }) => {
           </TouchableHighlight>
           <TouchableHighlight
             style={(navbar.navButton, styles.col4)}
-            onPress={() => Alert.alert("DEF")}
+            onPress={() =>
+              navigation.navigate("Settings", {
+                location: route.params.location,
+                startTime: route.params.startTime,
+                endTime: route.params.endTime,
+              })
+            }
             activeOpacity={0.65}
             underlayColor={"rgba(255,255,255,0)"}
           >
