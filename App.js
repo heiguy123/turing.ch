@@ -26,12 +26,12 @@ import ViewGraphIndex from "./screens/ViewGraphIndex";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Dashboard from "./screens/Dashboard";
-import Settings from "./screens/Settings";
 import CalChoose from "./screens/CalChoose";
 import DefaultPage from "./screens/DefaultPage";
 import CustomisePage from "./screens/CustomisePage";
 import CalLastPage from "./screens/CalLastPage";
 import TimeRange from "./screens/TimeRange";
+import SettingsPage from "./screens/Settings";
 
 const Stack = createNativeStackNavigator();
 
@@ -58,12 +58,12 @@ function App() {
         <Stack.Screen name="SetLocation" component={SetLocation} />
         <Stack.Screen name="TimeRange" component={TimeRange} />
         <Stack.Screen name="Dashboard" component={Dashboard} />
-        <Stack.Screen name="Settings" component={Settings} />
         <Stack.Screen name="ViewGraphIndex" component={ViewGraphIndex} />
         <Stack.Screen name="CalChoose" component={CalChoose} />
         <Stack.Screen name="DefaultPage" component={DefaultPage} />
         <Stack.Screen name="CustomisePage" component={CustomisePage} />
         <Stack.Screen name="CalLastPage" component={CalLastPage} />
+        <Stack.Screen name="Settings" component={SettingsPage} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -116,12 +116,12 @@ const CustomisePage = ({ navigation, route }) => {
           Panel Specification
         </Text>
         <Text style={[fonts.p, { color: "#555555", top: "-7%" }]}>
-          Specification 1
+          Nominal Power (Watt)
         </Text>
         <TextInput
           onChangeText={(number) => setMpp(number)}
           keyboardType="numeric"
-          placeholder="Power at Maximum Power Point (MPP)"
+          placeholder="Power"
           style={{ alignSelf: "center", left: "3%", position: "absolute" }}
         />
       </View>
@@ -132,12 +132,12 @@ const CustomisePage = ({ navigation, route }) => {
         ]}
       >
         <Text style={[fonts.p, { color: "#555555", top: "-16%" }]}>
-          Specification 2
+          Area (m^2)
         </Text>
         <TextInput
           onChangeText={(number) => setArea(number)}
           keyboardType="numeric"
-          placeholder="Area per panel(m^2)"
+          placeholder="Area per panel"
           style={{ alignSelf: "center", left: "6%", position: "absolute" }}
         />
       </View>
@@ -148,7 +148,7 @@ const CustomisePage = ({ navigation, route }) => {
         ]}
       >
         <Text style={[fonts.p, { color: "#555555", top: "-16%" }]}>
-          Specification 3
+          Numbers of panels
         </Text>
         <TextInput
           onChangeText={(number) => setNumOfP(number)}
@@ -164,12 +164,12 @@ const CustomisePage = ({ navigation, route }) => {
         ]}
       >
         <Text style={[fonts.p, { color: "#555555", top: "-7%" }]}>
-          Specification 4
+          Estimate use duration (year(s))
         </Text>
         <TextInput
           onChangeText={(number) => setYear(number)}
           keyboardType="numeric"
-          placeholder="Duration you want to check (Year)"
+          placeholder="Estimate use duration of solar panel"
           style={{ alignSelf: "center", left: "3%", position: "absolute" }}
         />
       </View>
@@ -192,12 +192,12 @@ const CustomisePage = ({ navigation, route }) => {
           Electricity Settings
         </Text>
         <Text style={[fonts.p, { color: "#555555", top: "-7%" }]}>
-          Specification 1
+          Electricity price (USD)
         </Text>
         <TextInput
           onChangeText={(number) => setFix(number)}
           keyboardType="numeric"
-          placeholder="Electricity price per kWh in your area(US Dollar)"
+          placeholder="Electricity price per kWh in your area"
           style={{ alignSelf: "center", left: "3%", position: "absolute" }}
         />
       </View>
@@ -208,12 +208,12 @@ const CustomisePage = ({ navigation, route }) => {
         ]}
       >
         <Text style={[fonts.p, { color: "#555555", top: "-7%" }]}>
-          Specification 2
+          Electricity bill usage per month (USD/month)
         </Text>
         <TextInput
           onChangeText={(number) => setBill(number)}
           keyboardType="numeric"
-          placeholder="Estimate your electricity bill per month(US Dollar)"
+          placeholder="Estimate your electricity bill per month"
           style={{ alignSelf: "center", left: "3%", position: "absolute" }}
         />
       </View>
@@ -222,12 +222,16 @@ const CustomisePage = ({ navigation, route }) => {
         onPress={() =>
           navigation.navigate("CalLastPage", {
             location: route.params.location,
+            startTime: route.params.startTime,
+            endTime: route.params.endTime,
           })
         }
         onPressIn={calculates}
         onPress={() =>
           navigation.navigate("CalLastPage", {
             location: route.params.location,
+            startTime: route.params.startTime,
+            endTime: route.params.endTime,
             powerGenerated: powerGenerated,
             moneySaved: moneySaved,
             percentageSaved: percentageSaved,
@@ -252,6 +256,8 @@ const CustomisePage = ({ navigation, route }) => {
             onPress={() =>
               navigation.navigate("CalChoose", {
                 location: route.params.location,
+                startTime: route.params.startTime,
+                endTime: route.params.endTime,
               })
             }
             activeOpacity={0.65}
@@ -279,6 +285,8 @@ const CustomisePage = ({ navigation, route }) => {
             onPress={() =>
               navigation.navigate("Dashboard", {
                 location: route.params.location,
+                startTime: route.params.startTime,
+                endTime: route.params.endTime,
               })
             }
             activeOpacity={0.65}
@@ -304,7 +312,13 @@ const CustomisePage = ({ navigation, route }) => {
           </TouchableHighlight>
           <TouchableHighlight
             style={(navbar.navButton, styles.col4)}
-            onPress={() => Alert.alert("DEF")}
+            onPress={() =>
+              navigation.navigate("Settings", {
+                location: route.params.location,
+                startTime: route.params.startTime,
+                endTime: route.params.endTime,
+              })
+            }
             activeOpacity={0.65}
             underlayColor={"rgba(255,255,255,0)"}
           >
