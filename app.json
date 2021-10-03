@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "testexpo",
-    "slug": "testexpo",
+    "name": "iRadiance",
+    "slug": "iradiance",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -34,6 +34,7 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "description": ""
+    "description": "Solar Panel Purchasing Decision Support Mobile Application",
+    "githubUrl": "https://github.com/heiguy123/turing.ch/"
   }
 }
